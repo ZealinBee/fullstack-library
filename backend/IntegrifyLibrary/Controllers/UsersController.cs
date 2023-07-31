@@ -24,6 +24,8 @@ namespace IntegrifyLibrary.Controllers
         }
 
         [HttpGet("id")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetUserById(Guid id)
         {
             var foundUser = _userRepository.GetUserById(id);

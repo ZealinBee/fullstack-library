@@ -2,6 +2,7 @@ using IntegrifyLibrary.Services.Abstractions;
 using IntegrifyLibrary.Entities;
 using IntegrifyLibrary.Dto;
 using AutoMapper;
+using System.Text;
 
 namespace IntegrifyLibrary.Services.Implementations
 {
@@ -45,9 +46,18 @@ namespace IntegrifyLibrary.Services.Implementations
 
         public UserDto CreateUser(UserDto userDto)
         {
-            var user = _mapper.Map<User>(userDto);
-            _users.Add(user);
-            return userDto;
+            try
+            {
+                byte[] passwordHash = Encoding.ASCII.GetBytes(userDto.Password);
+                var user = _mapper.Map<User>(userDto);
+                user.Password = passwordHash;
+                _users.Add(user);
+                return userDto;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public UserDto GetUserById(Guid id)
@@ -55,7 +65,7 @@ namespace IntegrifyLibrary.Services.Implementations
             var foundUser = _users.FirstOrDefault(user => user.id == id);
             if (foundUser == null)
             {
-                return null;
+                throw new Exception($"User with id {id} not found");
             }
             var userDto = _mapper.Map<UserDto>(foundUser);
             return userDto;

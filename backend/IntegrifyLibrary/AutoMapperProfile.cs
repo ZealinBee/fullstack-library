@@ -9,7 +9,8 @@ namespace IntegrifyLibrary
         public AutoMapperProfile()
         {
             CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
+            CreateMap<UserDto, User>()
+                .ForMember(dest => dest.Password, opt => opt.Ignore());
         }
     }
 }
