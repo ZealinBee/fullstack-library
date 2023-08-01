@@ -1,9 +1,8 @@
-
 namespace IntegrifyLibrary.Entities
 {
     public record User
     {
-        public Guid User_id { get; init; }
+        public Guid UserId { get; init; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; init; }

@@ -3,8 +3,12 @@ using IntegrifyLibrary.Services.Implementations;
 using IntegrifyLibrary.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using IntegrifyLibrary.Database;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<DatabaseContext>();
 
 // Add services to the container.
 builder.Services.AddControllers();

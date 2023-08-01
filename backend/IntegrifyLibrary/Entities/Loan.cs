@@ -4,10 +4,10 @@ namespace IntegrifyLibrary.Entities
     {
         public Guid LoanId { get; init; }
         public Guid BookId { get; init; }
-        public DateTime LoanDate { get; init; }
-        public DateTime DueDate { get; init; }
-        public DateTime ReturnedDate { get; init; }
-        public Timestamp CreatedAt { get; init; }
-        public Timestamp ModifiedAt { get; init; }
+        public DateOnly LoanDate { get; init; }
+        public DateOnly DueDate { get; init; }
+        public DateOnly ReturnedDate { get; init; }
+        public DateOnly CreatedAt { get; init; }
+        public DateOnly ModifiedAt { get; init; }
     }
 }

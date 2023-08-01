@@ -17,22 +17,22 @@ namespace IntegrifyLibrary.Services.Implementations
 
         private readonly List<User> _users = new() {
             new User {
-                id = Guid.NewGuid(),
+                UserId = Guid.NewGuid(),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "JohnDoe@gmail.com",
                 Password = new byte[] { 1, 2, 3, 4, 5, 6 },
-                isLibrarian = false,
+                IsLibrarian = false,
                 CreatedAt = DateOnly.FromDateTime(DateTime.Now),
                 UpdatedAt = DateOnly.FromDateTime(DateTime.Now)
                 },
             new User {
-                id = Guid.NewGuid(),
+                UserId = Guid.NewGuid(),
                 FirstName = "Jane",
                 LastName = "Doe",
                 Email = "JaneDoe@gmail.com",
                 Password = new byte[] { 1, 2, 3, 4, 5, 6 },
-                isLibrarian = true,
+                IsLibrarian = true,
                 CreatedAt = DateOnly.FromDateTime(DateTime.Now),
                 UpdatedAt = DateOnly.FromDateTime(DateTime.Now)
             }
@@ -62,7 +62,7 @@ namespace IntegrifyLibrary.Services.Implementations
 
         public UserDto GetUserById(Guid id)
         {
-            var foundUser = _users.FirstOrDefault(user => user.id == id);
+            var foundUser = _users.FirstOrDefault(user => user.UserId == id);
             if (foundUser == null)
             {
                 throw new Exception($"User with id {id} not found");

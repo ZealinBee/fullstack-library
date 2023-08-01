@@ -15,14 +15,15 @@ namespace IntegrifyLibrary.Database
         public DbSet<Genre> Genres { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public DatabaseContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = _configuration.GetConnectionString("DefaultConnection");
-            var builder = new NpgsqlConnectionStringBuilder(connectionString)
-            {
-                Password = _configuration["DbPassword"]
-            };
-            optionsBuilder.UseNpgsql(builder.ConnectionString);
+            var builder = new NpgsqlDataSourceBuilder(_configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseNpgsql(builder.Build());
         }
     }
 }

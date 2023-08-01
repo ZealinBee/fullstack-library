@@ -33,3 +33,13 @@ D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\obj\Debug\net7.
 D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\obj\Debug\net7.0\ref\IntegrifyLibrary.dll
 D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\AutoMapper.dll
 D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\Humanizer.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\Npgsql.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibrary\bin\Debug\net7.0\System.CodeDom.dll

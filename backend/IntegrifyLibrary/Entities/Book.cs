@@ -10,8 +10,8 @@ namespace IntegrifyLibrary.Entities
         public Guid AuthorId { get; init; }
         public int Quantity { get; init; }
         public int PageCount { get; init; }
-        public DateTime PublishedDate { get; init; }
-        public Timestamp CreatedAt { get; init; }
-        public Timestamp ModifiedAt { get; init; }
+        public DateOnly PublishedDate { get; init; }
+        public DateOnly CreatedAt { get; init; }
+        public DateOnly ModifiedAt { get; init; }
     }
 }
