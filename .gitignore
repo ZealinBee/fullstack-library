@@ -5,6 +5,11 @@ backend/appsettings.json
 backend/appsettings.*.json
 backend/obj/
 backend/bin/
+backend/IntegrifyLibrary/obj/
+backend/IntegrifyLibrary/bin/
+backend/IntegrifyLibrary/appsettings.json
+backend/IntegrifyLibrary/appsettings.*.json
+
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
