@@ -1,0 +1,12 @@
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\bin\Debug\net7.0\IntegrifyLibraryApi.Domain.deps.json
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\bin\Debug\net7.0\IntegrifyLibraryApi.Domain.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\bin\Debug\net7.0\IntegrifyLibraryApi.Domain.pdb
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\obj\Debug\net7.0\IntegrifyLibraryApi.Domain.csproj.AssemblyReference.cache
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\obj\Debug\net7.0\IntegrifyLibraryApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\obj\Debug\net7.0\IntegrifyLibraryApi.Domain.AssemblyInfoInputs.cache
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\obj\Debug\net7.0\IntegrifyLibraryApi.Domain.AssemblyInfo.cs
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\obj\Debug\net7.0\IntegrifyLibraryApi.Domain.csproj.CoreCompileInputs.cache
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\obj\Debug\net7.0\IntegrifyLibraryApi.Domain.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\obj\Debug\net7.0\refint\IntegrifyLibraryApi.Domain.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\obj\Debug\net7.0\IntegrifyLibraryApi.Domain.pdb
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Domain\obj\Debug\net7.0\ref\IntegrifyLibraryApi.Domain.dll

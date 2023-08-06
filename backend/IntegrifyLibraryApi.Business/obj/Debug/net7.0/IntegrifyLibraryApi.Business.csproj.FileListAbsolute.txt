@@ -1,0 +1,5 @@
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.csproj.AssemblyReference.cache
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.GeneratedMSBuildEditorConfig.editorconfig
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.AssemblyInfoInputs.cache
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.AssemblyInfo.cs
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.csproj.CoreCompileInputs.cache
