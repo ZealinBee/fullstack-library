@@ -2,6 +2,7 @@ using IntegrifyLibraryApi.Domain;
 using IntegrifyLibraryApi.Infrastructure;
 using AutoMapper;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 
 namespace IntegrifyLibraryApi.Business
 {

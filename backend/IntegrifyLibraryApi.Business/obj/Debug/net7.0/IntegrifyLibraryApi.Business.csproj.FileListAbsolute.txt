@@ -3,3 +3,13 @@ D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj
 D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.AssemblyInfoInputs.cache
 D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.AssemblyInfo.cs
 D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.csproj.CoreCompileInputs.cache
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\bin\Debug\net7.0\IntegrifyLibraryApi.Business.deps.json
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\bin\Debug\net7.0\IntegrifyLibraryApi.Business.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\bin\Debug\net7.0\IntegrifyLibraryApi.Business.pdb
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\bin\Debug\net7.0\IntegrifyLibraryApi.Domain.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\bin\Debug\net7.0\IntegrifyLibraryApi.Domain.pdb
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.csproj.CopyComplete
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\refint\IntegrifyLibraryApi.Business.dll
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\IntegrifyLibraryApi.Business.pdb
+D:\Integrify Assignments\fs15_Fullstack\backend\IntegrifyLibraryApi.Business\obj\Debug\net7.0\ref\IntegrifyLibraryApi.Business.dll

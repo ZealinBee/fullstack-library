@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http;
+
 namespace IntegrifyLibraryApi.Business
 {
     public class LoggingMiddleware : IMiddleware

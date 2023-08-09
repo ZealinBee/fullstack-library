@@ -5,10 +5,10 @@ backend/appsettings.json
 backend/appsettings.*.json
 backend/obj/
 backend/bin/
-backend/IntegrifyLibrary/obj/
-backend/IntegrifyLibrary/bin/
-backend/IntegrifyLibrary/appsettings.json
-backend/IntegrifyLibrary/appsettings.*.json
+backend/IntegrifyLibraryApi.Infrastrucutre/obj/
+backend/IntegrifyLibraryApi.Infrastrucutre/bin/
+backend/IntegrifyLibraryApi.Infrastrucutre/appsettings.json
+backend/IntegrifyLibraryApi.Infrastrucutre/appsettings.*.json
 
 
 # Visual Studio 2015/2017 cache/options directory
@@ -103,3 +103,7 @@ frontend/package-*.json
 .DS_Store
 .AppleDouble
 .LSOverride
+**/bin/
+**/appsettings.json
+**/obj/
+**/appsettings.*.json

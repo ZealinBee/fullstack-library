@@ -1,6 +1,5 @@
-using IntegrifyLibraryApi.Business;
 
-namespace IntegrifyLibrary.Services.Abstractions
+namespace IntegrifyLibraryApi.Business
 {
     public interface IUserService
     {
