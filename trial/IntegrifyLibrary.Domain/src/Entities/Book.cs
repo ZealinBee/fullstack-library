@@ -1,4 +1,4 @@
-namespace IntegrifyLibrary.src.Domain
+namespace IntegrifyLibrary.Domain
 {
     public record Book
     {
