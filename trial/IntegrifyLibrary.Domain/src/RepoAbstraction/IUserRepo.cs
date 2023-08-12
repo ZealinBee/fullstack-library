@@ -7,6 +7,6 @@ namespace IntegrifyLibrary.Domain
     {
         Task<ReadUserDto> GetUserByIdAsync(Guid id);
         Task<List<ReadUserDto>> GetAllUsersAsync();
-        Task<CreateUserDto> CreateUserAsync(CreateUserDto user);
+        Task<UserDto> CreateUserAsync(CreateUserDto user);
     }
 }

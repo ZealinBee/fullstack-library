@@ -34,12 +34,12 @@ namespace IntegrifyLibrary.Infrastructure
             return _mapper.Map<List<ReadUserDto>>(userEntities);
         }
 
-        public async Task<CreateUserDto> CreateUserAsync(CreateUserDto user)
+        public async Task<UserDto> CreateUserAsync(CreateUserDto user)
         {
-            var userEntity = _mapper.Map<User>(user);
+            var userEntity = _mapper.Map<User>(user); // convert CreateUserDto to User
             await _context.Users.AddAsync(userEntity);
             await _context.SaveChangesAsync();
-            return _mapper.Map<CreateUserDto>(userEntity);
+            return _mapper.Map<UserDto>(userEntity);
         }
     }
 }
