@@ -1,6 +1,5 @@
 using AutoMapper;
-using IntegrifyLibrary.Domain.Dtos;
-using IntegrifyLibrary.Domain.Entities;
+using IntegrifyLibrary.Domain;
 
 namespace IntegrifyLibrary.Application
 {
@@ -10,6 +9,9 @@ namespace IntegrifyLibrary.Application
         {
             CreateMap<User, ReadUserDto>();
             CreateMap<CreateUserDto, User>();
+            CreateMap<User, UserDto>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => src.UpdatedAt));
         }
     }
 }
