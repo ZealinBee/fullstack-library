@@ -7,5 +7,7 @@ namespace IntegrifyLibrary.Business
 {
     public interface IUserService : IBaseService<CreateUserDto, GetUserDto, UpdateUserDto>
     {
+
+        public GetUserDto CreateAdmin(CreateUserDto dto);
     }
 }

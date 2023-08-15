@@ -2,9 +2,13 @@ using IntegrifyLibrary.Domain;
 using IntegrifyLibrary.Business;
 using IntegrifyLibrary.Infrastructure;
 
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
-using AutoMapper;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,10 +26,31 @@ builder.Services
 
 builder.Services
     .AddScoped<IUserService, UserService>()
-    .AddScoped<IBookService, BookService>();
+    .AddScoped<IBookService, BookService>()
+    .AddScoped<IAuthService, AuthService>();
+
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = "ecommerce-backend",
+        ValidateAudience = false,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my-secrete-key-jsdguyfsdgcjsdbchjsdb jdhscjysdcsdj")),
+        ValidateIssuerSigningKey = true
+    };
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("EmailWhiteList", policy => policy.RequireClaim(ClaimTypes.Email, "admin@mail.com"));
+});
+
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -41,6 +66,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

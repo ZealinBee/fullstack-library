@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntegrifyLibrary.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230815152039_MigrationTesting")]
-    partial class MigrationTesting
+    [Migration("20230815173822_MigrationWithBook")]
+    partial class MigrationWithBook
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,67 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("IntegrifyLibrary.Domain.Book", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("author_id");
+
+                    b.Property<string>("AuthorName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("author_name");
+
+                    b.Property<string>("BookName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("book_name");
+
+                    b.Property<DateOnly>("CreatedAt")
+                        .HasColumnType("date")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("GenreId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("genre_id");
+
+                    b.Property<string>("ISBN")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("isbn");
+
+                    b.Property<DateOnly>("ModifiedAt")
+                        .HasColumnType("date")
+                        .HasColumnName("modified_at");
+
+                    b.Property<int>("PageCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("page_count");
+
+                    b.Property<DateOnly>("PublishedDate")
+                        .HasColumnType("date")
+                        .HasColumnName("published_date");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("quantity");
+
+                    b.HasKey("Id")
+                        .HasName("pk_books");
+
+                    b.ToTable("books", (string)null);
+                });
 
             modelBuilder.Entity("IntegrifyLibrary.Domain.User", b =>
                 {
@@ -55,9 +116,9 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("last_name");
 
-                    b.Property<byte[]>("Password")
+                    b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("bytea")
+                        .HasColumnType("text")
                         .HasColumnName("password");
 
                     b.Property<DateOnly>("UpdatedAt")

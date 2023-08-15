@@ -10,6 +10,7 @@ public class DatabaseContext : DbContext
 {
     private readonly IConfiguration _configuration;
     public DbSet<User> Users { get; set; }
+    public DbSet<Book> Books { get; set; }
 
     public DatabaseContext(IConfiguration configuration, DbContextOptions options) : base(options)
     {

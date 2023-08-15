@@ -19,7 +19,7 @@ public class BaseRepo<T> : IBaseRepo<T> where T : class
     {
         _dbSet.Add(item);
         _context.SaveChanges();
-        return GetOne((Guid)item.Id);
+        return item;
     }
 
     public T GetOne(Guid id)
