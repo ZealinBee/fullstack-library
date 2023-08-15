@@ -5,6 +5,10 @@
     <ProjectReference Include="..\IntegrifyLibrary.Domain\IntegrifyLibrary.Domain.csproj" />
   </ItemGroup>
 
+      <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

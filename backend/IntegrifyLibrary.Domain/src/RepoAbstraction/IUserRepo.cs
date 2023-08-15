@@ -1,12 +1,6 @@
-using IntegrifyLibrary.Domain;
-using Npgsql;
+namespace IntegrifyLibrary.Domain;
 
-namespace IntegrifyLibrary.Domain
+public interface IUserRepo : IBaseRepo<User>
 {
-    public interface IUserRepo
-    {
-        Task<ReadUserDto> GetUserByIdAsync(Guid id);
-        Task<List<ReadUserDto>> GetAllUsersAsync();
-        Task<UserDto> CreateUserAsync(CreateUserDto user);
-    }
+    User GetOneByEmail(string email);
 }

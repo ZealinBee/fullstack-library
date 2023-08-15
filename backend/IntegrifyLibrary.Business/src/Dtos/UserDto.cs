@@ -35,7 +35,7 @@ namespace IntegrifyLibrary.Business
 
     }
 
-    public class ReadUserDto
+    public class GetUserDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
