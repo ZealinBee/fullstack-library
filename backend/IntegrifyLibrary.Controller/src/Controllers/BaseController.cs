@@ -65,6 +65,7 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
         return Ok(item);
     }
 
+
     [HttpDelete("{id}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]

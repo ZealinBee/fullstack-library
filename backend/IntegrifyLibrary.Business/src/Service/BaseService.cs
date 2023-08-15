@@ -8,7 +8,7 @@ public class BaseService<T, TCreateDto, TGetDto, TUpdateDto> : IBaseService<TCre
     protected readonly IMapper _mapper;
     protected readonly IBaseRepo<T> _repo;
 
-    protected BaseService(IBaseRepo<T> repo, IMapper mapper)
+    public BaseService(IBaseRepo<T> repo, IMapper mapper)
     {
         _repo = repo;
         _mapper = mapper;
@@ -16,6 +16,7 @@ public class BaseService<T, TCreateDto, TGetDto, TUpdateDto> : IBaseService<TCre
 
     public virtual TCreateDto CreateOne(TCreateDto dto)
     {
+        if (dto == null) throw new ArgumentNullException(nameof(dto));
         var newItem = _mapper.Map<T>(dto);
         return _mapper.Map<TCreateDto>(_repo.CreateOne(newItem));
     }
