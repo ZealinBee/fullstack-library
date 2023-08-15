@@ -3,15 +3,16 @@ namespace IntegrifyLibrary.Domain
     public record Book
     {
         public Guid Id { get; init; }
-        public string BookName { get; init; }
-        public string ISBN { get; init; }
-        public string AuthorName { get; init; }
-        public Guid GenreId { get; init; }
-        public Guid AuthorId { get; init; }
-        public int Quantity { get; init; }
-        public int PageCount { get; init; }
-        public DateOnly PublishedDate { get; init; }
-        public DateOnly CreatedAt { get; init; }
-        public DateOnly ModifiedAt { get; init; }
+        public string BookName { get; set; }
+        public string ISBN { get; set; }
+        public string AuthorName { get; set; }
+        public string Description { get; set; }
+        public Guid GenreId { get; set; }
+        public Guid AuthorId { get; set; }
+        public int Quantity { get; set; }
+        public int PageCount { get; set; }
+        public DateOnly PublishedDate { get; set; }
+        public DateOnly CreatedAt { get; set; }
+        public DateOnly ModifiedAt { get; set; }
     }
 }

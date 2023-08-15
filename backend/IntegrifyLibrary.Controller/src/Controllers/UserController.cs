@@ -4,7 +4,6 @@ using IntegrifyLibrary.Business;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntegrifyLibrary.Controllers;
-
 [ApiController]
 public class UserController : BaseController<User, CreateUserDto, GetUserDto, UpdateUserDto>
 {
@@ -29,17 +28,17 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
         return Ok(_userService.GetOne(id));
     }
 
-    // [HttpPost]
-    // [ProducesResponseType(statusCode: 201)]
-    // [ProducesResponseType(statusCode: 400)]
-    // public override ActionResult<GetUserDto> Create([FromBody] CreateUserDto dto)
-    // {
-    //     var item = _userService.CreateOne(dto);
-    //     if (item == null)
-    //     {
-    //         return BadRequest();
-    //     }
-    //     return CreatedAtAction(nameof(GetOne), new { id = item.Id }, item);
-    // }
-}
+    [HttpPost]
+    [ProducesResponseType(statusCode: 201)]
+    [ProducesResponseType(statusCode: 400)]
+    public override ActionResult<GetUserDto> CreateOne([FromBody] CreateUserDto dto)
+    {
+        var item = _userService.CreateOne(dto);
+        if (item == null)
+        {
+            return BadRequest();
+        }
+        return CreatedAtAction("Created", item);
+    }
 
+}

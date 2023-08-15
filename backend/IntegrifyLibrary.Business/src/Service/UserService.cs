@@ -1,5 +1,6 @@
-using AutoMapper;
 using IntegrifyLibrary.Domain;
+
+using AutoMapper;
 
 namespace IntegrifyLibrary.Business
 {

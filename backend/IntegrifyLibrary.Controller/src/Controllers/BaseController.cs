@@ -45,16 +45,17 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [HttpPost]
     [ProducesResponseType(statusCode: 201)]
     [ProducesResponseType(statusCode: 400)]
-    public virtual ActionResult<TGetDto> Create([FromBody] TCreateDto dto)
+    public virtual ActionResult<TGetDto> CreateOne([FromBody] TCreateDto dto)
     {
-        return Ok(_service.CreateOne(dto));
+        var createdObject = _service.CreateOne(dto);
+        return CreatedAtAction("Created", createdObject);
     }
 
-    [HttpPut("{id}")]
+    [HttpPatch("{id}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 400)]
     [ProducesResponseType(statusCode: 404)]
-    public virtual ActionResult<TGetDto> Update([FromRoute] Guid id, [FromBody] TUpdateDto dto)
+    public virtual ActionResult<TGetDto> UpdateOne([FromRoute] Guid id, [FromBody] TUpdateDto dto)
     {
         var item = _service.UpdateOne(id, dto);
         if (item == null)
@@ -67,7 +68,7 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [HttpDelete("{id}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]
-    public virtual ActionResult<bool> Delete([FromRoute] Guid id)
+    public virtual ActionResult<bool> DeleteOne([FromRoute] Guid id)
     {
         var item = _service.DeleteOne(id);
         if (item == false)

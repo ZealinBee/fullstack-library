@@ -6,5 +6,5 @@ public interface IBaseRepo<T>
     List<T> GetAll();
     T GetOne(Guid id);
     T UpdateOne(T item);
-    bool DeleteOne(Guid id);
+    bool DeleteOne(T item);
 }

@@ -42,6 +42,6 @@ public class BaseService<T, TCreateDto, TGetDto, TUpdateDto> : IBaseService<TCre
     public virtual bool DeleteOne(Guid id)
     {
         var item = _repo.GetOne(id);
-        return _repo.DeleteOne(id);
+        return _repo.DeleteOne(item);
     }
 }

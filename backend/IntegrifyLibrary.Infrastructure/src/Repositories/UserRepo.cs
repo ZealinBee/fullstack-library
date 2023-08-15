@@ -45,11 +45,11 @@ public class UserRepo : IUserRepo
         return user;
     }
 
-    public bool DeleteOne(Guid id)
+    public bool DeleteOne(User user)
     {
-        var user = _users.FirstOrDefault(u => u.UserId == id);
         _users.Remove(user);
         _context.SaveChanges();
         return true;
     }
+
 }
