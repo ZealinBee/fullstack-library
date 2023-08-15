@@ -16,13 +16,14 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
         _userService = userService;
     }
 
-    [Authorize]
+    [Authorize(Roles = "Librarian")]
     [HttpGet]
     public override ActionResult<List<GetUserDto>> GetAll()
     {
         return _userService.GetAll();
     }
 
+    [Authorize(Roles = "Librarian")]
     [HttpGet("{id}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]
@@ -31,17 +32,42 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
         return Ok(_userService.GetOne(id));
     }
 
-    [HttpPost]
-    [ProducesResponseType(statusCode: 201)]
-    [ProducesResponseType(statusCode: 400)]
-    public override ActionResult<GetUserDto> CreateOne([FromBody] CreateUserDto dto)
+    // [Authorize(Roles = "Librarian")]
+    [HttpPost("admin")]
+    public ActionResult<GetUserDto> CreateAdmin([FromBody] CreateUserDto dto)
     {
-        var item = _userService.CreateOne(dto);
+        var item = _userService.CreateAdmin(dto);
         if (item == null)
         {
             return BadRequest();
         }
         return CreatedAtAction("Created", item);
     }
+
+    [Authorize(Roles = "Librarian")]
+    [HttpPatch("{id}")]
+    public override ActionResult<GetUserDto> UpdateOne([FromRoute] Guid id, [FromBody] UpdateUserDto dto)
+    {
+        var item = _userService.UpdateOne(id, dto);
+        if (item == null)
+        {
+            return NotFound();
+        }
+        return Ok(item);
+    }
+
+    [Authorize(Roles = "Librarian")]
+    [HttpDelete("{id}")]
+    public override ActionResult<bool> DeleteOne([FromRoute] Guid id)
+    {
+        var item = _userService.DeleteOne(id);
+        if (item == false)
+        {
+            return NotFound();
+        }
+        return NoContent();
+    }
+
+
 
 }

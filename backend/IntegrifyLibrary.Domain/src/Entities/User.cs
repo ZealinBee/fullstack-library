@@ -18,7 +18,7 @@ public class User
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Role
 {
-    Librarian,
-    User
+    User,
+    Librarian
 }
 

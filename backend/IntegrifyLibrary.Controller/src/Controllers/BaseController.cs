@@ -75,6 +75,6 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
         {
             return NotFound();
         }
-        return Ok(item);
+        return NoContent();
     }
 }

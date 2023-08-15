@@ -1,3 +1,5 @@
+using IntegrifyLibrary.Domain;
+
 namespace IntegrifyLibrary.Business
 {
     public class CreateUserDto
@@ -21,7 +23,7 @@ namespace IntegrifyLibrary.Business
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public bool IsLibrarian { get; set; }
+        public Role Role { get; set; }
         public DateOnly CreatedAt { get; init; }
         public DateOnly UpdatedAt { get; init; }
     }
@@ -40,7 +42,6 @@ namespace IntegrifyLibrary.Business
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public bool IsLibrarian { get; set; }
-
+        public Role Role { get; set; }
     }
 }
