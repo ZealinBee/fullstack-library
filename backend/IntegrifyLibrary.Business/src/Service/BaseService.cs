@@ -26,9 +26,10 @@ public class BaseService<T, TCreateDto, TGetDto, TUpdateDto> : IBaseService<TCre
         return _mapper.Map<TGetDto>(_repo.GetOne(id));
     }
 
-    public virtual List<TGetDto> GetAll()
+    public virtual List<TGetDto> GetAll(QueryOptions queryOptions)
     {
-        return _mapper.Map<List<TGetDto>>(_repo.GetAll());
+        var result = _repo.GetAll(queryOptions);
+        return _mapper.Map<List<TGetDto>>(_repo.GetAll(queryOptions));
     }
 
     public virtual TUpdateDto UpdateOne(Guid id, TUpdateDto itemToUpdate)

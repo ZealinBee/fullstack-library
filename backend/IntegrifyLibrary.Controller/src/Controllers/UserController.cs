@@ -17,9 +17,9 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
 
     [Authorize(Roles = "Librarian")]
     [HttpGet]
-    public override ActionResult<List<GetUserDto>> GetAll()
+    public override ActionResult<List<GetUserDto>> GetAll(QueryOptions queryOptions)
     {
-        return _userService.GetAll();
+        return _userService.GetAll(queryOptions);
     }
 
     [Authorize(Roles = "Librarian")]
@@ -75,7 +75,4 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
         }
         return NoContent();
     }
-
-
-
 }

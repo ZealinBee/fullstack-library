@@ -19,9 +19,9 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [HttpGet]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]
-    public virtual ActionResult<List<TGetDto>> GetAll()
+    public virtual ActionResult<List<TGetDto>> GetAll([FromQuery] QueryOptions queryOptions)
     {
-        var items = _service.GetAll();
+        var items = _service.GetAll(queryOptions).ToArray();
         if (items == null)
         {
             return NotFound();
@@ -29,7 +29,7 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
         return Ok(items);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:Guid}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]
     public virtual ActionResult<TGetDto> GetOne([FromRoute] Guid id)
@@ -51,7 +51,7 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
         return CreatedAtAction(nameof(CreateOne), createdObject);
     }
 
-    [HttpPatch("{id}")]
+    [HttpPatch("{id:Guid}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 400)]
     [ProducesResponseType(statusCode: 404)]

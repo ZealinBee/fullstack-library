@@ -6,7 +6,7 @@ public interface IBaseService<TCreateDto, TGetDto, TUpdateDto>
 {
     TCreateDto CreateOne(TCreateDto dto);
     TGetDto GetOne(Guid id);
-    List<TGetDto> GetAll();
+    List<TGetDto> GetAll(QueryOptions queryOptions);
     TUpdateDto UpdateOne(Guid id, TUpdateDto dto);
     bool DeleteOne(Guid id);
 }

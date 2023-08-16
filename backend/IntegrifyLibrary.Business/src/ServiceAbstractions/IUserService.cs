@@ -8,6 +8,6 @@ namespace IntegrifyLibrary.Business
     public interface IUserService : IBaseService<CreateUserDto, GetUserDto, UpdateUserDto>
     {
 
-        public CreateUserDto CreateAdmin(CreateUserDto dto);
+        CreateUserDto CreateAdmin(CreateUserDto dto);
     }
 }
