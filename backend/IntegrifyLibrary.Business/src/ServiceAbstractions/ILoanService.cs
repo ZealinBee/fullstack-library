@@ -2,7 +2,7 @@ using IntegrifyLibrary.Domain;
 
 namespace IntegrifyLibrary.Business;
 
-public interface ILoanService<CreateLoanDto, GetLoanDto, UpdateLoanDto>
+public interface ILoanService : IBaseService<CreateLoanDto, GetLoanDto, UpdateLoanDto>
 {
 
 }

@@ -16,6 +16,9 @@ namespace IntegrifyLibrary.Business
         public CreateUserDto CreateAdmin(CreateUserDto dto)
         {
             var user = _mapper.Map<User>(dto);
+            PasswordService.HashPassword(dto.Password, out var hashedPassword, out var salt);
+            user.Password = hashedPassword;
+            user.Salt = salt;
             user.Role = Role.Librarian;
             return _mapper.Map<CreateUserDto>(_userRepo.CreateOne(user));
         }
@@ -29,6 +32,5 @@ namespace IntegrifyLibrary.Business
             user.Role = Role.User;
             return _mapper.Map<CreateUserDto>(_userRepo.CreateOne(user));
         }
-
     }
 }

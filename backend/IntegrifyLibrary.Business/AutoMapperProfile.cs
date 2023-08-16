@@ -16,5 +16,10 @@ public class AutoMapperProfile : Profile
         CreateMap<User, UpdateUserDto>();
         CreateMap<BookDto, Book>();
         CreateMap<Book, BookDto>();
+        CreateMap<CreateLoanDto, Loan>()
+        .ForMember(dest => dest.LoanDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(DateTime.Now)));
+
+        CreateMap<Loan, CreateLoanDto>()
+        .ForMember(dest => dest.LoanDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(DateTime.Now)));
     }
 }

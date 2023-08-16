@@ -1,5 +1,4 @@
 namespace IntegrifyLibrary.Business;
-
 public class GetLoanDto
 {
     public Guid BookId { get; set; }

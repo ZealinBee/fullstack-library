@@ -4,7 +4,6 @@ using IntegrifyLibrary.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-
 namespace IntegrifyLibrary.Controllers;
 [ApiController]
 public class UserController : BaseController<User, CreateUserDto, GetUserDto, UpdateUserDto>

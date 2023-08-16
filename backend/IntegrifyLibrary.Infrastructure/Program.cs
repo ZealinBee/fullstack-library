@@ -22,12 +22,14 @@ builder.Services.AddControllers();
 
 builder.Services
     .AddScoped<IUserRepo, UserRepo>()
-    .AddScoped<IBookRepo, BookRepo>();
+    .AddScoped<IBookRepo, BookRepo>()
+    .AddScoped<ILoanRepo, LoanRepo>();
 
 builder.Services
     .AddScoped<IUserService, UserService>()
     .AddScoped<IBookService, BookService>()
-    .AddScoped<IAuthService, AuthService>();
+    .AddScoped<IAuthService, AuthService>()
+    .AddScoped<ILoanService, LoanService>();
 
 
 
