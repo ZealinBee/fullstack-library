@@ -15,14 +15,14 @@ public class BaseRepo<T> : IBaseRepo<T> where T : class
         _dbSet = context.Set<T>();
     }
 
-    public T CreateOne(T item)
+    public virtual T CreateOne(T item)
     {
         _dbSet.Add(item);
         _context.SaveChanges();
         return item;
     }
 
-    public T GetOne(Guid id)
+    public virtual T GetOne(Guid id)
     {
         var entity = _dbSet.Find(id);
         if (entity is null)
@@ -33,19 +33,34 @@ public class BaseRepo<T> : IBaseRepo<T> where T : class
         return entity;
     }
 
-    public List<T> GetAll()
+    public virtual List<T> GetAll(QueryOptions queryOptions)
     {
+        var items = _dbSet
+            .AsEnumerable()
+            .Where(e =>
+                e.GetType().GetProperty(queryOptions.FilterBy)!.GetValue(e)!.ToString()!.ToLower().Contains(
+                    queryOptions.Filter.ToLower()
+                    )
+            )
+            .OrderBy(e => e.GetType().GetProperty(queryOptions.OrderBy));
+        if (queryOptions.OrderByDirection == "desc")
+        {
+            return items.OrderDescending()
+                .Skip((queryOptions.Page - 1) * queryOptions.PageSize)
+                .Take(queryOptions.PageSize)
+                .ToList();
+        }
         return _dbSet.ToList();
     }
 
-    public T UpdateOne(T item)
+    public virtual T UpdateOne(T item)
     {
         _dbSet.Update(item);
         _context.SaveChanges();
         return item;
     }
 
-    public bool DeleteOne(T item)
+    public virtual bool DeleteOne(T item)
     {
         _dbSet.Remove(item);
         _context.SaveChanges();
