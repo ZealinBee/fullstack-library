@@ -24,7 +24,7 @@ public class BookController : BaseController<Book, BookDto, BookDto, BookDto>
     public override ActionResult<BookDto> CreateOne([FromBody] BookDto dto)
     {
         var createdObject = _bookService.CreateOne(dto);
-        return CreatedAtAction("Created", createdObject);
+        return CreatedAtAction(nameof(CreateOne), createdObject);
     }
 
     [Authorize(Roles = "Librarian")]

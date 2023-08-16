@@ -9,9 +9,10 @@ public class User
     public string LastName { get; set; }
     public string Email { get; init; }
     public string Password { get; set; }
+    public byte[] Salt { get; set; }
     public Role Role { get; set; }
     public DateOnly CreatedAt { get; init; }
-    public DateOnly UpdatedAt { get; set; }
+    public DateOnly UpdatedAt { get; init; }
 
 
 }

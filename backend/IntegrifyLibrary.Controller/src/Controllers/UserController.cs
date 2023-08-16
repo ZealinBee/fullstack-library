@@ -44,6 +44,15 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
         return CreatedAtAction("Created", item);
     }
 
+    [HttpPost]
+    [ProducesResponseType(statusCode: 201)]
+    [ProducesResponseType(statusCode: 400)]
+    public override ActionResult<GetUserDto> CreateOne([FromBody] CreateUserDto dto)
+    {
+        var createdObject = _service.CreateOne(dto);
+        return CreatedAtAction(nameof(CreateOne), createdObject);
+    }
+
     [Authorize(Roles = "Librarian")]
     [HttpPatch("{id}")]
     public override ActionResult<GetUserDto> UpdateOne([FromRoute] Guid id, [FromBody] UpdateUserDto dto)

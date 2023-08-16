@@ -48,7 +48,7 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     public virtual ActionResult<TGetDto> CreateOne([FromBody] TCreateDto dto)
     {
         var createdObject = _service.CreateOne(dto);
-        return CreatedAtAction("Created", createdObject);
+        return CreatedAtAction(nameof(CreateOne), createdObject);
     }
 
     [HttpPatch("{id}")]
