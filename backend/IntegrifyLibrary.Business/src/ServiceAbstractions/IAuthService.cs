@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 namespace IntegrifyLibrary.Business;
 public interface IAuthService
 {
-    string VerifyCredentials(LoginUserDto credentials);
+    Task<string> VerifyCredentials(LoginUserDto credentials);
 }

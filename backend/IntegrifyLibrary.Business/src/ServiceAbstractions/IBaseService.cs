@@ -4,9 +4,9 @@ namespace IntegrifyLibrary.Business;
 
 public interface IBaseService<TCreateDto, TGetDto, TUpdateDto>
 {
-    TCreateDto CreateOne(TCreateDto dto);
-    TGetDto GetOne(Guid id);
-    List<TGetDto> GetAll(QueryOptions queryOptions);
-    TUpdateDto UpdateOne(Guid id, TUpdateDto dto);
-    bool DeleteOne(Guid id);
+    Task<TCreateDto> CreateOne(TCreateDto dto);
+    Task<TGetDto> GetOne(Guid id);
+    Task<List<TGetDto>> GetAll(QueryOptions queryOptions);
+    Task<TUpdateDto> UpdateOne(Guid id, TUpdateDto dto);
+    Task<bool> DeleteOne(Guid id);
 }

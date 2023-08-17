@@ -17,9 +17,9 @@ public class AuthService : IAuthService
         _userRepo = userRepo;
     }
 
-    public string VerifyCredentials(LoginUserDto credentials)
+    public async Task<string> VerifyCredentials(LoginUserDto credentials)
     {
-        var foundUser = _userRepo.GetOneByEmail(credentials.Email) ?? throw new Exception("Email not found");
+        var foundUser = await _userRepo.GetOneByEmail(credentials.Email) ?? throw new Exception("Email not found");
         var isAuthenticated = PasswordService.VerifyPassword(credentials.Password, foundUser.Password, foundUser.Salt);
         if (!isAuthenticated) throw new Exception("Password is incorrect");
         return GenerateToken(foundUser);

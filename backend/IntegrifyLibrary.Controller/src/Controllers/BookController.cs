@@ -21,9 +21,9 @@ public class BookController : BaseController<Book, BookDto, BookDto, BookDto>
     [HttpPost]
     [ProducesResponseType(statusCode: 201)]
     [ProducesResponseType(statusCode: 400)]
-    public override ActionResult<BookDto> CreateOne([FromBody] BookDto dto)
+    public override async Task<ActionResult<BookDto>> CreateOne([FromBody] BookDto dto)
     {
-        var createdObject = _bookService.CreateOne(dto);
+        var createdObject = await _bookService.CreateOne(dto);
         return CreatedAtAction(nameof(CreateOne), createdObject);
     }
 
@@ -32,9 +32,9 @@ public class BookController : BaseController<Book, BookDto, BookDto, BookDto>
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 400)]
     [ProducesResponseType(statusCode: 404)]
-    public override ActionResult<BookDto> UpdateOne([FromRoute] Guid id, [FromBody] BookDto dto)
+    public override async Task<ActionResult<BookDto>> UpdateOne([FromRoute] Guid id, [FromBody] BookDto dto)
     {
-        var item = _bookService.UpdateOne(id, dto);
+        var item = await _bookService.UpdateOne(id, dto);
         if (item == null)
         {
             return NotFound();
@@ -44,9 +44,9 @@ public class BookController : BaseController<Book, BookDto, BookDto, BookDto>
 
     [Authorize(Roles = "Librarian")]
     [HttpDelete("{id}")]
-    public override ActionResult<bool> DeleteOne([FromRoute] Guid id)
+    public override async Task<ActionResult<bool>> DeleteOne([FromRoute] Guid id)
     {
-        var item = _bookService.DeleteOne(id);
+        var item = await _bookService.DeleteOne(id);
         if (item == false)
         {
             return NotFound();

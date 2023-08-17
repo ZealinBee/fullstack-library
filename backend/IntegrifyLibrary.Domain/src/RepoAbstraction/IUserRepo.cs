@@ -2,6 +2,6 @@ namespace IntegrifyLibrary.Domain;
 
 public interface IUserRepo : IBaseRepo<User>
 {
-    User CreateAdmin(User user);
-    User GetOneByEmail(string email);
+    Task<User> CreateAdmin(User user);
+    Task<User> GetOneByEmail(string email);
 }

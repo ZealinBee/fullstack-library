@@ -11,12 +11,12 @@ public class UserRepo : BaseRepo<User>, IUserRepo
     {
 
     }
-    public User GetOneByEmail(string email)
+    public async Task<User> GetOneByEmail(string email)
     {
         return _context.Users.FirstOrDefault(u => u.Email == email);
     }
 
-    public User CreateAdmin(User user)
+    public async Task<User> CreateAdmin(User user)
     {
         user.Role = Role.Librarian;
         return user;

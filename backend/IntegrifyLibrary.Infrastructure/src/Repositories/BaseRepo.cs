@@ -15,14 +15,14 @@ public class BaseRepo<T> : IBaseRepo<T> where T : class
         _dbSet = context.Set<T>();
     }
 
-    public virtual T CreateOne(T item)
+    public virtual async Task<T> CreateOne(T item)
     {
         _dbSet.Add(item);
         _context.SaveChanges();
         return item;
     }
 
-    public virtual T GetOne(Guid id)
+    public virtual async Task<T> GetOne(Guid id)
     {
         var entity = _dbSet.Find(id);
         if (entity is null)
@@ -33,7 +33,7 @@ public class BaseRepo<T> : IBaseRepo<T> where T : class
         return entity;
     }
 
-    public virtual List<T> GetAll(QueryOptions queryOptions)
+    public virtual async Task<List<T>> GetAll(QueryOptions queryOptions)
     {
         var items = _dbSet
             .AsEnumerable()
@@ -53,14 +53,14 @@ public class BaseRepo<T> : IBaseRepo<T> where T : class
         return _dbSet.ToList();
     }
 
-    public virtual T UpdateOne(T item)
+    public virtual async Task<T> UpdateOne(T item)
     {
         _dbSet.Update(item);
         _context.SaveChanges();
         return item;
     }
 
-    public virtual bool DeleteOne(T item)
+    public virtual async Task<bool> DeleteOne(T item)
     {
         _dbSet.Remove(item);
         _context.SaveChanges();

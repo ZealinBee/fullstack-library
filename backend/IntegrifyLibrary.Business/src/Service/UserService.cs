@@ -13,7 +13,7 @@ namespace IntegrifyLibrary.Business
             _mapper = mapper;
             _userRepo = userRepo;
         }
-        public CreateUserDto CreateAdmin(CreateUserDto dto)
+        public async Task<CreateUserDto> CreateAdmin(CreateUserDto dto)
         {
             var user = _mapper.Map<User>(dto);
             PasswordService.HashPassword(dto.Password, out var hashedPassword, out var salt);
@@ -23,7 +23,7 @@ namespace IntegrifyLibrary.Business
             return _mapper.Map<CreateUserDto>(_userRepo.CreateOne(user));
         }
 
-        public override CreateUserDto CreateOne(CreateUserDto dto)
+        public override async Task<CreateUserDto> CreateOne(CreateUserDto dto)
         {
             var user = _mapper.Map<User>(dto);
             PasswordService.HashPassword(dto.Password, out var hashedPassword, out var salt);

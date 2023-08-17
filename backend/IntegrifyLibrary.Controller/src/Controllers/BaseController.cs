@@ -19,9 +19,9 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [HttpGet]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]
-    public virtual ActionResult<List<TGetDto>> GetAll([FromQuery] QueryOptions queryOptions)
+    public virtual async Task<ActionResult<List<TGetDto>>> GetAll([FromQuery] QueryOptions queryOptions)
     {
-        var items = _service.GetAll(queryOptions).ToArray();
+        var items = await _service.GetAll(queryOptions);
         if (items == null)
         {
             return NotFound();
@@ -32,9 +32,9 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [HttpGet("{id:Guid}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]
-    public virtual ActionResult<TGetDto> GetOne([FromRoute] Guid id)
+    public virtual async Task<ActionResult<TGetDto>> GetOne([FromRoute] Guid id)
     {
-        var item = _service.GetOne(id);
+        var item = await _service.GetOne(id);
         if (item == null)
         {
             return NotFound();
@@ -45,9 +45,9 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [HttpPost]
     [ProducesResponseType(statusCode: 201)]
     [ProducesResponseType(statusCode: 400)]
-    public virtual ActionResult<TGetDto> CreateOne([FromBody] TCreateDto dto)
+    public virtual async Task<ActionResult<TGetDto>> CreateOne([FromBody] TCreateDto dto)
     {
-        var createdObject = _service.CreateOne(dto);
+        var createdObject = await _service.CreateOne(dto);
         return CreatedAtAction(nameof(CreateOne), createdObject);
     }
 
@@ -55,9 +55,9 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 400)]
     [ProducesResponseType(statusCode: 404)]
-    public virtual ActionResult<TGetDto> UpdateOne([FromRoute] Guid id, [FromBody] TUpdateDto dto)
+    public virtual async Task<ActionResult<TGetDto>> UpdateOne([FromRoute] Guid id, [FromBody] TUpdateDto dto)
     {
-        var item = _service.UpdateOne(id, dto);
+        var item = await _service.UpdateOne(id, dto);
         if (item == null)
         {
             return NotFound();
@@ -69,9 +69,9 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [HttpDelete("{id}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]
-    public virtual ActionResult<bool> DeleteOne([FromRoute] Guid id)
+    public virtual async Task<ActionResult<bool>> DeleteOne([FromRoute] Guid id)
     {
-        var item = _service.DeleteOne(id);
+        var item = await _service.DeleteOne(id);
         if (item == false)
         {
             return NotFound();

@@ -17,9 +17,9 @@ namespace IntegrifyLibrary.Controller
         }
 
         [HttpPost]
-        public ActionResult<string> VerifyCredentials([FromBody] LoginUserDto credentials)
+        public async Task<ActionResult<string>> VerifyCredentials([FromBody] LoginUserDto credentials)
         {
-            return Ok(_authService.VerifyCredentials(credentials));
+            return Ok(await _authService.VerifyCredentials(credentials));
         }
     }
 }

@@ -14,36 +14,37 @@ public class BaseService<T, TCreateDto, TGetDto, TUpdateDto> : IBaseService<TCre
         _mapper = mapper;
     }
 
-    public virtual TCreateDto CreateOne(TCreateDto dto)
+    public virtual async Task<TCreateDto> CreateOne(TCreateDto dto)
     {
         if (dto == null) throw new ArgumentNullException(nameof(dto));
         var newItem = _mapper.Map<T>(dto);
         return _mapper.Map<TCreateDto>(_repo.CreateOne(newItem));
     }
 
-    public virtual TGetDto GetOne(Guid id)
+    public virtual async Task<TGetDto> GetOne(Guid id)
     {
         return _mapper.Map<TGetDto>(_repo.GetOne(id));
     }
 
-    public virtual List<TGetDto> GetAll(QueryOptions queryOptions)
+    public virtual async Task<List<TGetDto>> GetAll(QueryOptions queryOptions)
     {
-        var result = _repo.GetAll(queryOptions);
+        var result = await _repo.GetAll(queryOptions);
         return _mapper.Map<List<TGetDto>>(_repo.GetAll(queryOptions));
     }
 
-    public virtual TUpdateDto UpdateOne(Guid id, TUpdateDto itemToUpdate)
+    public virtual async Task<TUpdateDto> UpdateOne(Guid id, TUpdateDto itemToUpdate)
     {
-        var foundItem = _repo.GetOne(id);
+        var foundItem = await _repo.GetOne(id);
+        if (foundItem == null) throw new Exception($"Item with id {id} not found");
         var updatedItem = _mapper.Map(itemToUpdate, foundItem);
         _repo.UpdateOne(updatedItem);
         return _mapper.Map<TUpdateDto>(updatedItem);
     }
 
 
-    public virtual bool DeleteOne(Guid id)
+    public virtual async Task<bool> DeleteOne(Guid id)
     {
-        var item = _repo.GetOne(id);
-        return _repo.DeleteOne(item);
+        var item = await _repo.GetOne(id);
+        return await _repo.DeleteOne(item);
     }
 }
