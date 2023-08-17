@@ -35,6 +35,8 @@ builder.Services
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
+builder.Services.AddSingleton<ErrorHandlerMiddleware>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {

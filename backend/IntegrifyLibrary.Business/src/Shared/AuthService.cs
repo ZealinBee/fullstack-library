@@ -28,10 +28,10 @@ public class AuthService : IAuthService
     public string GenerateToken(User user)
     {
         var claims = new List<Claim>{
-                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                new Claim(ClaimTypes.Role, user.Role.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
-            };
+                    new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role.ToString()),
+                    new Claim(ClaimTypes.Email, user.Email),
+                };
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("integrify-assignment-secret-key-1234567890"));
         var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
         var securityTokenDescriptor = new SecurityTokenDescriptor

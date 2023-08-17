@@ -1,6 +1,6 @@
 namespace IntegrifyLibrary.Domain
 {
-    public record Book
+    public class Book
     {
         public Guid Id { get; init; }
         public string BookName { get; set; }

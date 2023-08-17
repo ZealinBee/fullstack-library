@@ -18,18 +18,18 @@ public class BaseService<T, TCreateDto, TGetDto, TUpdateDto> : IBaseService<TCre
     {
         if (dto == null) throw new ArgumentNullException(nameof(dto));
         var newItem = _mapper.Map<T>(dto);
-        return _mapper.Map<TCreateDto>(_repo.CreateOne(newItem));
+        return _mapper.Map<TCreateDto>(await _repo.CreateOne(newItem));
     }
 
     public virtual async Task<TGetDto> GetOne(Guid id)
     {
-        return _mapper.Map<TGetDto>(_repo.GetOne(id));
+        return _mapper.Map<TGetDto>(await _repo.GetOne(id));
     }
 
     public virtual async Task<List<TGetDto>> GetAll(QueryOptions queryOptions)
     {
         var result = await _repo.GetAll(queryOptions);
-        return _mapper.Map<List<TGetDto>>(_repo.GetAll(queryOptions));
+        return _mapper.Map<List<TGetDto>>(result);
     }
 
     public virtual async Task<TUpdateDto> UpdateOne(Guid id, TUpdateDto itemToUpdate)

@@ -3,6 +3,7 @@ using IntegrifyLibrary.Business;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace IntegrifyLibrary.Controllers;
 [ApiController]
@@ -51,5 +52,24 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
     {
         var createdObject = await _service.CreateOne(dto);
         return CreatedAtAction(nameof(CreateOne), createdObject);
+    }
+
+    [Authorize(Roles = "User")]
+    [HttpDelete("delete-account")]
+    [ProducesResponseType(statusCode: 201)]
+    [ProducesResponseType(statusCode: 400)]
+    public async Task<ActionResult> DeleteOwnAccount()
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userIdClaim != null)
+        {
+            var userId = userIdClaim.Value;
+            var result = await _userService.DeleteOne(Guid.Parse(userId));
+            if (result)
+            {
+                return Ok();
+            }
+        }
+        return NoContent();
     }
 }

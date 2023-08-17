@@ -14,6 +14,14 @@ public class LoanController : BaseController<Loan, CreateLoanDto, GetLoanDto, Up
     }
 
     [Authorize(Roles = "User")]
+    [HttpGet]
+    public override async Task<ActionResult<List<GetLoanDto>>> GetAll([FromQuery] QueryOptions queryOptions)
+    {
+        var result = await _loanService.GetAll(queryOptions);
+        return Ok(result);
+    }
+
+    [Authorize(Roles = "User")]
     [HttpPost]
     [ProducesResponseType(statusCode: 201)]
     [ProducesResponseType(statusCode: 400)]
