@@ -31,7 +31,7 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
         return Ok(await _userService.GetOne(id));
     }
 
-    // [Authorize(Roles = "Librarian")]
+    [Authorize(Roles = "Librarian")]
     [HttpPost("admin")]
     public async Task<ActionResult<GetUserDto>> CreateAdmin([FromBody] CreateUserDto dto)
     {
@@ -43,6 +43,7 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
         return CreatedAtAction("Created", item);
     }
 
+    [AllowAnonymous]
     [HttpPost]
     [ProducesResponseType(statusCode: 201)]
     [ProducesResponseType(statusCode: 400)]
@@ -50,29 +51,5 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
     {
         var createdObject = await _service.CreateOne(dto);
         return CreatedAtAction(nameof(CreateOne), createdObject);
-    }
-
-    [Authorize(Roles = "Librarian")]
-    [HttpPatch("{id}")]
-    public override async Task<ActionResult<GetUserDto>> UpdateOne([FromRoute] Guid id, [FromBody] UpdateUserDto dto)
-    {
-        var item = await _userService.UpdateOne(id, dto);
-        if (item == null)
-        {
-            return NotFound();
-        }
-        return Ok(item);
-    }
-
-    [Authorize(Roles = "Librarian")]
-    [HttpDelete("{id}")]
-    public override async Task<ActionResult<bool>> DeleteOne([FromRoute] Guid id)
-    {
-        var item = await _userService.DeleteOne(id);
-        if (item == false)
-        {
-            return NotFound();
-        }
-        return NoContent();
     }
 }

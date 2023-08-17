@@ -1,9 +1,9 @@
 namespace IntegrifyLibrary.Domain
 {
-    public record Author
+    public class Author
     {
         public Guid Id { get; init; }
-        public Guid BookId { get; init; }
-        public string AuthorName { get; init; }
+        public List<Guid> BookIds { get; set; }
+        public string AuthorName { get; set; } = string.Empty;
     }
 }

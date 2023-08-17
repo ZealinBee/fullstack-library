@@ -23,15 +23,15 @@ builder.Services.AddControllers();
 builder.Services
     .AddScoped<IUserRepo, UserRepo>()
     .AddScoped<IBookRepo, BookRepo>()
-    .AddScoped<ILoanRepo, LoanRepo>();
+    .AddScoped<ILoanRepo, LoanRepo>()
+    .AddScoped<IAuthorRepo, AuthorRepo>();
 
 builder.Services
     .AddScoped<IUserService, UserService>()
     .AddScoped<IBookService, BookService>()
     .AddScoped<IAuthService, AuthService>()
-    .AddScoped<ILoanService, LoanService>();
-
-
+    .AddScoped<ILoanService, LoanService>()
+    .AddScoped<IAuthorService, AuthorService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 

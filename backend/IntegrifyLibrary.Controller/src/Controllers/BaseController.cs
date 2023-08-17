@@ -2,6 +2,7 @@ using IntegrifyLibrary.Domain;
 using IntegrifyLibrary.Business;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IntegrifyLibrary.Controllers;
 
@@ -42,6 +43,7 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
         return Ok(item);
     }
 
+    [Authorize(Roles = "Librarian")]
     [HttpPost]
     [ProducesResponseType(statusCode: 201)]
     [ProducesResponseType(statusCode: 400)]
@@ -51,6 +53,7 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
         return CreatedAtAction(nameof(CreateOne), createdObject);
     }
 
+    [Authorize(Roles = "Librarian")]
     [HttpPatch("{id:Guid}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 400)]
@@ -65,7 +68,7 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
         return Ok(item);
     }
 
-
+    [Authorize(Roles = "Librarian")]
     [HttpDelete("{id}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]
