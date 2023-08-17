@@ -16,12 +16,6 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
         _userService = userService;
     }
 
-    [Authorize(Roles = "Librarian")]
-    [HttpGet]
-    public override async Task<ActionResult<List<GetUserDto>>> GetAll(QueryOptions queryOptions)
-    {
-        return await _userService.GetAll(queryOptions);
-    }
 
     [Authorize(Roles = "Librarian")]
     [HttpGet("{id}")]
@@ -31,6 +25,21 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
     {
         return Ok(await _userService.GetOne(id));
     }
+
+    [Authorize(Roles = "Librarian")]
+    [HttpGet]
+    [ProducesResponseType(statusCode: 200)]
+    [ProducesResponseType(statusCode: 404)]
+    public override async Task<ActionResult<List<GetUserDto>>> GetAll([FromQuery] QueryOptions queryOptions)
+    {
+        var items = await _userService.GetAll(queryOptions);
+        if (items == null)
+        {
+            return NotFound();
+        }
+        return Ok(items);
+    }
+
 
     [Authorize(Roles = "Librarian")]
     [HttpPost("admin")]
@@ -50,8 +59,22 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
     [ProducesResponseType(statusCode: 400)]
     public override async Task<ActionResult<GetUserDto>> CreateOne([FromBody] CreateUserDto dto)
     {
-        var createdObject = await _service.CreateOne(dto);
+        var createdObject = await _userService.CreateOne(dto);
         return CreatedAtAction(nameof(CreateOne), createdObject);
+    }
+
+    [HttpPatch("{id:Guid}")]
+    [ProducesResponseType(statusCode: 200)]
+    [ProducesResponseType(statusCode: 400)]
+    [ProducesResponseType(statusCode: 404)]
+    public override async Task<ActionResult<GetUserDto>> UpdateOne([FromRoute] Guid id, [FromBody] UpdateUserDto dto)
+    {
+        var item = await _userService.UpdateOne(id, dto);
+        if (item == null)
+        {
+            return NotFound();
+        }
+        return Ok(item);
     }
 
     [Authorize(Roles = "User")]
