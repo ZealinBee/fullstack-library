@@ -10,4 +10,9 @@ public class AuthorRepo : BaseRepo<Author>, IAuthorRepo
     {
 
     }
+
+    public async Task<Author> GetOneByAuthorName(string authorName)
+    {
+        return await _context.Authors.FirstOrDefaultAsync(a => a.AuthorName == authorName);
+    }
 }

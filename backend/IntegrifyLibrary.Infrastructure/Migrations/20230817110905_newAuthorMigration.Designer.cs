@@ -3,6 +3,7 @@ using System;
 using IntegrifyLibrary.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,39 +12,32 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntegrifyLibrary.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230817110905_newAuthorMigration")]
+    partial class newAuthorMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "user", "librarian" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("IntegrifyLibrary.Domain.Author", b =>
                 {
-                    b.Property<Guid>("AuthorId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("author_id");
+                        .HasColumnName("id");
 
                     b.Property<string>("AuthorName")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("author_name");
 
-                    b.Property<DateOnly>("CreatedAt")
-                        .HasColumnType("date")
-                        .HasColumnName("created_at");
-
-                    b.Property<DateOnly>("ModifiedAt")
-                        .HasColumnType("date")
-                        .HasColumnName("modified_at");
-
-                    b.HasKey("AuthorId")
+                    b.HasKey("Id")
                         .HasName("pk_authors");
 
                     b.ToTable("authors", (string)null);
@@ -51,10 +45,10 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
 
             modelBuilder.Entity("IntegrifyLibrary.Domain.Book", b =>
                 {
-                    b.Property<Guid>("BookId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("book_id");
+                        .HasColumnName("id");
 
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uuid")
@@ -104,7 +98,7 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("quantity");
 
-                    b.HasKey("BookId")
+                    b.HasKey("Id")
                         .HasName("pk_books");
 
                     b.HasIndex("AuthorId")
@@ -206,14 +200,12 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
 
             modelBuilder.Entity("IntegrifyLibrary.Domain.Book", b =>
                 {
-                    b.HasOne("IntegrifyLibrary.Domain.Author", "Author")
+                    b.HasOne("IntegrifyLibrary.Domain.Author", null)
                         .WithMany("Books")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_books_authors_author_id");
-
-                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("IntegrifyLibrary.Domain.Author", b =>

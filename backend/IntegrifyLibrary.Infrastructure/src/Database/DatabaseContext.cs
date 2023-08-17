@@ -24,4 +24,13 @@ public class DatabaseContext : DbContext
         var builder = new NpgsqlConnectionStringBuilder(_configuration.GetConnectionString("DefaultConnection"));
         optionsBuilder.UseNpgsql(builder.ConnectionString).UseSnakeCaseNamingConvention();
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasPostgresEnum<Role>();
+        modelBuilder.Entity<Author>()
+            .HasMany(author => author.Books)
+            .WithOne(author => author.Author)
+            .HasForeignKey(author => author.AuthorId);
+    }
 }

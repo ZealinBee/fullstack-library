@@ -9,6 +9,4 @@ public class BookDto
     public int Quantity { get; set; }
     public int PageCount { get; set; }
     public DateOnly PublishedDate { get; set; }
-    public Guid GenreId { get; set; }
-    public Guid AuthorId { get; set; }
 }
