@@ -13,8 +13,7 @@ public class User
     public Role Role { get; set; }
     public DateOnly CreatedAt { get; init; }
     public DateOnly UpdatedAt { get; init; }
-
-
+    public List<Loan> Loans { get; set; } = new();
 }
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Role

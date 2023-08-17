@@ -10,8 +10,7 @@ public class GetLoanDto
 
 public class CreateLoanDto
 {
-    public Guid BookId { get; set; }
-    public Guid UserId { get; set; }
+    public List<Guid> BookIds { get; set; }
     public DateOnly LoanDate { get; set; }
 }
 

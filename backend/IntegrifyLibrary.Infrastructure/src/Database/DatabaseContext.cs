@@ -13,6 +13,7 @@ public class DatabaseContext : DbContext
     public DbSet<Book> Books { get; set; }
     public DbSet<Loan> Loans { get; set; }
     public DbSet<Author> Authors { get; set; }
+    public DbSet<LoanDetails> LoanDetails { get; set; }
 
     public DatabaseContext(IConfiguration configuration, DbContextOptions options) : base(options)
     {
@@ -32,5 +33,13 @@ public class DatabaseContext : DbContext
             .HasMany(author => author.Books)
             .WithOne(author => author.Author)
             .HasForeignKey(author => author.AuthorId);
+        modelBuilder.Entity<User>()
+            .HasMany(user => user.Loans)
+            .WithOne(user => user.User)
+            .HasForeignKey(user => user.UserId);
+        modelBuilder.Entity<Loan>()
+            .HasMany(loan => loan.LoanDetails)
+            .WithOne(loan => loan.Loan)
+            .HasForeignKey(loan => loan.LoanId);
     }
 }

@@ -3,6 +3,7 @@ using IntegrifyLibrary.Business;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace IntegrifyLibrary.Controllers;
 public class LoanController : BaseController<Loan, CreateLoanDto, GetLoanDto, UpdateLoanDto>
@@ -27,7 +28,8 @@ public class LoanController : BaseController<Loan, CreateLoanDto, GetLoanDto, Up
     [ProducesResponseType(statusCode: 400)]
     public override async Task<ActionResult<GetLoanDto>> CreateOne([FromBody] CreateLoanDto dto)
     {
-        var createdObject = await _loanService.CreateOne(dto);
+        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        var createdObject = await _loanService.CreateLoan(dto, userId);
         return CreatedAtAction(nameof(CreateOne), createdObject);
     }
 }
