@@ -51,6 +51,6 @@ not finalized
 ## Getting Started
 
 Clone the repository from github with `git clone` Then `npm i` for the packages and lastly `npm start` and go to your http://localhost:3000 to see the website  
-Here is the deployed website: [Deployed Website][1]
+Here is the deployed backend in azure: [Deployed Website][1]
 
-[1]: https://brewery-zealinbee.netlify.app/
+[1]: https://integrifylibrary.azurewebsites.net/

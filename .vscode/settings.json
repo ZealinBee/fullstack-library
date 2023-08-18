@@ -1,3 +1,5 @@
 {
-    "FSharp.suggestGitignore": false
+    "FSharp.suggestGitignore": false,
+    "appService.defaultWebAppToDeploy": "/subscriptions/0cf5df7d-0c21-4eab-93dc-02e431dbbb25/resourceGroups/IntegrifyLibrary_group/providers/Microsoft.Web/sites/IntegrifyLibrary",
+    "appService.deploySubpath": "backend\\bin\\Publish"
 }
