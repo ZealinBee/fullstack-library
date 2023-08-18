@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 
-import CreateUser from "../interfaces/users/CreateUser";
+import LoginUser from "../interfaces/users/LoginUser";
 import useAppDispatch  from "../redux/hooks/useAppDispatch";
-import { createNewUser } from "../redux/reducers/usersReducers";
+import { loginUser } from "../redux/reducers/usersReducers";
 
-function SignUp() {
+function Login() {
   const dispatch = useAppDispatch();
-  const [user, setUser] = useState<CreateUser>({
-    firstName: "",
-    lastName: "",
+  const [user, setUser] = useState<LoginUser>({
     email: "",
     password: "",
   });
@@ -16,8 +14,8 @@ function SignUp() {
   function createAccountHandler(event: React.FormEvent) {
     event.preventDefault();
     console.log(user);
-    dispatch(createNewUser(user));
-  }
+    dispatch(loginUser(user))
+}
 
   function formChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setUser((prevState) => {
@@ -30,20 +28,8 @@ function SignUp() {
 
   return (
     <div>
-      <h1>Sign Up</h1>
+      <h1>Login</h1>
       <form onSubmit={createAccountHandler}>
-        <input
-          type="text"
-          onChange={formChangeHandler}
-          name="firstName"
-          value={user.firstName}
-        />
-       <input
-          type="text"
-          onChange={formChangeHandler}
-          name="lastName"
-          value={user.lastName}
-        />
        <input
           type="email"
           onChange={formChangeHandler}
@@ -56,10 +42,10 @@ function SignUp() {
           name="password"
           value={user.password}
         />
-        <button type="submit">Create Account</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
 }
 
-export default SignUp;
+export default Login;
