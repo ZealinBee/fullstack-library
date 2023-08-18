@@ -34,5 +34,13 @@ namespace IntegrifyLibrary.Business
             user.Role = Role.User;
             return _mapper.Map<CreateUserDto>(await _userRepo.CreateOne(user));
         }
+
+        public async Task MakeUserLibrarian(string userEmail)
+        {
+            var user = await _userRepo.GetOneByEmail(userEmail);
+            if (user == null) throw new Exception($"User with email {userEmail} does not exist");
+            user.Role = Role.Librarian;
+            await _userRepo.UpdateOne(user);
+        }
     }
 }

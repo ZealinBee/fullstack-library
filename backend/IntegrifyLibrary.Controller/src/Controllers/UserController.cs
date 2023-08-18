@@ -41,7 +41,7 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
     }
 
 
-    [Authorize(Roles = "Librarian")]
+    // [Authorize(Roles = "Librarian")]
     [HttpPost("admin")]
     public async Task<ActionResult<GetUserDto>> CreateAdmin([FromBody] CreateUserDto dto)
     {
@@ -75,6 +75,17 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
             return NotFound();
         }
         return Ok(item);
+    }
+
+    [Authorize(Roles = "Librarian")]
+    [HttpPatch("make-user-librarian")]
+    [ProducesResponseType(statusCode: 200)]
+    [ProducesResponseType(statusCode: 400)]
+    [ProducesResponseType(statusCode: 404)]
+    public async Task<ActionResult> MakeUserLibrarian([FromBody] string userEmail)
+    {
+        await _userService.MakeUserLibrarian(userEmail);
+        return Ok();
     }
 
     [Authorize(Roles = "User")]
