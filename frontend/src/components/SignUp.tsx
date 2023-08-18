@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 
 import CreateUser from "../interfaces/users/CreateUser";
+import useAppDispatch  from "../redux/hooks/useAppDispatch";
+import { createNewUser } from "../redux/reducers/usersReducers";
 
 function Login() {
+  const dispatch = useAppDispatch();
   const [user, setUser] = useState<CreateUser>({
     firstName: "",
     lastName: "",
@@ -12,6 +15,8 @@ function Login() {
 
   function createAccountHandler(event: React.FormEvent) {
     event.preventDefault();
+    console.log(user);
+    dispatch(createNewUser(user));
   }
 
   function formChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {

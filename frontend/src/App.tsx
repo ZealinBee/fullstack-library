@@ -17,7 +17,6 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: <AuthPage />,
-    errorElement: <NotFoundPage />,
   },
   {
     path: "/cart",

@@ -24,7 +24,15 @@ export const createNewUser = createAsyncThunk(
   "users/createNewUser",
   async (user: CreateUser) => {
     try {
-      const result = await axios.post("http://localhost:5043//api/v1/users");
+      const result = await axios.post(
+        "http://localhost:5043/api/v1/users",
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
