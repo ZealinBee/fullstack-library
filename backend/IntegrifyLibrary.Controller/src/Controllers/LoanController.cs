@@ -32,4 +32,16 @@ public class LoanController : BaseController<Loan, CreateLoanDto, GetLoanDto, Up
         var createdObject = await _loanService.CreateLoan(dto, userId);
         return CreatedAtAction(nameof(CreateOne), createdObject);
     }
+
+    [Authorize(Roles = "User")]
+    [HttpGet("own-loans")]
+    [ProducesResponseType(statusCode: 200)]
+    [ProducesResponseType(statusCode: 404)]
+    public async Task<ActionResult<List<GetLoanDto>>> GetOwnLoans()
+    {
+        var userIdClaim = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        var result = await _loanService.GetOwnLoans(userIdClaim);
+        return Ok(result);
+    }
+
 }
