@@ -1,10 +1,23 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import CreateBook from '../components/CreateBook'
-import UserList from '../components/UserList'
-import Header from '../components/Header'
+import CreateBook from "../components/CreateBook";
+import UserList from "../components/UserList";
+import Header from "../components/Header";
+import useAppSelector from "../redux/hooks/useAppSelector";
 
 function DashboardPage() {
+  const currentUser = useAppSelector((state) => state.users.currentUser);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/auth");
+    }
+    if (currentUser?.role !== "Librarian") {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div>
       <Header />
@@ -12,7 +25,7 @@ function DashboardPage() {
       <CreateBook />
       <UserList />
     </div>
-  )
+  );
 }
 
-export default DashboardPage
+export default DashboardPage;

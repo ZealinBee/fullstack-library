@@ -20,24 +20,24 @@ function BookList() {
     dispatch(deleteBook({ bookId: bookId, jwt_token: token }));
   }
 
-
-
   return (
     <div>
       {books.map((book: GetBook) => {
         return (
-          <>
-            <div key={book.bookId}>
+          <div key={book.bookId}>
+            <div>
               <h1>Book Name: {book.bookName}</h1>
               <h2>Author Name: {book.authorName}</h2>
             </div>
             <button onClick={() => deleteBookHandler(book.bookId)}>
               Delete
             </button>
-            <Link to={`/books/${book.bookId}`}>  
-              <button onClick={() => dispatch(selectCurrentBook(book))}>Details</button>
+            <Link to={`/books/${book.bookId}`}>
+              <button onClick={() => dispatch(selectCurrentBook(book))}>
+                Details
+              </button>
             </Link>
-          </>
+          </div>
         );
       })}
     </div>

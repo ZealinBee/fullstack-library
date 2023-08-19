@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import LoginUser from "../interfaces/users/LoginUser";
 import useAppDispatch  from "../redux/hooks/useAppDispatch";
 import { loginUser } from "../redux/reducers/usersReducer";
+
 
 function Login() {
   const dispatch = useAppDispatch();
@@ -10,13 +12,17 @@ function Login() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
-  function createAccountHandler(event: React.FormEvent) {
+  async function createAccountHandler(event: React.FormEvent) {
     event.preventDefault();
     console.log(user);
-    dispatch(loginUser(user))
+    const response = await dispatch(loginUser(user))
+    if(response.meta.requestStatus === 'fulfilled'){
+      navigate('/')
+    }
 }
-
+  
   function formChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setUser((prevState) => {
       return {

@@ -53,7 +53,7 @@ export const createNewUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   "users/loginUser",
-  async (user: LoginUser) => {
+  async (user: LoginUser, { dispatch }) => {
     try {
       const response = await axios.post<string>(
         "http://localhost:5043/api/v1/auth",
@@ -64,7 +64,7 @@ export const loginUser = createAsyncThunk(
           },
         }
       );
-      console.log(response.data);
+      await dispatch(getUserProfile(response.data));
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -77,11 +77,6 @@ export const loginUser = createAsyncThunk(
       }
     }
   }
-);
-
-export const authenticateUser = createAsyncThunk(
-  "users/authenticateUser",
-  async (jwt_token: string) => {}
 );
 
 export const getAllUsers = createAsyncThunk(
