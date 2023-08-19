@@ -4,7 +4,7 @@ using AutoMapper;
 
 namespace IntegrifyLibrary.Business;
 
-public class BookService : BaseService<Book, BookDto, BookDto, BookDto>, IBookService
+public class BookService : BaseService<Book, BookDto, GetBookDto, BookDto>, IBookService
 {
     private readonly IBookRepo _bookRepo;
     private readonly IAuthorRepo _authorRepo;

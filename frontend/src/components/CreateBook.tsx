@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { createBook } from "../redux/reducers/booksReducer";
-import SimpleBook from "../interfaces/books/SimpleBook";
+import ICreateBook from "../interfaces/books/CreateBook";
 
 function CreateBook() {
   const dispatch = useAppDispatch();
-  const [book, setBook] = useState<SimpleBook>({
+  const [book, setBook] = useState<ICreateBook>({
     bookName: "",
     authorName: "",
     description: "",

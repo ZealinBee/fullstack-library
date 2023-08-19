@@ -10,3 +10,8 @@ public class BookDto
     public int PageCount { get; set; }
     public DateOnly PublishedDate { get; set; }
 }
+
+public class GetBookDto : BookDto
+{
+    public Guid BookId { get; set; }
+}

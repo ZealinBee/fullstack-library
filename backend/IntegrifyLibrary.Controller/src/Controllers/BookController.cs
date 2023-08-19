@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace IntegrifyLibrary.Controllers;
 [ApiController]
 
-public class BookController : BaseController<Book, BookDto, BookDto, BookDto>
+public class BookController : BaseController<Book, BookDto, GetBookDto, BookDto>
 {
     private readonly IBookService _bookService;
 
@@ -21,7 +21,7 @@ public class BookController : BaseController<Book, BookDto, BookDto, BookDto>
     [HttpPost]
     [ProducesResponseType(statusCode: 201)]
     [ProducesResponseType(statusCode: 400)]
-    public override async Task<ActionResult<BookDto>> CreateOne([FromBody] BookDto dto)
+    public override async Task<ActionResult<GetBookDto>> CreateOne([FromBody] BookDto dto)
     {
         var createdObject = await _bookService.CreateOne(dto);
         return CreatedAtAction(nameof(CreateOne), createdObject);

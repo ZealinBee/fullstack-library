@@ -1,13 +1,14 @@
 import axios, { AxiosError } from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import SimpleBook from "../../interfaces/books/SimpleBook";
+import GetBook from "../../interfaces/books/GetBook";
+import CreateBook from "../../interfaces/books/CreateBook";
 
 interface BooksState {
-  books: SimpleBook[];
+  books: GetBook[];
   loading: boolean;
   error: AxiosError | null;
-  currentBook: SimpleBook | null;
+  currentBook: GetBook | null;
 }
 
 const initialState: BooksState = {
@@ -19,7 +20,7 @@ const initialState: BooksState = {
 
 export const getAllBooks = createAsyncThunk("books/getAllBooks", async () => {
   try {
-    const response = await axios.get<SimpleBook[]>(
+    const response = await axios.get<GetBook[]>(
       "http://localhost:5043/api/v1/books"
     );
     return response.data;
@@ -37,9 +38,9 @@ export const getAllBooks = createAsyncThunk("books/getAllBooks", async () => {
 
 export const createBook = createAsyncThunk(
   "books/createBook",
-  async (book: SimpleBook) => {
+  async (book: CreateBook) => {
     try {
-      const response = await axios.post<SimpleBook>(
+      const response = await axios.post<CreateBook>(
         "http://localhost:5043/api/v1/books",
         book,
         {
@@ -62,14 +63,21 @@ export const createBook = createAsyncThunk(
   }
 );
 
+
 export const deleteBook = createAsyncThunk(
   "books/deleteBook",
-  async (bookId: number) => {
+  async ({bookId, jwt_token} : {bookId: string, jwt_token: string | null}) => {
     try {
-      const response = await axios.delete<SimpleBook>(
-        `http://localhost:5043/api/v1/books/${bookId}`
+      await axios.delete<GetBook>(
+        `http://localhost:5043/api/v1/books/${bookId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          }
+        }
       );
-      return response.data;
+      return bookId;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const responseData = error.response?.data;
@@ -92,6 +100,11 @@ const booksSlice = createSlice({
         state.books = action.payload;
         state.loading = false;
         state.error = null;
+    })
+    .addCase(deleteBook.fulfilled, (state, action) => {
+      state.books = state.books.filter(book => book.bookId !== action.payload);
+      state.loading = false;
+      state.error = null;
     })
   }
 });
