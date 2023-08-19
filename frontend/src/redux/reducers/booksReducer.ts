@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import Book from "../../interfaces/books/Book";
 import SimpleBook from "../../interfaces/books/SimpleBook";
 
 interface BooksState {
