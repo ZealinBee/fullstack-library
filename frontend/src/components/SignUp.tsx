@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import CreateUser from "../interfaces/users/CreateUser";
 import useAppDispatch  from "../redux/hooks/useAppDispatch";
-import { createNewUser } from "../redux/reducers/usersReducers";
+import { createNewUser } from "../redux/reducers/usersReducer";
 
 function SignUp() {
   const dispatch = useAppDispatch();

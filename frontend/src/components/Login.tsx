@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import LoginUser from "../interfaces/users/LoginUser";
 import useAppDispatch  from "../redux/hooks/useAppDispatch";
-import { loginUser } from "../redux/reducers/usersReducers";
+import { loginUser } from "../redux/reducers/usersReducer";
 
 function Login() {
   const dispatch = useAppDispatch();
