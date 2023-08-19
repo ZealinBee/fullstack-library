@@ -42,5 +42,12 @@ namespace IntegrifyLibrary.Business
             user.Role = Role.Librarian;
             await _userRepo.UpdateOne(user);
         }
+
+        public async Task<GetUserDto> GetOwnProfile(string userEmail)
+        {
+            var user = await _userRepo.GetOneByEmail(userEmail);
+            if (user == null) throw new Exception($"User with email {userEmail} does not exist");
+            return _mapper.Map<GetUserDto>(user);
+        }
     }
 }

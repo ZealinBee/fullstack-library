@@ -37,4 +37,5 @@ public class BookService : BaseService<Book, BookDto, GetBookDto, BookDto>, IBoo
             return _mapper.Map<BookDto>(await _repo.CreateOne(newBook));
         }
     }
+
 }

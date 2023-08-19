@@ -10,5 +10,6 @@ namespace IntegrifyLibrary.Business
 
         Task<CreateUserDto> CreateAdmin(CreateUserDto dto);
         Task MakeUserLibrarian(string userEmail);
+        Task<GetUserDto> GetOwnProfile(string userEmail);
     }
 }

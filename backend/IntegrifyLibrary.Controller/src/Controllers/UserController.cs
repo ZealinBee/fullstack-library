@@ -106,4 +106,14 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
         }
         return NoContent();
     }
+
+    [Authorize(Roles = "Librarian, User")]
+    [HttpGet("profile")]
+    [ProducesResponseType(statusCode: 200)]
+    [ProducesResponseType(statusCode: 404)]
+    public async Task<GetUserDto> GetOwnProfile()
+    {
+        var userEmail = User.FindFirst(ClaimTypes.Email).Value;
+        return await _userService.GetOwnProfile(userEmail);
+    }
 }
