@@ -43,11 +43,14 @@ namespace IntegrifyLibrary.Business
             await _userRepo.UpdateOne(user);
         }
 
-        public async Task<GetUserDto> GetOwnProfile(string userEmail)
+        public async Task<UpdateUserDto> UpdateOwnProfile(Guid id, UpdateUserDto dto)
         {
-            var user = await _userRepo.GetOneByEmail(userEmail);
-            if (user == null) throw new Exception($"User with email {userEmail} does not exist");
-            return _mapper.Map<GetUserDto>(user);
+            var user = await _userRepo.GetOne(id);
+            var updatedUser = _mapper.Map(dto, user);
+            PasswordService.HashPassword(dto.Password, out var hashedPassword, out var salt);
+            updatedUser.Password = hashedPassword;
+            updatedUser.Salt = salt;
+            return _mapper.Map<UpdateUserDto>(await _userRepo.UpdateOne(updatedUser));
         }
     }
 }

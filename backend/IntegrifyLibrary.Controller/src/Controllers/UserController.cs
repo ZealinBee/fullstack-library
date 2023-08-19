@@ -41,7 +41,7 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
     }
 
 
-    // [Authorize(Roles = "Librarian")]
+    [Authorize(Roles = "Librarian")]
     [HttpPost("admin")]
     public async Task<ActionResult<GetUserDto>> CreateAdmin([FromBody] CreateUserDto dto)
     {
@@ -111,9 +111,21 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
     [HttpGet("profile")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]
-    public async Task<GetUserDto> GetOwnProfile()
+    public async Task<ActionResult<GetUserDto>> GetOwnProfile()
     {
-        var userEmail = User.FindFirst(ClaimTypes.Email).Value;
-        return await _userService.GetOwnProfile(userEmail);
+        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        var userProfile = await _userService.GetOne(userId);
+        return Ok(userProfile);
+    }
+
+    [Authorize(Roles = "Librarian, User")]
+    [HttpPatch("profile")]
+    [ProducesResponseType(statusCode: 200)]
+    [ProducesResponseType(statusCode: 404)]
+    public async Task<ActionResult<UpdateUserDto>> ChangeOwnProfile([FromBody] UpdateUserDto dto)
+    {
+        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        var updateItem = await _userService.UpdateOwnProfile(userId, dto);
+        return Ok(updateItem);
     }
 }
