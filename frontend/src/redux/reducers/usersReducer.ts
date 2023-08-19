@@ -112,6 +112,33 @@ export const getAllUsers = createAsyncThunk(
   }
 );
 
+export const deleteUser = createAsyncThunk(
+  "users/deleteUser",
+  async ({userId, jwt_token} : {userId: string, jwt_token: string | null}) => {
+    try {
+      await axios.delete(
+        `http://localhost:5043/api/v1/users/${userId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
+      return userId;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+)
+
 const usersSlice = createSlice({
   name: "users",
   initialState,
@@ -128,6 +155,12 @@ const usersSlice = createSlice({
       return {
         ...state,
         users: action.payload, 
+      }
+    })
+    .addCase(deleteUser.fulfilled, (state, action) => {
+      return {
+        ...state,
+        users: state.users.filter((user) => user.userId !== action.payload)
       }
     })
   }
