@@ -38,7 +38,7 @@ For the frontend, this project uses React, typescript and MUI.
 
 - Loan books and CRUD on own loans, ability view the loan history
 - Create new accounts
-- Read, update and delete their own accounts
+- Read, update and delete their own profile
 - See all the books and able to search and sort through the books
 
 ## Project Structure

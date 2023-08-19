@@ -10,7 +10,7 @@ interface UsersState {
   users: GetUser[];
   loading: boolean;
   error: AxiosError | null;
-  currentUser: User | null;
+  currentUser: GetUser | null;
   isLoggedIn: boolean;
   currentToken: string | null;
 }
@@ -112,12 +112,12 @@ export const getAllUsers = createAsyncThunk(
   }
 );
 
-export const deleteUser = createAsyncThunk(
-  "users/deleteUser",
-  async ({userId, jwt_token} : {userId: string, jwt_token: string | null}) => {
+export const getUserProfile = createAsyncThunk(
+  "users/getUserProfile",
+  async (jwt_token: string | null) => {
     try {
-      await axios.delete(
-        `http://localhost:5043/api/v1/users/${userId}`,
+      const response = await axios.get<GetUser>(
+        "http://localhost:5043/api/v1/users/profile",
         {
           headers: {
             "Content-Type": "application/json",
@@ -125,6 +125,36 @@ export const deleteUser = createAsyncThunk(
           },
         }
       );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "users/deleteUser",
+  async ({
+    userId,
+    jwt_token,
+  }: {
+    userId: string;
+    jwt_token: string | null;
+  }) => {
+    try {
+      await axios.delete(`http://localhost:5043/api/v1/users/${userId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt_token}`,
+        },
+      });
       return userId;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -137,33 +167,75 @@ export const deleteUser = createAsyncThunk(
       }
     }
   }
-)
+);
+
+export const deleteProfile = createAsyncThunk(
+  "users/deleteProfile",
+  async (jwt_token: string | null) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5043/api/v1/users/profile`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+);
 
 const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      return {
-        ...state,
-        isLoggedIn: true,
-        currentToken: action.payload,
-      }
-    })
-    .addCase(getAllUsers.fulfilled, (state, action) => {
-      return {
-        ...state,
-        users: action.payload, 
-      }
-    })
-    .addCase(deleteUser.fulfilled, (state, action) => {
-      return {
-        ...state,
-        users: state.users.filter((user) => user.userId !== action.payload)
-      }
-    })
-  }
+    builder
+      .addCase(loginUser.fulfilled, (state, action) => {
+        return {
+          ...state,
+          isLoggedIn: true,
+          currentToken: action.payload,
+        };
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        return {
+          ...state,
+          users: action.payload,
+        };
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        return {
+          ...state,
+          users: state.users.filter((user) => user.userId !== action.payload),
+        };
+      })
+      .addCase(getUserProfile.fulfilled, (state, action) => {
+        return {
+          ...state,
+          currentUser: action.payload,
+        };
+      })
+      .addCase(deleteProfile.fulfilled, (state, action) => {
+        return {
+          ...state,
+          currentUser: null,
+          isLoggedIn: false,
+          currentToken: null,
+        };
+      });
+  },
 });
 
 const usersReducer = usersSlice.reducer;

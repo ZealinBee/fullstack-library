@@ -7,6 +7,8 @@ import NotFoundPage from './pages/NotFoundPage';
 import CartPage from './pages/CartPage';
 import DashboardPage from './pages/DashboardPage';
 import LandingPage from './pages/LandingPage';
+import ProfilePage from './pages/ProfilePage';
+import BookPage from './pages/BookPage';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,16 @@ const router = createBrowserRouter([
   {
     path: "/welcome",
     element: <LandingPage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/books/:id",
+    element: <BookPage />,
     errorElement: <NotFoundPage />,
   }
 ])

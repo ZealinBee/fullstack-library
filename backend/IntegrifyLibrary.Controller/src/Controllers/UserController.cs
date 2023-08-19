@@ -88,8 +88,8 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
         return Ok();
     }
 
-    [Authorize(Roles = "User")]
-    [HttpDelete("delete-account")]
+    [Authorize(Roles = "Librarian, User")]
+    [HttpDelete("profile")]
     [ProducesResponseType(statusCode: 201)]
     [ProducesResponseType(statusCode: 400)]
     public async Task<ActionResult> DeleteOwnAccount()

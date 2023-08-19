@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { getAllBooks } from "../redux/reducers/booksReducer";
 import useAppSelector from "../redux/hooks/useAppSelector";
 import GetBook from "../interfaces/books/GetBook";
-import { deleteBook } from "../redux/reducers/booksReducer";
+import { deleteBook, selectCurrentBook } from "../redux/reducers/booksReducer";
 
 function BookList() {
   const dispatch = useAppDispatch();
@@ -15,9 +16,12 @@ function BookList() {
     dispatch(getAllBooks());
   }, []);
 
-  function deleteBookHandler(bookId : string) {
+  function deleteBookHandler(bookId: string) {
     dispatch(deleteBook({ bookId: bookId, jwt_token: token }));
   }
+
+
+
   return (
     <div>
       {books.map((book: GetBook) => {
@@ -26,9 +30,13 @@ function BookList() {
             <div key={book.bookId}>
               <h1>Book Name: {book.bookName}</h1>
               <h2>Author Name: {book.authorName}</h2>
-              <h3>ISBN: {book.ISBN}</h3>
             </div>
-            <button onClick={() => deleteBookHandler(book.bookId)}>Delete</button>
+            <button onClick={() => deleteBookHandler(book.bookId)}>
+              Delete
+            </button>
+            <Link to={`/books/${book.bookId}`}>  
+              <button onClick={() => dispatch(selectCurrentBook(book))}>Details</button>
+            </Link>
           </>
         );
       })}

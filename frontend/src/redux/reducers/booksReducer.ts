@@ -94,7 +94,11 @@ export const deleteBook = createAsyncThunk(
 const booksSlice = createSlice({
   name: "books",
   initialState,
-  reducers: {},
+  reducers: {
+    selectCurrentBook: (state, action) => {
+      state.currentBook = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(getAllBooks.fulfilled, (state, action) => {
         state.books = action.payload;
@@ -109,4 +113,5 @@ const booksSlice = createSlice({
   }
 });
 
+export const { selectCurrentBook } = booksSlice.actions;
 export default booksSlice.reducer;
