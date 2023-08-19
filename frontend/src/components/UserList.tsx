@@ -3,8 +3,11 @@ import React, { useEffect } from "react";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import useAppSelector from "../redux/hooks/useAppSelector";
 import GetUser from "../interfaces/users/GetUser";
-import { getAllUsers } from "../redux/reducers/usersReducer";
-import { deleteUser } from "../redux/reducers/usersReducer";
+import {
+  getAllUsers,
+  deleteUser,
+  makeUserLibrarian,
+} from "../redux/reducers/usersReducer";
 
 function UserList() {
   const dispatch = useAppDispatch();
@@ -18,6 +21,10 @@ function UserList() {
 
   function deleteUserHandler(userId: string) {
     dispatch(deleteUser({ userId: userId, jwt_token: token }));
+  }
+
+  function makeUserLibrarianHandler(userEmail: string) {
+    dispatch(makeUserLibrarian({ userEmail: userEmail, jwt_token: token }));
   }
 
   return (
@@ -35,6 +42,11 @@ function UserList() {
             <button onClick={() => deleteUserHandler(user.userId)}>
               Delete
             </button>
+            {user.role !== "Librarian" ? (
+              <button onClick={() => makeUserLibrarianHandler(user.email)}>
+                Make User Librarian
+              </button>
+            ) : null}
           </div>
         );
       })}

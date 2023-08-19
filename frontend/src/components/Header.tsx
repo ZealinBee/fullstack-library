@@ -7,10 +7,15 @@ function Header() {
   const currentUser = useAppSelector((state) => state.users.currentUser);
   return (
     <div>
-      <Link to={"/"}>Home </Link> 
+      <Link to={"/"}>Home </Link>
       {currentUser ? null : <Link to={"/auth"}>| Auth </Link>}
-      {currentUser?.role === "Librarian" ? <Link to="/dashboard">| Dashboard | </Link> : null}
-      {currentUser ? <Link to="/profile">Profile</Link> : null}
+      {currentUser?.role === "Librarian" ? (
+        <Link to="/dashboard">| Dashboard | </Link>
+      ) : null}
+      {currentUser ? <Link to="/profile">| Profile </Link> : null}
+      {currentUser?.role === "Librarian" || !currentUser ? null : (
+        <Link to="/cart">| Loan Cart</Link>
+      )}
     </div>
   );
 }

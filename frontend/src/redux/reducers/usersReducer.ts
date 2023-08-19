@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import User from "../../interfaces/users/User";
 import CreateUser from "../../interfaces/users/CreateUser";
 import LoginUser from "../../interfaces/users/LoginUser";
 import GetUser from "../../interfaces/users/GetUser";
@@ -191,10 +190,50 @@ export const deleteProfile = createAsyncThunk(
   }
 );
 
+export const makeUserLibrarian = createAsyncThunk(
+  "users/makeUserLibrarian",
+  async ({
+    userEmail,
+    jwt_token,
+  }: {
+    userEmail: string;
+    jwt_token: string | null;
+  }) => {
+    try {
+      const response = await axios.patch(
+        `http://localhost:5043/api/v1/users/make-user-librarian`,
+        userEmail,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+);
+
 const usersSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    logoutUser: (state) => {
+      state.isLoggedIn = false;
+      state.currentUser = null;
+      state.currentToken = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -229,9 +268,25 @@ const usersSlice = createSlice({
           isLoggedIn: false,
           currentToken: null,
         };
-      });
+      })
+      .addCase(makeUserLibrarian.fulfilled, (state, action) => {
+        return {
+          ...state,
+          users: state.users.map((user: GetUser) => {
+            if (user.email === action.payload) {
+              return {
+                ...user,
+                role: "Librarian",
+              };
+            }
+            return user; 
+          }),
+        };
+      })
+      
   },
 });
 
+export const { logoutUser } = usersSlice.actions;
 const usersReducer = usersSlice.reducer;
 export default usersReducer;

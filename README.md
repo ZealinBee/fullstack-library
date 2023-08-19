@@ -53,4 +53,8 @@ not finalized
 Clone the repository from github with `git clone` Then `npm i` for the packages and lastly `npm start` and go to your http://localhost:3000 to see the website  
 Here is the deployed backend in azure: [Deployed Website][1]
 
+To test the librarian functionalities for the website, the credentials for admin/librarian is:
+email: admin@mail.com
+password: password
+
 [1]: https://integrifylibrary.azurewebsites.net/

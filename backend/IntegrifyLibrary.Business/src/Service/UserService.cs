@@ -35,12 +35,13 @@ namespace IntegrifyLibrary.Business
             return _mapper.Map<CreateUserDto>(await _userRepo.CreateOne(user));
         }
 
-        public async Task MakeUserLibrarian(string userEmail)
+        public async Task<string> MakeUserLibrarian(string userEmail)
         {
             var user = await _userRepo.GetOneByEmail(userEmail);
             if (user == null) throw new Exception($"User with email {userEmail} does not exist");
             user.Role = Role.Librarian;
             await _userRepo.UpdateOne(user);
+            return user.Email;
         }
 
         public async Task<UpdateUserDto> UpdateOwnProfile(Guid id, UpdateUserDto dto)

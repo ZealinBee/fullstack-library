@@ -26,8 +26,4 @@ public class BookController : BaseController<Book, BookDto, GetBookDto, BookDto>
         var createdObject = await _bookService.CreateOne(dto);
         return CreatedAtAction(nameof(CreateOne), createdObject);
     }
-
-
-
-
 }

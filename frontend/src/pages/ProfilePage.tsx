@@ -1,19 +1,30 @@
 import React, {useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Header from '../components/Header'
 import useAppDispatch from '../redux/hooks/useAppDispatch'
 import useAppSelector from '../redux/hooks/useAppSelector'
-import { getUserProfile, deleteProfile } from '../redux/reducers/usersReducer'
+import { getUserProfile, deleteProfile, logoutUser } from '../redux/reducers/usersReducer'
 
 function ProfilePage() {
   const user = useAppSelector(state => state.users.currentUser)
   const dispatch = useAppDispatch()
   let token = useAppSelector(state => state.users.currentToken)
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getUserProfile(token))
   }, [])
 
+  function deleteProfileHandler() {
+    deleteProfile(token)
+    navigate('/')
+  }
+
+  function logoutHandler() {
+    dispatch(logoutUser())
+    navigate('/')
+  }
 
   return (
     <div>
@@ -23,8 +34,9 @@ function ProfilePage() {
       <h2>{user?.lastName}</h2>
       <h2>{user?.email}</h2>
       <h2>{user?.role}</h2>
-      <button onClick={() => dispatch(deleteProfile(token))}>Delete account</button>
+      <button onClick={deleteProfileHandler}>Delete account</button>
       <button >Update account</button>
+      <button onClick={logoutHandler}>Logout</button>
     </div>
   )
 }

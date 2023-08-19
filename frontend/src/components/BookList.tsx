@@ -11,6 +11,7 @@ function BookList() {
   const dispatch = useAppDispatch();
   const books = useAppSelector((state) => state.books.books);
   let token = useAppSelector((state) => state.users.currentToken);
+  const currentUser = useAppSelector((state) => state.users.currentUser);
 
   useEffect(() => {
     dispatch(getAllBooks());
@@ -29,9 +30,11 @@ function BookList() {
               <h1>Book Name: {book.bookName}</h1>
               <h2>Author Name: {book.authorName}</h2>
             </div>
-            <button onClick={() => deleteBookHandler(book.bookId)}>
-              Delete
-            </button>
+            {currentUser?.role === "Librarian" ? (
+              <button onClick={() => deleteBookHandler(book.bookId)}>
+                Delete
+              </button>
+            ) : null}
             <Link to={`/books/${book.bookId}`}>
               <button onClick={() => dispatch(selectCurrentBook(book))}>
                 Details

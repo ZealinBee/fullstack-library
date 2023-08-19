@@ -82,10 +82,10 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 400)]
     [ProducesResponseType(statusCode: 404)]
-    public async Task<ActionResult> MakeUserLibrarian([FromBody] string userEmail)
+    public async Task<ActionResult<string>> MakeUserLibrarian([FromBody] string userEmail)
     {
-        await _userService.MakeUserLibrarian(userEmail);
-        return Ok();
+        var email = await _userService.MakeUserLibrarian(userEmail);
+        return Ok(email);
     }
 
     [Authorize(Roles = "Librarian, User")]
