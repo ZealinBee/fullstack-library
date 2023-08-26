@@ -33,14 +33,16 @@ builder.Services
     .AddScoped<IUserRepo, UserRepo>()
     .AddScoped<IBookRepo, BookRepo>()
     .AddScoped<ILoanRepo, LoanRepo>()
-    .AddScoped<IAuthorRepo, AuthorRepo>();
+    .AddScoped<IAuthorRepo, AuthorRepo>()
+    .AddScoped<IGenreRepo, GenreRepo>();
 
 builder.Services
     .AddScoped<IUserService, UserService>()
     .AddScoped<IBookService, BookService>()
     .AddScoped<IAuthService, AuthService>()
     .AddScoped<ILoanService, LoanService>()
-    .AddScoped<IAuthorService, AuthorService>();
+    .AddScoped<IAuthorService, AuthorService>()
+    .AddScoped<IGenreService, GenreService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 

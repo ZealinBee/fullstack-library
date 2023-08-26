@@ -37,24 +37,28 @@ function SignUp() {
           onChange={formChangeHandler}
           name="firstName"
           value={user.firstName}
+          placeholder="First Name"
         />
        <input
           type="text"
           onChange={formChangeHandler}
           name="lastName"
           value={user.lastName}
+          placeholder="Last Name"
         />
        <input
           type="email"
           onChange={formChangeHandler}
           name="email"
           value={user.email}
+          placeholder="Email"
         />
        <input
           type="password"
           onChange={formChangeHandler}
           name="password"
           value={user.password}
+          placeholder="Password"
         />
         <button type="submit">Create Account</button>
       </form>

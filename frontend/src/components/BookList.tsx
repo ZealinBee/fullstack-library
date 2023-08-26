@@ -6,6 +6,7 @@ import { getAllBooks } from "../redux/reducers/booksReducer";
 import useAppSelector from "../redux/hooks/useAppSelector";
 import GetBook from "../interfaces/books/GetBook";
 import { deleteBook, selectCurrentBook } from "../redux/reducers/booksReducer";
+import { addToCart } from "../redux/reducers/cartReducer";
 
 function BookList() {
   const dispatch = useAppDispatch();
@@ -19,6 +20,10 @@ function BookList() {
 
   function deleteBookHandler(bookId: string) {
     dispatch(deleteBook({ bookId: bookId, jwt_token: token }));
+  }
+
+  function addToCartHandler(book: GetBook) {
+    dispatch(addToCart(book));
   }
 
   return (
@@ -40,6 +45,9 @@ function BookList() {
                 Details
               </button>
             </Link>
+            {currentUser?.role === "User" ? (
+              <button onClick={() => addToCartHandler(book)}>Add to Loan Cart</button>
+            ) : null}
           </div>
         );
       })}

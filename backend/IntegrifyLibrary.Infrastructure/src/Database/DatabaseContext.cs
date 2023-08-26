@@ -14,6 +14,7 @@ public class DatabaseContext : DbContext
     public DbSet<Loan> Loans { get; set; }
     public DbSet<Author> Authors { get; set; }
     public DbSet<LoanDetails> LoanDetails { get; set; }
+    public DbSet<Genre> Genres { get; set; }
 
     public DatabaseContext(IConfiguration configuration, DbContextOptions options) : base(options)
     {
@@ -41,5 +42,9 @@ public class DatabaseContext : DbContext
             .HasMany(loan => loan.LoanDetails)
             .WithOne(loan => loan.Loan)
             .HasForeignKey(loan => loan.LoanId);
+        modelBuilder.Entity<Book>()
+            .HasMany(x => x.Genres)
+            .WithMany(y => y.Books)
+            .UsingEntity(z => z.ToTable("book_genres"));
     }
 }

@@ -41,12 +41,14 @@ function Login() {
           onChange={formChangeHandler}
           name="email"
           value={user.email}
+          placeholder="Email"
         />
        <input
           type="password"
           onChange={formChangeHandler}
           name="password"
           value={user.password}
+          placeholder="Password"
         />
         <button type="submit">Login</button>
       </form>

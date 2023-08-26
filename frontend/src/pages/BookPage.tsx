@@ -8,6 +8,7 @@ import useAppDispatch from "../redux/hooks/useAppDispatch";
 function BookPage() {
   const currentBook = useAppSelector((state) => state.books.currentBook);
   const dispatch = useAppDispatch();
+  const currentUser = useAppSelector((state) => state.users.currentUser);
 
   function addToCartHandler() {
     dispatch(addToCart(currentBook));
@@ -25,7 +26,9 @@ function BookPage() {
         <h2>Page Count: {currentBook?.pageCount}</h2>
         <h2>Published Date: {currentBook?.publishedDate}</h2>
       </div>
-      <button onClick={addToCartHandler}>Add To Loan Cart</button>
+      {currentUser?.role === "User" ? (
+        <button onClick={addToCartHandler}>Add To Loan Cart</button>
+      ) : null}
     </>
   );
 }

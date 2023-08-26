@@ -12,6 +12,7 @@ namespace IntegrifyLibrary.Domain
         public Guid AuthorId { get; set; }
         public int Quantity { get; set; }
         public int PageCount { get; set; }
+        public ICollection<Genre> Genres { get; set; } = new List<Genre>();
         public DateOnly PublishedDate { get; set; }
         public DateOnly CreatedAt { get; set; }
         public DateOnly ModifiedAt { get; set; }
