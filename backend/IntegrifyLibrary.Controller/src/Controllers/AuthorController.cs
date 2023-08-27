@@ -14,5 +14,13 @@ public class AuthorController : BaseController<Author, CreateAuthorDto, GetAutho
         _authorService = authorService;
     }
 
-
+    [HttpPost]
+    [ProducesResponseType(statusCode: 201)]
+    [ProducesResponseType(statusCode: 400)]
+    [Authorize(Roles = "Librarian")]
+    public override async Task<ActionResult<GetAuthorDto>> CreateOne([FromBody] CreateAuthorDto dto)
+    {
+        var createdObject = await _authorService.CreateOne(dto);
+        return CreatedAtAction(nameof(CreateOne), createdObject);
+    }
 }

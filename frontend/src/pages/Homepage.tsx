@@ -7,7 +7,7 @@ function Homepage() {
   return (
     <>
       <Header />
-      <h1>Homepage</h1>
+      <h1>Homepage (STYLING COMING SOON)</h1>
       <BookList />
     </>
   );

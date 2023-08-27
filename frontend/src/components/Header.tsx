@@ -8,9 +8,10 @@ function Header() {
   return (
     <div>
       <Link to={"/"}>Home </Link>
+      <Link to={"/authors"}>| Authors </Link>
       {currentUser ? null : <Link to={"/auth"}>| Auth </Link>}
       {currentUser?.role === "Librarian" ? (
-        <Link to="/dashboard">| Dashboard | </Link>
+        <Link to="/dashboard">| Dashboard  </Link>
       ) : null}
       {currentUser ? <Link to="/profile">| Profile </Link> : null}
       {currentUser?.role === "Librarian" || !currentUser ? null : (

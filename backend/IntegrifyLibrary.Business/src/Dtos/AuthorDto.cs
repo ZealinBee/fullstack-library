@@ -10,8 +10,8 @@ public class CreateAuthorDto
 
 public class GetAuthorDto
 {
-    public Guid Id { get; init; }
-    public List<Book>? Books { get; set; }
+    public Guid AuthorId { get; init; }
+    public List<Book> Books { get; set; } = new List<Book>();
     public string AuthorName { get; set; } = string.Empty;
 }
 

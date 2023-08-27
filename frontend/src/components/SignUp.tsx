@@ -16,7 +16,8 @@ function SignUp() {
   function createAccountHandler(event: React.FormEvent) {
     event.preventDefault();
     console.log(user);
-    dispatch(createNewUser(user));
+    const response = dispatch(createNewUser(user));
+    console.log(response);
   }
 
   function formChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -38,6 +39,7 @@ function SignUp() {
           name="firstName"
           value={user.firstName}
           placeholder="First Name"
+          required
         />
        <input
           type="text"
@@ -45,6 +47,7 @@ function SignUp() {
           name="lastName"
           value={user.lastName}
           placeholder="Last Name"
+          required
         />
        <input
           type="email"
@@ -52,6 +55,7 @@ function SignUp() {
           name="email"
           value={user.email}
           placeholder="Email"
+          required
         />
        <input
           type="password"
@@ -59,6 +63,7 @@ function SignUp() {
           name="password"
           value={user.password}
           placeholder="Password"
+          required
         />
         <button type="submit">Create Account</button>
       </form>

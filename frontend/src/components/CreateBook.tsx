@@ -22,7 +22,7 @@ function CreateBook() {
     dispatch(createBook(book));
   }
 
-  function formChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
+  function formChangeHandler(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
     setBook((prevState) => {
       return {
         ...prevState,
@@ -40,36 +40,47 @@ function CreateBook() {
           onChange={formChangeHandler}
           name="bookName"
           value={book.bookName}
+          required
+          placeholder="Book Name"
         />
         <input
           type="text"
           onChange={formChangeHandler}
           name="authorName"
           value={book.authorName}
+          required
+          placeholder="Author Name"
         />
-        <input
-          type="text"
+        <textarea
           onChange={formChangeHandler}
           name="description"
           value={book.description}
+          required
+          placeholder="Description"
         />
         <input
           type="text"
           onChange={formChangeHandler}
           name="ISBN"
           value={book.ISBN}
+          required
+          placeholder="ISBN"
         />
         <input
           type="number"
           onChange={formChangeHandler}
           name="quantity"
           value={book.quantity}
+          required
+          placeholder="Quantity in Library"
         />
         <input
           type="number"
           onChange={formChangeHandler}
           name="pageCount"
           value={book.pageCount}
+          required
+          placeholder="Page Count"
         />
         <button type="submit">Create Book</button>
       </form>

@@ -21,7 +21,7 @@ For the frontend, this project uses React, typescript and MUI.
 - .NET Core
 - Entity Framework Core
 - Azure
-- Xunit
+- XUnit
 
 ## Features
 
@@ -31,7 +31,9 @@ For the frontend, this project uses React, typescript and MUI.
 #### Librarian :
 
 - CRUD operations on the users, ability to make user admin
-- CRUD operations on the books and authors
+- CRUD operations on the books
+- CRUD operation on the authors
+- CRUD operation on the genres
 - See all the loans of the users, can choose to manage them as well
 
 #### User :
@@ -40,6 +42,8 @@ For the frontend, this project uses React, typescript and MUI.
 - Create new accounts
 - Read, update and delete their own profile
 - See all the books and able to search and sort through the books
+- Get all authors
+- Get all genres
 
 ## Project Structure
 

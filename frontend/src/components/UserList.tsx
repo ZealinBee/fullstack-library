@@ -16,7 +16,6 @@ function UserList() {
 
   useEffect(() => {
     dispatch(getAllUsers(token));
-    console.log(users);
   }, [token, dispatch]);
 
   function deleteUserHandler(userId: string) {

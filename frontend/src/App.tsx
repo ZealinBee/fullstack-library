@@ -1,14 +1,17 @@
-import React from 'react'
+import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import AuthPage from './pages/AuthPage';
+import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
-import NotFoundPage from './pages/NotFoundPage';
-import CartPage from './pages/CartPage';
-import DashboardPage from './pages/DashboardPage';
-import LandingPage from './pages/LandingPage';
-import ProfilePage from './pages/ProfilePage';
-import BookPage from './pages/BookPage';
+import NotFoundPage from "./pages/NotFoundPage";
+import CartPage from "./pages/CartPage";
+import DashboardPage from "./pages/DashboardPage";
+import LandingPage from "./pages/LandingPage";
+import ProfilePage from "./pages/ProfilePage";
+import BookPage from "./pages/BookPage";
+import AuthorsPage from "./pages/AuthorsPage";
+import AuthorPage from "./pages/AuthorPage";
+import LoansPage from "./pages/LoansPage";
 
 const router = createBrowserRouter([
   {
@@ -44,15 +47,30 @@ const router = createBrowserRouter([
     path: "/books/:id",
     element: <BookPage />,
     errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/authors",
+    element: <AuthorsPage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/authors/:id",
+    element: <AuthorPage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/loans",
+    element: <LoansPage />,
+    errorElement: <NotFoundPage />,
   }
-])
+]);
 
 const App = () => {
   return (
     <>
       <RouterProvider router={router} />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

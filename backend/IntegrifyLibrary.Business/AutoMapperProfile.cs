@@ -33,5 +33,11 @@ public class AutoMapperProfile : Profile
         CreateMap<Author, GetAuthorDto>();
         CreateMap<UpdateAuthorDto, Author>();
         CreateMap<Author, UpdateAuthorDto>();
+        CreateMap<Genre, CreateGenreDto>();
+        CreateMap<CreateGenreDto, Genre>();
+        CreateMap<GetGenreDto, Genre>();
+        CreateMap<Genre, GetGenreDto>();
+        CreateMap<UpdateGenreDto, Genre>();
+        CreateMap<Genre, UpdateGenreDto>();
     }
 }
