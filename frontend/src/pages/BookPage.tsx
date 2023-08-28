@@ -16,7 +16,6 @@ function BookPage() {
   return (
     <>
       <Header />
-      <h1>Loan Cart</h1>
       <div>
         <h1>Individual Book Page</h1>
         <h2>Book Name: {currentBook?.bookName}</h2>

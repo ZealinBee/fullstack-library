@@ -14,7 +14,7 @@ public class LoanController : BaseController<Loan, CreateLoanDto, GetLoanDto, Up
         _loanService = loanService;
     }
 
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "Librarian")]
     [HttpGet]
     public override async Task<ActionResult<List<GetLoanDto>>> GetAll([FromQuery] QueryOptions queryOptions)
     {

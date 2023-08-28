@@ -11,12 +11,17 @@ function Header() {
       <Link to={"/authors"}>| Authors </Link>
       {currentUser ? null : <Link to={"/auth"}>| Auth </Link>}
       {currentUser?.role === "Librarian" ? (
-        <Link to="/dashboard">| Dashboard  </Link>
+        <Link to="/dashboard">| Dashboard </Link>
       ) : null}
       {currentUser ? <Link to="/profile">| Profile </Link> : null}
       {currentUser?.role === "Librarian" || !currentUser ? null : (
-        <Link to="/cart">| Loan Cart</Link>
+        <Link to="/cart">| Loan Cart | </Link>
       )}
+      {currentUser ? (
+        <Link to={"/loans"}>
+          {currentUser.role === "Librarian" ? "All Loans" : "My Loans"}
+        </Link>
+      ) : null}
     </div>
   );
 }
