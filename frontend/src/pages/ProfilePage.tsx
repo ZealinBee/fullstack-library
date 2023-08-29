@@ -16,8 +16,8 @@ function ProfilePage() {
     dispatch(getUserProfile(token))
   }, [])
 
-  function deleteProfileHandler() {
-    deleteProfile(token)
+async function deleteProfileHandler() {
+    await dispatch(deleteProfile(token))
     navigate('/')
   }
 
