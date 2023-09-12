@@ -27,7 +27,7 @@ async function deleteProfileHandler() {
   }
 
   return (
-    <div>
+    <div className="page">
       <Header></Header>
       <h1>Profile Page</h1>
       <h2>{user?.firstName}</h2>

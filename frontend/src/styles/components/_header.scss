@@ -1,0 +1,46 @@
+@import "../variables.scss";
+
+.header {
+    padding-left:2rem;
+    padding-top:1.25rem;
+    width: 250px;
+  h1 {
+    letter-spacing: 3px;
+    margin-bottom:2rem;
+  }
+
+  ul {
+
+    .divider {
+        margin: 1rem 0;
+        border-bottom: 1px solid rgba(201, 201, 201, 0.574);
+    }
+    li {
+      display: flex;
+      font-weight:500;
+      margin-bottom:1.5rem;
+      a {
+        text-decoration: none;
+        color: $gray;
+        display: flex;
+        align-items: center;
+
+        .icon-wrapper {
+            margin-right: 1rem;
+            background-color: rgba(201, 201, 201, 0.574);
+            border-radius: 1rem;
+            padding:0.4rem 0.5rem 0.25rem 0.5rem;
+        }
+        p {
+        }
+      }
+      .active-link {
+        color: $primary;
+        .icon-wrapper {
+            background-color: $primary;
+            color: white;
+        }
+      }
+    }
+  }
+}

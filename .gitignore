@@ -107,5 +107,6 @@ frontend/package-*.json
 **/appsettings.json
 **/obj/
 **/appsettings.*.json
+**/publish
 
 deployment/

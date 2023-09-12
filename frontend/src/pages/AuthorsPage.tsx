@@ -14,7 +14,6 @@ function AuthorsPage() {
 
   useEffect(() => {
     dispatch(getAllAuthors());
-    console.log(authors);
   }, []);
 
   return (

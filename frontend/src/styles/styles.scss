@@ -1,0 +1,23 @@
+@use "./variables.scss";
+@use "./components/header.scss";
+
+* {
+  box-sizing: border-box;
+  font-family: "poppins";
+  margin:0;
+  padding:0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+
+.page {
+    display:flex;
+}
