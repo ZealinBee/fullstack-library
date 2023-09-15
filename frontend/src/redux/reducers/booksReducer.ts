@@ -21,7 +21,7 @@ const initialState: BooksState = {
 export const getAllBooks = createAsyncThunk("books/getAllBooks", async () => {
   try {
     const response = await axios.get<GetBook[]>(
-      "http://localhost:5043/api/v1/books"
+      "http://98.71.75.120/api/v1/books"
     );
     return response.data;
   } catch (error) {
@@ -41,7 +41,7 @@ export const createBook = createAsyncThunk(
   async (book: CreateBook) => {
     try {
       const response = await axios.post<CreateBook>(
-        "http://localhost:5043/api/v1/books",
+        "http://98.71.75.120/api/v1/books",
         book,
         {
           headers: {
@@ -69,7 +69,7 @@ export const deleteBook = createAsyncThunk(
   async ({bookId, jwt_token} : {bookId: string, jwt_token: string | null}) => {
     try {
       await axios.delete<GetBook>(
-        `http://localhost:5043/api/v1/books/${bookId}`,
+        `http://98.71.75.120/api/v1/books/${bookId}`,
         {
           headers: {
             "Content-Type": "application/json",

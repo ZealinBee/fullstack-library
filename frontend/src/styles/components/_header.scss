@@ -4,6 +4,8 @@
     padding-left:2rem;
     padding-top:1.25rem;
     width: 250px;
+    // min-height: 100vh;
+    // position:fixed;
   h1 {
     letter-spacing: 3px;
     margin-bottom:2rem;
@@ -29,7 +31,7 @@
             margin-right: 1rem;
             background-color: rgba(201, 201, 201, 0.574);
             border-radius: 1rem;
-            padding:0.4rem 0.5rem 0.25rem 0.5rem;
+            padding:0.4rem 0.5rem 0.2rem 0.5rem;
         }
         p {
         }

@@ -8,8 +8,10 @@ function AuthPage() {
   return (
     <div>
       <Header></Header>
-      <SignUp></SignUp>
-      <Login></Login>
+      <div className="auth">
+        <SignUp></SignUp>
+        <Login></Login>
+      </div>
     </div>
   );
 }

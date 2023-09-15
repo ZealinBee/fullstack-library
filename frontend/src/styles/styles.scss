@@ -1,5 +1,10 @@
 @use "./variables.scss";
 @use "./components/header.scss";
+@use "./components/signup";
+
+@use "./pages/auth.scss";
+
+@import "./variables.scss";
 
 * {
   box-sizing: border-box;
@@ -20,4 +25,16 @@ li {
 
 .page {
     display:flex;
+}
+
+
+button {
+  margin: 0.75rem 0;
+  padding: 0.6rem 1rem;
+  border-radius: 2rem;
+  border:none;
+  cursor: pointer;
+  background-color: $primary;
+  color:white;
+  font-size:0.9rem;
 }

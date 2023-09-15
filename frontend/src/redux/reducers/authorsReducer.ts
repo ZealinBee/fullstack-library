@@ -22,7 +22,7 @@ export const getAllAuthors = createAsyncThunk(
     async () => {
         try {
             const response = await axios.get<GetAuthor[]>(
-            "http://localhost:5043/api/v1/authors"
+            "http://98.71.75.120/api/v1/authors"
             );
             return response.data;
         } catch (error) {
