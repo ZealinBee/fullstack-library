@@ -17,22 +17,39 @@ function CartPage() {
 
   function loanBooksHandler() {
     const bookIds = cartItems.map((item) => item.bookId);
-    dispatch(loanBooks({bookIds, jwt_token}));
-    bookIds.forEach((bookId) => dispatch(removeFromCart(bookId)));    
+    dispatch(loanBooks({ bookIds, jwt_token }));
+    bookIds.forEach((bookId) => dispatch(removeFromCart(bookId)));
   }
 
   return (
     <>
       <Header></Header>
-      {cartItems.map((item) => (
-        <div key={item.bookId}>
-          <h2>Book Name: {item.bookName}</h2>
-          <button onClick={() => removeFromCartHandler(item.bookId)}>
-            Remove from cart
-          </button>
-        </div>
-      ))}
-      <button onClick={loanBooksHandler}>Loan books</button>
+      <h1 className="top">Loan Cart</h1>
+      <div className="loan-cart-items">
+        {cartItems.map((item) => (
+          <div key={item.bookId} className="loan-cart-item">
+            <div className="img-wrapper">
+              <img
+                src="https://m.media-amazon.com/images/I/81zlbsnFiYL._AC_UF1000,1000_QL80_.jpg"
+                alt=""
+              />
+              <div className="book-details">
+              <h2>{item.bookName}</h2>
+              <h3>{item.authorName}</h3>
+              </div>
+          
+            </div>
+
+            <button onClick={() => removeFromCartHandler(item.bookId)}>
+              Remove from cart
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <button onClick={loanBooksHandler} className="loan-books-button">
+        Loan books
+      </button>
     </>
   );
 }

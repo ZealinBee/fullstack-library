@@ -9,6 +9,8 @@
 @use "./pages/book-page";
 @use "./pages/authors-page";
 @use "./pages/profile-page";
+@use "./pages/loans-page";
+@use "./pages/cart-page";
 
 @import "./variables.scss";
 
@@ -51,4 +53,9 @@ form {
     border: 1px $gray solid;
   }
   
+}
+
+.top {
+  margin-left: $margin-left;
+  padding-top:1rem;
 }

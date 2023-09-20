@@ -28,13 +28,12 @@ function LoansPage() {
         </div>
       ) : (
         <div>
-          <h1>My Loans</h1>
+          <h2>My Loans</h2>
         </div>
       )}
       {loans.map((loan) => {
         return (
-          <div>
-            {" "}
+          <div key={loan.bookId} className="loan">
             {/* Add a unique key for each element in the map */}
             <h2>Book ID: {loan.bookId}</h2>
             <h3>Loan Date: {loan.loanDate}</h3>
