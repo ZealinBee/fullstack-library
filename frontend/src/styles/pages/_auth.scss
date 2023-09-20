@@ -1,46 +1,90 @@
 @import "../variables.scss";
 
 .auth {
-    display:flex;
-    margin-left:300px;
-    h1 {
-        font-size:2rem;
-        margin-bottom:0.75rem;
-    }
+  display: flex;
+  margin-left: calc(40% - 550px / 2);
+
 }
 
 .auth-wrapper {
-    display:flex;
-    border-radius: 0.5rem;
-    margin-top:10%;
+  display: flex;
+  border-radius: 0.5rem;
+  margin-top: 10%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-height: 500px;
 }
 
 .auth-description {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color:$primary;
-    justify-content: center;
-    button {
-        margin-top:1rem;
-        background-color:white;
-        color:$primary;
-        width:200px;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: $primary-desaturated;
+  justify-content: center;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0 3rem;
+  h2 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  button {
+    margin-top: 1rem;
+    background-color: white;
+    color: $primary;
+    width: 200px;
+  }
 }
 
 form {
-    display:flex;
-    flex-direction: column;
-    width:550px;
-    padding: 0 3rem;
-    input {
-        margin: 0.2rem;
-        border-radius: 0.2rem;
-        padding: 0.4rem 1rem;
-        border:1px $gray solid;
-        font-size:0.9rem;
-    }
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+  padding: 0 3rem;
+  justify-content: center;
+  input {
+    margin: 0.2rem;
+    border-radius: 0.2rem;
+    padding: 0.4rem 1rem;
+    border: 1px $gray solid;
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  h3 {
+    font-weight: 400;
+    color: $gray;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  label {
+    font-size: 0.85rem;
+  }
+
+  .auth-button {
+    margin-bottom: 3rem;
+  }
 }
 
+.login {
+    
+}
+
+
+
+
+
+.login-description {
+    border-radius: 0.5rem 0 0 0.5rem;
+}

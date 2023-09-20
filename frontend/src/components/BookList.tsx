@@ -27,26 +27,29 @@ function BookList() {
   }
 
   return (
-    <div>
+    <div className="bookList">
       {books.map((book: GetBook) => {
         return (
-          <div key={book.bookId}>
-            <div>
-              <h1>Book Name: {book.bookName}</h1>
-              <h2>Author Name: {book.authorName}</h2>
-            </div>
-            {currentUser?.role === "Librarian" ? (
+          <div
+            key={book.bookId}
+            className="book"
+            onClick={() => dispatch(selectCurrentBook(book))}
+          >
+            {/* {currentUser?.role === "Librarian" ? (
               <button onClick={() => deleteBookHandler(book.bookId)}>
                 Delete
               </button>
-            ) : null}
+            ) : null} */}
             <Link to={`/books/${book.bookId}`}>
-              <button onClick={() => dispatch(selectCurrentBook(book))}>
-                Details
-              </button>
+              <img
+                src="https://m.media-amazon.com/images/I/81zlbsnFiYL._AC_UF1000,1000_QL80_.jpg"
+                alt="an image for the book"
+              />
             </Link>
             {currentUser?.role === "User" ? (
-              <button onClick={() => addToCartHandler(book)}>Add to Loan Cart</button>
+              <button onClick={() => addToCartHandler(book)}>
+                Add to Loan Cart
+              </button>
             ) : null}
           </div>
         );

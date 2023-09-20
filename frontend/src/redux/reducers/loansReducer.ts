@@ -21,7 +21,7 @@ export const getAllLoans = createAsyncThunk(
   "loans/getAllLoans",
   async (jwt_token: string | null) => {
     try {
-      const response = await axios.get("http://98.71.75.120/api/v1/loans", {
+      const response = await axios.get("http://98.71.53.99/api/v1/loans", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${jwt_token}`,
@@ -46,7 +46,7 @@ export const getOwnLoans = createAsyncThunk(
   async (jwt_token: string | null) => {
     try {
       const response = await axios.get(
-        "http://98.71.75.120/api/v1/loans/own-loans",
+        "http://98.71.53.99/api/v1/loans/own-loans",
         {
           headers: {
             "Content-Type": "application/json",

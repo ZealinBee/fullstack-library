@@ -1,0 +1,15 @@
+@import "../variables.scss";
+
+.bookList {
+  margin-left: $margin-left;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  img {
+    width: 150px;
+  }
+}

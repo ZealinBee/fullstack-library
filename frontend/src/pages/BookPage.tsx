@@ -16,14 +16,22 @@ function BookPage() {
   return (
     <>
       <Header />
-      <div>
-        <h1>Individual Book Page</h1>
-        <h2>Book Name: {currentBook?.bookName}</h2>
-        <h2>Author Name: {currentBook?.authorName}</h2>
-        <h2>ISBN: {currentBook?.ISBN}</h2>
-        <h2>Description: {currentBook?.description}</h2>
-        <h2>Page Count: {currentBook?.pageCount}</h2>
-        <h2>Published Date: {currentBook?.publishedDate}</h2>
+      <div className="book-page">
+        <div className="img-wrapper">
+          <img
+            src="https://m.media-amazon.com/images/I/81zlbsnFiYL._AC_UF1000,1000_QL80_.jpg"
+            alt="image for a book"
+          />
+        </div>
+        <div className="book-details">
+          <h2 className="book-name">{currentBook?.bookName}</h2>
+          <h3 className="book-author">{currentBook?.authorName}</h3>
+          <h2>Description: {currentBook?.description}</h2>
+          <h2>Page Count: {currentBook?.pageCount}</h2>
+          <h2>Published Date: {currentBook?.publishedDate}</h2>
+          <h2>ISBN: {currentBook?.ISBN}</h2>
+
+        </div>
       </div>
       {currentUser?.role === "User" ? (
         <button onClick={addToCartHandler}>Add To Loan Cart</button>

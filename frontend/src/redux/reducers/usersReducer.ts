@@ -28,7 +28,7 @@ export const createNewUser = createAsyncThunk(
   async (user: CreateUser) => {
     try {
       const result = await axios.post(
-        "http://98.71.75.120/api/v1/users",
+        "http://98.71.53.99/api/v1/users",
         user,
         {
           headers: {
@@ -55,7 +55,7 @@ export const loginUser = createAsyncThunk(
   async (user: LoginUser, { dispatch }) => {
     try {
       const response = await axios.post<string>(
-        "http://98.71.75.120/api/v1/auth",
+        "http://98.71.53.99/api/v1/auth",
         user,
         {
           headers: {
@@ -83,7 +83,7 @@ export const getAllUsers = createAsyncThunk(
   async (jwt_token: string | null) => {
     try {
       const response = await axios.get<GetUser[]>(
-        "http://98.71.75.120/api/v1/users",
+        "http://98.71.53.99/api/v1/users",
         {
           headers: {
             "Content-Type": "application/json",
@@ -111,7 +111,7 @@ export const getUserProfile = createAsyncThunk(
   async (jwt_token: string | null) => {
     try {
       const response = await axios.get<GetUser>(
-        "http://98.71.75.120/api/v1/users/profile",
+        "http://98.71.53.99/api/v1/users/profile",
         {
           headers: {
             "Content-Type": "application/json",
@@ -143,7 +143,7 @@ export const deleteUser = createAsyncThunk(
     jwt_token: string | null;
   }) => {
     try {
-      await axios.delete(`http://98.71.75.120/api/v1/users/${userId}`, {
+      await axios.delete(`http://98.71.53.99/api/v1/users/${userId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${jwt_token}`,
@@ -168,7 +168,7 @@ export const deleteProfile = createAsyncThunk(
   async (jwt_token: string | null) => {
     try {
       const response = await axios.delete(
-        `http://98.71.75.120/api/v1/users/profile`,
+        `http://98.71.53.99/api/v1/users/profile`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -201,7 +201,7 @@ export const makeUserLibrarian = createAsyncThunk(
   }) => {
     try {
       const response = await axios.patch(
-        `http://98.71.75.120/api/v1/users/make-user-librarian`,
+        `http://98.71.53.99/api/v1/users/make-user-librarian`,
         userEmail,
         {
           headers: {

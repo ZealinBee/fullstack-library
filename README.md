@@ -4,6 +4,9 @@ This is a full stack library application where there is the librarian who can ma
 For the backend, this project uses .NET Core, Entity Framework Core, Postgres and Azure.
 For the frontend, this project uses React, typescript and MUI.
 
+[BACKEND SWAGGER UI LINK(Hosted on azure virtual machine ubuntu + nginx)]: http://98.71.75.120/swagger/index.html
+[FRONTEND (Also hosted on azure virtual machine ubuntu + nginx)]: http://98.71.75.120:3001/
+
 ## Table of Content
 
 - [Technologies](#technologies)
@@ -54,11 +57,8 @@ not finalized
 
 ## Getting Started
 
-Clone the repository from github with `git clone` Then `npm i` for the packages and lastly `npm start` and go to your http://localhost:3000 to see the website  
-Here is the deployed backend in azure: [Deployed Website][1]
+Clone the repository from github with `git clone` Then `npm i` for the packages and lastly `npm start` and go to your http://localhost:3000 to see the website
 
 To test the librarian functionalities for the website, the credentials for admin/librarian is:
 email: admin@mail.com
 password: password
-
-[1]: https://integrifylibrary.azurewebsites.net/

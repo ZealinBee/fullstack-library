@@ -25,7 +25,7 @@ export const loanBooks = createAsyncThunk(
         loanDate: dateOnlyString,
       };
       const response = await axios.post(
-        "http://98.71.75.120/api/v1/loans",
+        "http://98.71.53.99/api/v1/loans",
         loanData,
         {
           headers: {
