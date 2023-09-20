@@ -33,7 +33,7 @@ function SignUp() {
   return (
     <div className="sign-up">
       <div className="auth-wrapper">
-        <form onSubmit={createAccountHandler}>
+        <form onSubmit={createAccountHandler} className="auth-form">
         <h1>Sign Up</h1>
         <h3>Make a new account to use our library</h3>
         <label htmlFor="firstName">First Name</label>

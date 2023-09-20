@@ -32,7 +32,7 @@ function BookList() {
         return (
           <div
             key={book.bookId}
-            className="book"
+            className="bookList__book"
             onClick={() => dispatch(selectCurrentBook(book))}
           >
             {/* {currentUser?.role === "Librarian" ? (
@@ -47,7 +47,7 @@ function BookList() {
               />
             </Link>
             {currentUser?.role === "User" ? (
-              <button onClick={() => addToCartHandler(book)}>
+              <button onClick={() => addToCartHandler(book)} className="bookList__add-book">
                 Add to Loan Cart
               </button>
             ) : null}

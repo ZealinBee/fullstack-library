@@ -39,7 +39,7 @@ function Login() {
           <p>Create an account to start loaning books in our library app</p>
           <button>Sign up</button>
         </div>
-        <form onSubmit={createAccountHandler}>
+        <form onSubmit={createAccountHandler} className="auth-form">
           <h1>Login</h1>
           <h3>Log in to your account to use our library</h3>
           <label htmlFor="email-signup">Email</label>

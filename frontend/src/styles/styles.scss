@@ -2,9 +2,11 @@
 @use "./components/header.scss";
 @use "./components/signup";
 @use "./components/book";
+@use "./components/create-book";
 
 @use "./pages/auth.scss";
 @use "./pages/book-page";
+@use "./pages/authors-page";
 
 @import "./variables.scss";
 

@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import Header from "../components/Header";
 import { addToCart } from "../redux/reducers/cartReducer";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
+import { setCurrentAuthor } from "../redux/reducers/authorsReducer";
 
 function BookPage() {
   const currentBook = useAppSelector((state) => state.books.currentBook);
@@ -17,25 +19,28 @@ function BookPage() {
     <>
       <Header />
       <div className="book-page">
-        <div className="img-wrapper">
+        <div className="book-page__img-wrapper">
           <img
             src="https://m.media-amazon.com/images/I/81zlbsnFiYL._AC_UF1000,1000_QL80_.jpg"
             alt="image for a book"
           />
+          {currentUser?.role === "User" ? (
+            <button onClick={addToCartHandler}>Add To Loan Cart</button>
+          ) : null}
         </div>
-        <div className="book-details">
-          <h2 className="book-name">{currentBook?.bookName}</h2>
-          <h3 className="book-author">{currentBook?.authorName}</h3>
-          <h2>Description: {currentBook?.description}</h2>
-          <h2>Page Count: {currentBook?.pageCount}</h2>
-          <h2>Published Date: {currentBook?.publishedDate}</h2>
-          <h2>ISBN: {currentBook?.ISBN}</h2>
-
+        <div className="book-page__book-details">
+          <h2 className="book-page__book-name">{currentBook?.bookName}</h2>
+          {/* <Link to={`/authors/${currentBook?.authorName}}`}> */}{" "}
+          <h3 className="book-page__book-author">{currentBook?.authorName}</h3>
+          {/* </Link> */}
+          <p className="book-page__book-description">{currentBook?.description}</p>
+          <p>ISBN: {currentBook?.ISBN}</p>
+          <p>
+            {currentBook?.pageCount} pages, first published on{" "}
+            {currentBook?.publishedDate}
+          </p>
         </div>
       </div>
-      {currentUser?.role === "User" ? (
-        <button onClick={addToCartHandler}>Add To Loan Cart</button>
-      ) : null}
     </>
   );
 }

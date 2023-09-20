@@ -1,0 +1,25 @@
+@import "../variables.scss";
+
+.create-book {
+  margin-left: $margin-left;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    textarea {
+      padding: 0.25rem 1rem;
+      width: 600px;
+      border-radius: 0.25rem;
+    }
+    input {
+      width: 600px;
+      margin: 0;
+      border-radius: 0.25rem;
+    }
+    label {
+        margin-top:0.5rem;
+    }
+  }
+}

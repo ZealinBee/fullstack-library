@@ -6,10 +6,15 @@
   grid-template-columns: repeat(6, 1fr);
 }
 
-.book {
+.bookList__book {
   display: flex;
   flex-direction: column;
   img {
     width: 150px;
   }
+}
+
+.bookList__add-book {
+  width:150px;
+  font-size:0.75rem;
 }

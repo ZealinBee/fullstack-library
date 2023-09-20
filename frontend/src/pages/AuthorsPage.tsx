@@ -19,19 +19,28 @@ function AuthorsPage() {
   return (
     <div>
       <Header></Header>
-      <h1>Authors Page</h1>
-      {authors.map((author: GetAuthor) => {
-        return (
-          <div key={author.authorId}>
-            <h3>Author name:{author.authorName}</h3>
-            <Link to={`/authors/${author.authorName}`}>
-              <button onClick={() => dispatch(setCurrentAuthor(author))}>
-                View details
-              </button>
-            </Link>
-          </div>
-        );
-      })}
+
+      <div className="authors-page">
+        <h1>Authors</h1>
+        <div className="authors-page__authors">
+          {authors.map((author: GetAuthor) => {
+            return (
+              <div key={author.authorId} className="authors-page__author">
+                <img
+                  src="https://hips.hearstapps.com/hmg-prod/images/gettyimages-1061157246.jpg"
+                  alt="author's face"
+                  className="authors-page__author-image"
+                />
+                <Link to={`/authors/${author.authorName}`}>
+                  <button onClick={() => dispatch(setCurrentAuthor(author))}>
+                    {author.authorName}
+                  </button>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
