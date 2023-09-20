@@ -1,0 +1,39 @@
+@import "../variables.scss";
+
+.heading {
+    margin-left:$margin-left;
+    padding-top:1rem;
+}
+
+.profile-page {
+    margin-left: $margin-left;
+    margin-top:1.5rem;
+    display:flex;
+    .img-wrapper {
+        margin-right:2rem;
+        img {
+            width:200px;
+            height:200px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+
+
+    .name {
+        font-size: 1.75rem;
+    }
+
+    .email {
+        font-weight: 300;
+    }
+
+    button {
+        margin-right:0.5rem;
+    }
+
+    span {
+        font-weight:300;
+    }
+}
+

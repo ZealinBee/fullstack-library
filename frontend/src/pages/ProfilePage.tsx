@@ -1,44 +1,58 @@
-import React, {useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Header from '../components/Header'
-import useAppDispatch from '../redux/hooks/useAppDispatch'
-import useAppSelector from '../redux/hooks/useAppSelector'
-import { getUserProfile, deleteProfile, logoutUser } from '../redux/reducers/usersReducer'
+import Header from "../components/Header";
+import useAppDispatch from "../redux/hooks/useAppDispatch";
+import useAppSelector from "../redux/hooks/useAppSelector";
+import {
+  getUserProfile,
+  deleteProfile,
+  logoutUser,
+} from "../redux/reducers/usersReducer";
 
 function ProfilePage() {
-  const user = useAppSelector(state => state.users.currentUser)
-  const dispatch = useAppDispatch()
-  let token = useAppSelector(state => state.users.currentToken)
-  const navigate = useNavigate()
+  const user = useAppSelector((state) => state.users.currentUser);
+  const dispatch = useAppDispatch();
+  let token = useAppSelector((state) => state.users.currentToken);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getUserProfile(token))
-  }, [])
+    dispatch(getUserProfile(token));
+  }, []);
 
-async function deleteProfileHandler() {
-    await dispatch(deleteProfile(token))
-    navigate('/')
+  async function deleteProfileHandler() {
+    await dispatch(deleteProfile(token));
+    navigate("/");
   }
 
   function logoutHandler() {
-    dispatch(logoutUser())
-    navigate('/')
+    dispatch(logoutUser());
+    navigate("/");
   }
 
   return (
-    <div className="page">
+    <div>
       <Header></Header>
-      <h1>Profile Page</h1>
-      <h2>{user?.firstName}</h2>
-      <h2>{user?.lastName}</h2>
-      <h2>{user?.email}</h2>
-      <h2>{user?.role}</h2>
-      <button onClick={deleteProfileHandler}>Delete account</button>
-      <button >Update account</button>
-      <button onClick={logoutHandler}>Logout</button>
+      <h1 className="heading">Your profile</h1>
+
+      <div className="profile-page">
+        <div className="img-wrapper">
+          <img
+            src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
+            alt=""
+          />
+        </div>
+        <div className="profile-details">
+          <h2 className="name">{user?.firstName} {user?.lastName}</h2>
+          <h2 className="email">{user?.email}</h2>
+          <h2>{user?.role} <span>(Role)</span></h2>
+          <button onClick={deleteProfileHandler}>Delete account</button>
+          <button>Update account</button>
+          <button onClick={logoutHandler}>Logout</button>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default ProfilePage
+export default ProfilePage;

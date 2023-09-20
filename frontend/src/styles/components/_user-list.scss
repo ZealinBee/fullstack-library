@@ -1,0 +1,16 @@
+@import "../variables.scss";
+
+.user-list {
+    margin-left:$margin-left;
+    padding-top:2rem;
+    button {
+        font-size:0.8rem;
+        margin-right:0.5rem;
+    }
+
+    h3 {
+        span {
+            font-weight: 300;
+        }
+    }
+}

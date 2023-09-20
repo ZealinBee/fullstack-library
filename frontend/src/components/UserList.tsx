@@ -27,16 +27,24 @@ function UserList() {
   }
 
   return (
-    <div>
+    <div className="user-list">
       <h1>User List</h1>
       {users.map((user: GetUser) => {
         return (
           <div key={user.userId}>
             <div>
-              <h2>Email: {user.email}</h2>
-              <h2>First Name: {user.firstName}</h2>
-              <h2>User: {user.lastName}</h2>
-              <h2>User Role: {user.role}</h2>
+              <h3>
+                Email: <span>{user.email}</span>
+              </h3>
+              <h3>
+                First Name: <span>{user.firstName}</span>
+              </h3>
+              <h3>
+                User:<span> {user.lastName}</span>
+              </h3>
+              <h3>
+                User Role: <span>{user.role}</span>
+              </h3>
             </div>
             <button onClick={() => deleteUserHandler(user.userId)}>
               Delete

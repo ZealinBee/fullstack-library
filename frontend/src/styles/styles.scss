@@ -3,10 +3,12 @@
 @use "./components/signup";
 @use "./components/book";
 @use "./components/create-book";
+@use "./components/user-list";
 
 @use "./pages/auth.scss";
 @use "./pages/book-page";
 @use "./pages/authors-page";
+@use "./pages/profile-page";
 
 @import "./variables.scss";
 
@@ -41,4 +43,12 @@ button {
   background-color: $primary;
   color:white;
   font-size:0.9rem;
+}
+
+form {
+  input  {
+    padding: 0.4rem 1rem;
+    border: 1px $gray solid;
+  }
+  
 }
