@@ -16,5 +16,6 @@ namespace IntegrifyLibrary.Domain
         public DateOnly PublishedDate { get; set; }
         public DateOnly CreatedAt { get; set; }
         public DateOnly ModifiedAt { get; set; }
+        public string BookImage { get; set; }
     }
 }

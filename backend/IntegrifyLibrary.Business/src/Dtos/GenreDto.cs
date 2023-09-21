@@ -5,15 +5,18 @@ namespace IntegrifyLibrary.Business;
 public class CreateGenreDto
 {
     public string GenreName { get; set; }
+    public string GenreImage { get; set; }
 }
 
 public class UpdateGenreDto
 {
     public string GenreName { get; set; }
+    public string GenreImage { get; set; }
 }
 
 public class GetGenreDto
 {
     public string GenreName { get; set; }
     public ICollection<Book> Books { get; set; }
+    public string GenreImage { get; set; }
 }

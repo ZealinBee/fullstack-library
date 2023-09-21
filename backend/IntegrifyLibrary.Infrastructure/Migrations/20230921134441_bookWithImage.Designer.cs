@@ -3,6 +3,7 @@ using System;
 using IntegrifyLibrary.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntegrifyLibrary.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230921134441_bookWithImage")]
+    partial class bookWithImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,11 +51,6 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("author_id");
-
-                    b.Property<string>("AuthorImage")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("author_image");
 
                     b.Property<string>("AuthorName")
                         .IsRequired()
@@ -152,11 +150,6 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
                     b.Property<DateOnly>("CreatedAt")
                         .HasColumnType("date")
                         .HasColumnName("created_at");
-
-                    b.Property<string>("GenreImage")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("genre_image");
 
                     b.Property<string>("GenreName")
                         .IsRequired()
@@ -280,11 +273,6 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
                     b.Property<DateOnly>("UpdatedAt")
                         .HasColumnType("date")
                         .HasColumnName("updated_at");
-
-                    b.Property<string>("UserImage")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("user_image");
 
                     b.HasKey("UserId")
                         .HasName("pk_users");

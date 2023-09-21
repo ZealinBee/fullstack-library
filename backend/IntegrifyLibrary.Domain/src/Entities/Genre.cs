@@ -7,6 +7,7 @@ namespace IntegrifyLibrary.Domain
         public DateOnly CreatedAt { get; init; }
         public DateOnly ModifiedAt { get; init; }
         public ICollection<Book> Books { get; set; } = new List<Book>();
+        public string GenreImage { get; init; } = string.Empty;
     }
 
 }

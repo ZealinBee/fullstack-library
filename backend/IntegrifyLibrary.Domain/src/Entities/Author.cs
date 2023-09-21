@@ -7,5 +7,6 @@ namespace IntegrifyLibrary.Domain
         public string AuthorName { get; set; } = string.Empty;
         public DateOnly CreatedAt { get; set; }
         public DateOnly ModifiedAt { get; set; }
+        public string AuthorImage { get; set; } = string.Empty;
     }
 }

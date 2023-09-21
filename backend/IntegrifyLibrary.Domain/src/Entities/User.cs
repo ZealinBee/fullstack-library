@@ -14,6 +14,7 @@ public class User
     public DateOnly CreatedAt { get; init; }
     public DateOnly UpdatedAt { get; init; }
     public List<Loan> Loans { get; set; } = new();
+    public string UserImage { get; set; } = string.Empty;
 }
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Role
