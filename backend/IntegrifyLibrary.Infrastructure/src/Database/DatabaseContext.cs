@@ -32,8 +32,8 @@ public class DatabaseContext : DbContext
         modelBuilder.HasPostgresEnum<Role>();
         modelBuilder.Entity<Author>()
             .HasMany(author => author.Books)
-            .WithOne(author => author.Author)
-            .HasForeignKey(author => author.AuthorId);
+            .WithOne(book => book.Author)
+            .HasForeignKey(book => book.AuthorId);
         modelBuilder.Entity<User>()
             .HasMany(user => user.Loans)
             .WithOne(user => user.User)

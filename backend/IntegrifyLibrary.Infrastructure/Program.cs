@@ -33,6 +33,10 @@ builder.Services.AddCors(options =>
 
 
 builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services
@@ -66,6 +70,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         ValidateIssuerSigningKey = true
     };
 });
+
 
 builder.Services.AddAuthorization(options =>
 {
@@ -104,6 +109,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 // Configure the HTTP request pipeline.
+// Testing
 if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerUI();

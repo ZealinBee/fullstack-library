@@ -23,6 +23,5 @@ namespace IntegrifyLibrary.Business
             var newAuthor = _mapper.Map<Author>(dto);
             return _mapper.Map<GetAuthorDto>(await _authorRepo.CreateOne(newAuthor));
         }
-
     }
 }
