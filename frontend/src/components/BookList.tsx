@@ -16,12 +16,9 @@ function BookList() {
 
   useEffect(() => {
     dispatch(getAllBooks());
-    console.log(books)
   }, []);
 
-  function deleteBookHandler(bookId: string) {
-    dispatch(deleteBook({ bookId: bookId, jwt_token: token }));
-  }
+
 
   function addToCartHandler(book: GetBook) {
     dispatch(addToCart(book));
@@ -36,11 +33,6 @@ function BookList() {
             className="bookList__book"
             onClick={() => dispatch(selectCurrentBook(book))}
           >
-            {/* {currentUser?.role === "Librarian" ? (
-              <button onClick={() => deleteBookHandler(book.bookId)}>
-                Delete
-              </button>
-            ) : null} */}
             <Link to={`/books/${book.bookId}`}>
               <img
                 src={book.bookImage}

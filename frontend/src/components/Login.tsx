@@ -38,9 +38,6 @@ function Login({
       };
     });
   }
-
-  console.log(isSignUp)
-
   return (
     <div className={"login" + (isSignUp ? " toggle-off" : "")}>
       <div className={"auth-wrapper"}>
