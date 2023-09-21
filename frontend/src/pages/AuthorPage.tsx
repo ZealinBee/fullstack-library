@@ -12,7 +12,7 @@ function AuthorPage() {
       <div className="author-page">
         <div className="img-wrapper">
           <img
-            src="https://m.media-amazon.com/images/S/amzn-author-media-prod/8cigckin175jtpsk3gs361r4ss.jpg"
+            src={currentAuthor?.authorImage}
             alt=""
           />
           <h2>{currentAuthor?.authorName}</h2>

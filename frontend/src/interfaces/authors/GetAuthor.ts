@@ -5,4 +5,6 @@ export default interface GetAuthor
     authorId: string;
     authorName: string;
     books: GetBook[];
+    authorImage: string;
+
 }

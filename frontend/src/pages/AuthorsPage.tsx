@@ -27,7 +27,7 @@ function AuthorsPage() {
             return (
               <div key={author.authorId} className="authors-page__author">
                 <img
-                  src="https://hips.hearstapps.com/hmg-prod/images/gettyimages-1061157246.jpg"
+                  src={author.authorImage}
                   alt="author's face"
                   className="authors-page__author-image"
                 />

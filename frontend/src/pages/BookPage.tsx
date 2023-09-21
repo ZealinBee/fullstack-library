@@ -21,7 +21,7 @@ function BookPage() {
       <div className="book-page">
         <div className="book-page__img-wrapper">
           <img
-            src="https://m.media-amazon.com/images/I/81zlbsnFiYL._AC_UF1000,1000_QL80_.jpg"
+            src={currentBook?.bookImage}
             alt="image for a book"
           />
           {currentUser?.role === "User" ? (
