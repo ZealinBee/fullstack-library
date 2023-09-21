@@ -4,8 +4,8 @@ This is a full stack library application where there is the librarian who can ma
 For the backend, this project uses .NET Core, Entity Framework Core, Postgres and Azure.
 For the frontend, this project uses React, typescript and MUI.
 
-[BACKEND SWAGGER UI LINK(Hosted on azure virtual machine ubuntu + nginx)]: http://98.71.75.120/swagger/index.html
-[FRONTEND (Also hosted on azure virtual machine ubuntu + nginx)]: http://98.71.75.120:3001/
+[BACKEND SWAGGER UI LINK(Hosted on azure virtual machine ubuntu + nginx)]: http://98.71.53.99/swagger/index.html
+[FRONTEND (Also hosted on azure virtual machine ubuntu + nginx)]: http://98.71.53.99:3000/
 
 ## Table of Content
 
@@ -61,4 +61,4 @@ Clone the repository from github with `git clone` Then `npm i` for the packages 
 
 To test the librarian functionalities for the website, the credentials for admin/librarian is:
 email: admin@mail.com
-password: password
+password: admin123
