@@ -1,11 +1,14 @@
 # Introduction
 
-This is a full stack library application where there is the librarian who can management the library and user who can borrow and view books.
-For the backend, this project uses .NET Core, Entity Framework Core, Postgres and Azure.
+This is an online library that acts like your local city library. The user can create accounts and loan books, and the librarian can manage the books in the library. The website gives users and librarians different privileges, i.e. access to the different functionalities of the website. The admins have a detailed dashboard where they can manage the users, for example, admin have the right to delete an user or give the user the admin. It is also possible for the user to remove their own account. Feel free to make accounts and mess around with the functionalities. The website is hosted with azure virtual machine with ubuntu + nginx.
+
+For the backend, this project uses .NET Core, Entity Framework Core, Postgres and Azure.  
 For the frontend, this project uses React, typescript and MUI.
 
-[BACKEND SWAGGER UI LINK(Hosted on azure virtual machine ubuntu + nginx)]: http://98.71.53.99/swagger/index.html
-[FRONTEND (Also hosted on azure virtual machine ubuntu + nginx)]: http://98.71.53.99:3000/
+### Deployment
+
+[BACKEND SWAGGER UI LINK - Hosted on azure virtual machine ubuntu + nginx](http://98.71.53.99/swagger/index.html)  
+[FRONTEND - Also hosted on azure virtual machine ubuntu + nginx](http://98.71.53.99:3000/)
 
 ## Table of Content
 
