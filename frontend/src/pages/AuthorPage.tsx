@@ -5,19 +5,28 @@ import Header from "../components/Header";
 
 function AuthorPage() {
   const currentAuthor = useAppSelector((state) => state.authors.currentAuthor);
-  console.log(currentAuthor?.books)
+  console.log(currentAuthor?.books);
   return (
     <div>
       <Header></Header>
-      <h2>Author Name: {currentAuthor?.authorName}</h2>
-      {currentAuthor?.books.map((book) => {
-        return (
-          <div key={book.bookId}>
-            <h3>Book Name: {book.bookName}</h3>
-            <h3>ISBN: {book.ISBN}</h3>
-          </div>
-        );
-      })}
+      <div className="author-page">
+        <div className="img-wrapper">
+          <img
+            src="https://m.media-amazon.com/images/S/amzn-author-media-prod/8cigckin175jtpsk3gs361r4ss.jpg"
+            alt=""
+          />
+          <h2>{currentAuthor?.authorName}</h2>
+        </div>
+
+        {currentAuthor?.books.map((book) => {
+          return (
+            <div key={book.bookId}>
+              <h3>Book Name: {book.bookName}</h3>
+              <h3>ISBN: {book.ISBN}</h3>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

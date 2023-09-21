@@ -13,7 +13,8 @@ function CreateBook() {
     ISBN: "",
     quantity: 0,
     pageCount: 0,
-    publishedDate: new Date().toISOString().split("T")[0], 
+    publishedDate: new Date().toISOString().split("T")[0],
+    bookImage: "",
   });
 
   function createBookHandler(event: React.FormEvent) {
@@ -22,7 +23,11 @@ function CreateBook() {
     dispatch(createBook(book));
   }
 
-  function formChangeHandler(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
+  function formChangeHandler(
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) {
     setBook((prevState) => {
       return {
         ...prevState,
@@ -93,6 +98,16 @@ function CreateBook() {
           required
           placeholder="Page Count"
           id="page-count"
+        />
+        <label htmlFor="book-image">Book Image URL</label>
+        <input
+          type="text"
+          onChange={formChangeHandler}
+          name="bookImage"
+          value={book.bookImage}
+          required
+          placeholder="Book Image URL"
+          id="book-image"
         />
         <button type="submit">Create Book</button>
       </form>

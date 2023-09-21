@@ -3,7 +3,6 @@
 .auth {
   display: flex;
   margin-left: calc(40% - 550px / 2);
-
 }
 
 .auth-wrapper {
@@ -23,6 +22,7 @@
   justify-content: center;
   border-radius: 0 0.5rem 0.5rem 0;
   padding: 0 3rem;
+  width: 350px;
   h2 {
     font-weight: 600;
     margin-bottom: 0.5rem;
@@ -77,14 +77,10 @@
   }
 }
 
-.login {
-    
+.login-description {
+  border-radius: 0.5rem 0 0 0.5rem;
 }
 
-
-
-
-
-.login-description {
-    border-radius: 0.5rem 0 0 0.5rem;
+.toggle-off {
+  display: none;
 }

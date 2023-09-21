@@ -6,4 +6,6 @@ export default interface CreateBook {
     quantity: number;
     pageCount: number;
     publishedDate: string;
+    bookImage: string;
+
 }

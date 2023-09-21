@@ -12,6 +12,7 @@ import BookPage from "./pages/BookPage";
 import AuthorsPage from "./pages/AuthorsPage";
 import AuthorPage from "./pages/AuthorPage";
 import LoansPage from "./pages/LoansPage";
+import GenrePage from "./pages/GenrePage";
 
 
 const router = createBrowserRouter([
@@ -62,6 +63,11 @@ const router = createBrowserRouter([
   {
     path: "/loans",
     element: <LoansPage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/genres",
+    element: <GenrePage />,
     errorElement: <NotFoundPage />,
   }
 ]);

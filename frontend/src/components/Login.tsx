@@ -5,7 +5,15 @@ import LoginUser from "../interfaces/users/LoginUser";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { loginUser } from "../redux/reducers/usersReducer";
 
-function Login() {
+function Login({
+  isSignUp,
+  setIsSignUp,
+  toggle,
+}: {
+  isSignUp: boolean;
+  setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
+  toggle: () => void;
+}) {
   const dispatch = useAppDispatch();
   const [user, setUser] = useState<LoginUser>({
     email: "",
@@ -31,13 +39,15 @@ function Login() {
     });
   }
 
+  console.log(isSignUp)
+
   return (
-    <div className="login">
-      <div className="auth-wrapper">
+    <div className={"login" + (isSignUp ? " toggle-off" : "")}>
+      <div className={"auth-wrapper"}>
         <div className="auth-description login-description">
           <h2>Don't have an account yet?</h2>
           <p>Create an account to start loaning books in our library app</p>
-          <button>Sign up</button>
+          <button onClick={() => toggle()}>Sign up</button>
         </div>
         <form onSubmit={createAccountHandler} className="auth-form">
           <h1>Login</h1>

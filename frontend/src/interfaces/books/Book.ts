@@ -9,5 +9,5 @@ export default interface Book {
     quantity: number;
     pageCount: number;
     publishedDate: string;
-    
+    bookImage: string;
 }

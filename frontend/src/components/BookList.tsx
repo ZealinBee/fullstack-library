@@ -16,6 +16,7 @@ function BookList() {
 
   useEffect(() => {
     dispatch(getAllBooks());
+    console.log(books)
   }, []);
 
   function deleteBookHandler(bookId: string) {
@@ -42,7 +43,7 @@ function BookList() {
             ) : null} */}
             <Link to={`/books/${book.bookId}`}>
               <img
-                src="https://m.media-amazon.com/images/I/81zlbsnFiYL._AC_UF1000,1000_QL80_.jpg"
+                src={book.bookImage}
                 alt="an image for the book"
               />
             </Link>

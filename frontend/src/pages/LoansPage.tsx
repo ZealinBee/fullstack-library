@@ -24,23 +24,26 @@ function LoansPage() {
       <Header />
       {currentUser?.role === "Librarian" ? (
         <div>
-          <h1>All Loans</h1>
+          <h1 className="top">All Loans</h1>
         </div>
       ) : (
         <div>
-          <h2>My Loans</h2>
+          <h1 className="top">My Loans</h1>
         </div>
       )}
-      {loans.map((loan) => {
-        return (
-          <div key={loan.bookId} className="loan">
-            {/* Add a unique key for each element in the map */}
-            <h2>Book ID: {loan.bookId}</h2>
-            <h3>Loan Date: {loan.loanDate}</h3>
-            <h3>Due Date: {loan.dueDate}</h3>
-          </div>
-        );
-      })}
+      <div className="loans">
+        {" "}
+        {loans.map((loan) => {
+          return (
+            <div key={loan.bookId} className="loan">
+              {/* Add a unique key for each element in the map */}
+              <h2>Book ID: {loan.bookId}</h2>
+              <h3>Loan Date: {loan.loanDate}</h3>
+              <h3>Due Date: {loan.dueDate}</h3>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

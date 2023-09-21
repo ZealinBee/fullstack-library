@@ -5,7 +5,15 @@ import CreateUser from "../interfaces/users/CreateUser";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { createNewUser } from "../redux/reducers/usersReducer";
 
-function SignUp() {
+function SignUp({
+  isSignUp,
+  setIsSignUp,
+  toggle,
+}: {
+  isSignUp: boolean;
+  setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
+  toggle: () => void;
+}) {
   const dispatch = useAppDispatch();
   const [user, setUser] = useState<CreateUser>({
     firstName: "",
@@ -31,12 +39,12 @@ function SignUp() {
   }
 
   return (
-    <div className="sign-up">
+    <div className={"sign-up" + (isSignUp ? "" : " toggle-off")}>
       <div className="auth-wrapper">
         <form onSubmit={createAccountHandler} className="auth-form">
-        <h1>Sign Up</h1>
-        <h3>Make a new account to use our library</h3>
-        <label htmlFor="firstName">First Name</label>
+          <h1>Sign Up</h1>
+          <h3>Make a new account to use our library</h3>
+          <label htmlFor="firstName">First Name</label>
           <input
             type="text"
             onChange={formChangeHandler}
@@ -76,12 +84,14 @@ function SignUp() {
             required
             id="password-signup"
           />
-          <button type="submit" className="auth-button">Create Account</button>
+          <button type="submit" className="auth-button">
+            Create Account
+          </button>
         </form>
-        <div className="auth-description"> 
+        <div className="auth-description">
           <h2>Already have an account?</h2>
           <p>To loan and view your personal loans, please login</p>
-          <button>Login</button>
+          <button onClick={() => toggle()}>Login</button>
         </div>
       </div>
     </div>
