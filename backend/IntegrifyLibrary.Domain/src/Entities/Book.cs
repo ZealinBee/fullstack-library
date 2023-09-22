@@ -17,6 +17,7 @@ namespace IntegrifyLibrary.Domain
         public string BookImage { get; set; }
         public Genre Genre { get; set; }
         public Guid GenreId { get; set; }
+        public string GenreName { get; set; }
 
     }
 }

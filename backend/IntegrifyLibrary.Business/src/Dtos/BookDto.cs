@@ -10,6 +10,7 @@ public class BookDto
     public int PageCount { get; set; }
     public DateOnly PublishedDate { get; set; }
     public string BookImage { get; set; }
+    public string GenreName { get; set; }
 }
 
 public class GetBookDto : BookDto

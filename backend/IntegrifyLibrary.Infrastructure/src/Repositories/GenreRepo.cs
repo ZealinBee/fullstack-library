@@ -12,5 +12,17 @@ public class GenreRepo : BaseRepo<Genre>, IGenreRepo
     {
         _context = context;
     }
+
+    public async Task<Genre> GetOneByGenreName(string genreName)
+    {
+        return await _context.Genres.FirstOrDefaultAsync(g => g.GenreName == genreName);
+    }
+
+    public override async Task<List<Genre>> GetAll(QueryOptions queryOptions)
+    {
+        return _dbSet
+                .Include(genre => genre.Books)
+                .ToList();
+    }
 }
 
