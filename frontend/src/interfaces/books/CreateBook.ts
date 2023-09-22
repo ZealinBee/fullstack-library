@@ -7,5 +7,5 @@ export default interface CreateBook {
     pageCount: number;
     publishedDate: string;
     bookImage: string;
-
+    genreName: string;
 }

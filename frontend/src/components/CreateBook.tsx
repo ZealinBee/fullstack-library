@@ -15,6 +15,7 @@ function CreateBook() {
     pageCount: 0,
     publishedDate: new Date().toISOString().split("T")[0],
     bookImage: "",
+    genreName: "",
   });
 
   function createBookHandler(event: React.FormEvent) {
@@ -98,6 +99,16 @@ function CreateBook() {
           required
           placeholder="Page Count"
           id="page-count"
+        />
+        <label htmlFor="genre-name">Genre Name</label>
+        <input
+          type="text"
+          onChange={formChangeHandler}
+          name="genreName"
+          value={book.genreName}
+          required
+          placeholder="Genre Name"
+          id="genre-name"
         />
         <label htmlFor="book-image">Book Image URL</label>
         <input

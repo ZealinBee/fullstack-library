@@ -5,6 +5,7 @@ import booksReducer from './reducers/booksReducer';
 import cartReducer from './reducers/cartReducer';
 import authorsReducer from './reducers/authorsReducer';
 import loansReducer from './reducers/loansReducer';
+import genresReducer from './reducers/genresReducer';
 
 const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
         cart: cartReducer,
         authors: authorsReducer,
         loans: loansReducer,
+        genres: genresReducer
     }
 })
 
