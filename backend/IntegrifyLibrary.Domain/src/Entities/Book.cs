@@ -8,14 +8,15 @@ namespace IntegrifyLibrary.Domain
         public string AuthorName { get; set; }
         public Author Author { get; set; }
         public string Description { get; set; }
-        public Guid GenreId { get; set; }
         public Guid AuthorId { get; set; }
         public int Quantity { get; set; }
         public int PageCount { get; set; }
-        public ICollection<Genre> Genres { get; set; } = new List<Genre>();
         public DateOnly PublishedDate { get; set; }
         public DateOnly CreatedAt { get; set; }
         public DateOnly ModifiedAt { get; set; }
         public string BookImage { get; set; }
+        public Genre Genre { get; set; }
+        public Guid GenreId { get; set; }
+
     }
 }

@@ -3,6 +3,7 @@ using System;
 using IntegrifyLibrary.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntegrifyLibrary.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230922053833_OneToManyLoanUser")]
+    partial class OneToManyLoanUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,6 +25,25 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "user", "librarian" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("BookGenre", b =>
+                {
+                    b.Property<Guid>("BooksBookId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("books_book_id");
+
+                    b.Property<Guid>("GenresGenreId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("genres_genre_id");
+
+                    b.HasKey("BooksBookId", "GenresGenreId")
+                        .HasName("pk_book_genres");
+
+                    b.HasIndex("GenresGenreId")
+                        .HasDatabaseName("ix_book_genres_genres_genre_id");
+
+                    b.ToTable("book_genres", (string)null);
+                });
 
             modelBuilder.Entity("IntegrifyLibrary.Domain.Author", b =>
                 {
@@ -119,9 +141,6 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
 
                     b.HasIndex("AuthorId")
                         .HasDatabaseName("ix_books_author_id");
-
-                    b.HasIndex("GenreId")
-                        .HasDatabaseName("ix_books_genre_id");
 
                     b.ToTable("books", (string)null);
                 });
@@ -276,6 +295,23 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("BookGenre", b =>
+                {
+                    b.HasOne("IntegrifyLibrary.Domain.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksBookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_book_genres_books_books_book_id");
+
+                    b.HasOne("IntegrifyLibrary.Domain.Genre", null)
+                        .WithMany()
+                        .HasForeignKey("GenresGenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_book_genres_genres_genres_genre_id");
+                });
+
             modelBuilder.Entity("IntegrifyLibrary.Domain.Book", b =>
                 {
                     b.HasOne("IntegrifyLibrary.Domain.Author", "Author")
@@ -285,16 +321,7 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_books_authors_author_id");
 
-                    b.HasOne("IntegrifyLibrary.Domain.Genre", "Genre")
-                        .WithMany("Books")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_books_genres_genre_id");
-
                     b.Navigation("Author");
-
-                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("IntegrifyLibrary.Domain.Loan", b =>
@@ -322,11 +349,6 @@ namespace IntegrifyLibrary.Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("IntegrifyLibrary.Domain.Author", b =>
-                {
-                    b.Navigation("Books");
-                });
-
-            modelBuilder.Entity("IntegrifyLibrary.Domain.Genre", b =>
                 {
                     b.Navigation("Books");
                 });

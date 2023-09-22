@@ -36,15 +36,15 @@ public class DatabaseContext : DbContext
             .HasForeignKey(book => book.AuthorId);
         modelBuilder.Entity<User>()
             .HasMany(user => user.Loans)
-            .WithOne(user => user.User)
-            .HasForeignKey(user => user.UserId);
+            .WithOne(loan => loan.User)
+            .HasForeignKey(loan => loan.UserId);
         modelBuilder.Entity<Loan>()
             .HasMany(loan => loan.LoanDetails)
-            .WithOne(loan => loan.Loan)
-            .HasForeignKey(loan => loan.LoanId);
-        modelBuilder.Entity<Book>()
-            .HasMany(x => x.Genres)
-            .WithMany(y => y.Books)
-            .UsingEntity(z => z.ToTable("book_genres"));
+            .WithOne(loanDetail => loanDetail.Loan)
+            .HasForeignKey(loanDetail => loanDetail.LoanId);
+        modelBuilder.Entity<Genre>()
+            .HasMany(genre => genre.Books)
+            .WithOne(book => book.Genre)
+            .HasForeignKey(book => book.GenreId);
     }
 }

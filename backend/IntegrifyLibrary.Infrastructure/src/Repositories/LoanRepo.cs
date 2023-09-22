@@ -10,4 +10,22 @@ public class LoanRepo : BaseRepo<Loan>, ILoanRepo
     {
 
     }
+
+    public override async Task<List<Loan>> GetAll(QueryOptions queryOptions)
+    {
+        return _dbSet
+            .Include(loan => loan.LoanDetails)
+            .ToList();
+    }
+
+    public override async Task<Loan> GetOne(Guid id)
+    {
+        var entity = _dbSet.Include(loan => loan.LoanDetails).FirstOrDefault(l => l.LoanId == id);
+        if (entity is null)
+        {
+            throw new KeyNotFoundException("Id is not found");
+        }
+
+        return entity;
+    }
 }
