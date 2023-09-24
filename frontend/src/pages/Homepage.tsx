@@ -7,7 +7,7 @@ function Homepage() {
   return (
     <>
       <Header />
-      <h1 style={{ paddingTop: '1rem', marginLeft: 'calc(40% - 550px / 2)', marginBottom: "1rem" }}>Discover (STYLING COMING SOON)</h1>
+      <h1 className="top">Discover (MORE STYLING AND FEATURE COMING SOON)</h1>
       <BookList />
     </>
   );

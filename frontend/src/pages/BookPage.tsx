@@ -8,11 +8,15 @@ import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { setCurrentAuthor } from "../redux/reducers/authorsReducer";
 import { deleteBook } from "../redux/reducers/booksReducer";
 
+
 function BookPage() {
   const currentBook = useAppSelector((state) => state.books.currentBook);
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.users.currentUser);
   let token = useAppSelector((state) => state.users.currentToken);
+  const isBookInCart = useAppSelector((state) =>
+    state.cart.cartItems.find((item) => item.bookId === currentBook?.bookId)
+  );
 
   function addToCartHandler() {
     dispatch(addToCart(currentBook));
@@ -29,9 +33,14 @@ function BookPage() {
       <div className="book-page">
         <div className="book-page__img-wrapper">
           <img src={currentBook?.bookImage} alt="image for a book" />
-          {currentUser?.role === "User" ? (
-            <button onClick={addToCartHandler}>Add To Loan Cart</button>
-          ) : null}
+          {currentUser?.role === "User" &&
+            (!isBookInCart ? (
+              <button onClick={addToCartHandler}>Add To Loan Cart</button>
+            ) : (
+              <button disabled className="bookList__add-book">
+                Already in Loan Cart
+              </button>
+            ))}
         </div>
         <div className="book-page__book-details">
           <h2 className="book-page__book-name">{currentBook?.bookName}</h2>
@@ -53,8 +62,12 @@ function BookPage() {
                   Delete
                 </button>
               </Link>
+              <button style={{marginLeft:"0.5rem"}}>
+                Edit
+              </button>
             </>
           ) : null}
+
         </div>
       </div>
     </>

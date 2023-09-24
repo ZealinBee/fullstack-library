@@ -7,18 +7,21 @@ import useAppSelector from "../redux/hooks/useAppSelector";
 import GetBook from "../interfaces/books/GetBook";
 import { deleteBook, selectCurrentBook } from "../redux/reducers/booksReducer";
 import { addToCart } from "../redux/reducers/cartReducer";
+import Book from "./Book";
 
 function BookList() {
   const dispatch = useAppDispatch();
   const books = useAppSelector((state) => state.books.books);
   let token = useAppSelector((state) => state.users.currentToken);
   const currentUser = useAppSelector((state) => state.users.currentUser);
+  const currentBook = useAppSelector((state) => state.books.currentBook);
+  // const isBookInCart = useAppSelector((state) =>
+  //   state.cart.cartItems.find((item) => item.bookId === currentBook?.bookId)
+  // );
 
   useEffect(() => {
     dispatch(getAllBooks());
   }, []);
-
-
 
   function addToCartHandler(book: GetBook) {
     dispatch(addToCart(book));
@@ -28,22 +31,28 @@ function BookList() {
     <div className="bookList">
       {books.map((book: GetBook) => {
         return (
-          <div
-            key={book.bookId}
-            className="bookList__book"
-            onClick={() => dispatch(selectCurrentBook(book))}
-          >
-            <Link to={`/books/${book.bookId}`}>
-              <img
-                src={book.bookImage}
-                alt="an image for the book"
-              />
-            </Link>
+          <div key={book.bookId} className="bookList__book">
+            <Book book={book}></Book>
             {currentUser?.role === "User" ? (
-              <button onClick={() => addToCartHandler(book)} className="bookList__add-book">
+              <button
+                onClick={() => addToCartHandler(book)}
+                className="bookList__add-book"
+              >
                 Add to Loan Cart
               </button>
-            ) : null}
+            ) : // !isBookInCart ? (
+            //   <button
+            //     onClick={() => addToCartHandler(book)}
+            //     className="bookList__add-book"
+            //   >
+            //     Add to Loan Cart
+            //   </button>
+            // ) : (
+            //   <button disabled className="bookList__add-book">
+            //     Already in Loan Cart
+            //   </button>
+            // )
+            null}
           </div>
         );
       })}

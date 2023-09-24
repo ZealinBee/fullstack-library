@@ -6,6 +6,7 @@ import useAppDispatch from "../redux/hooks/useAppDispatch";
 import useAppSelector from "../redux/hooks/useAppSelector";
 import { getAllGenres } from "../redux/reducers/genresReducer";
 import { selectCurrentBook } from "../redux/reducers/booksReducer";
+import Book from "../components/Book";
 
 function GenrePage() {
   const dispatch = useAppDispatch();
@@ -26,21 +27,23 @@ function GenrePage() {
               <>
                 <li className="genre">
                   <h2>{genre.genreName}</h2>
-                  {genre.books.map((book) => {
-                    return (
-                      <div className="book">
-                        <Link
-                          to={`/books/${book.bookId}`}
-                          onClick={() => dispatch(selectCurrentBook(book))}
-                        >
-                          <img
-                            src={book.bookImage}
-                            alt="an image for the book"
-                          />
-                        </Link>
-                      </div>
-                    );
-                  })}
+                  <div className="genre-books">
+                    {genre.books.map((book) => {
+                      return (
+                        <div className="book">
+                          <Link
+                            to={`/books/${book.bookId}`}
+                            onClick={() => dispatch(selectCurrentBook(book))}
+                          >
+                            <img
+                              src={book.bookImage}
+                              alt="book"
+                            />
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </li>
               </>
             );

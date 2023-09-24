@@ -1,4 +1,4 @@
-export default interface CreateBook {
+export default interface GetBook {
     bookId: string;
     bookName: string;
     authorName: string;
@@ -9,4 +9,5 @@ export default interface CreateBook {
     publishedDate: string;
     bookImage: string;
     genreName: string;
+    authorId: string;
 }

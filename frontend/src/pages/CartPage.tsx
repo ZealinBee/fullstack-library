@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Header from "../components/Header";
 import useAppSelector from "../redux/hooks/useAppSelector";
 import { removeFromCart } from "../redux/reducers/cartReducer";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { loanBooks } from "../redux/reducers/cartReducer";
+import { selectCurrentBook } from "../redux/reducers/booksReducer";
 
 function CartPage() {
   const cartItems = useAppSelector((state) => state.cart.cartItems);
@@ -29,15 +31,13 @@ function CartPage() {
         {cartItems.map((item) => (
           <div key={item.bookId} className="loan-cart-item">
             <div className="img-wrapper">
-              <img
-                src="https://m.media-amazon.com/images/I/81zlbsnFiYL._AC_UF1000,1000_QL80_.jpg"
-                alt=""
-              />
+              <img src={item.bookImage} alt="" />
               <div className="book-details">
-              <h2>{item.bookName}</h2>
-              <h3>{item.authorName}</h3>
+                <Link to={`/books/${item.bookId}`}>
+                  <h2 onClick={() => dispatch(selectCurrentBook(item))}>{item.bookName}</h2>
+                </Link>
+                <h3>{item.authorName}</h3>
               </div>
-          
             </div>
 
             <button onClick={() => removeFromCartHandler(item.bookId)}>

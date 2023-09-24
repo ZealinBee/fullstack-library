@@ -63,20 +63,22 @@ export const createBook = createAsyncThunk(
   }
 );
 
-
 export const deleteBook = createAsyncThunk(
   "books/deleteBook",
-  async ({bookId, jwt_token} : {bookId: string, jwt_token: string | null}) => {
+  async ({
+    bookId,
+    jwt_token,
+  }: {
+    bookId: string;
+    jwt_token: string | null;
+  }) => {
     try {
-      await axios.delete<GetBook>(
-        `http://98.71.53.99/api/v1/books/${bookId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwt_token}`,
-          }
-        }
-      );
+      await axios.delete<GetBook>(`http://98.71.53.99/api/v1/books/${bookId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt_token}`,
+        },
+      });
       return bookId;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -89,7 +91,39 @@ export const deleteBook = createAsyncThunk(
       }
     }
   }
-)
+);
+
+export const updateBook = createAsyncThunk(
+  "books/updateBook",
+  async ({
+    bookId,
+    book,
+    jwt_token,
+  }: {
+    bookId: string | undefined;
+    book: CreateBook | undefined;
+    jwt_token: string | null;
+  }) => {
+    try {
+      const response = await axios.put<CreateBook>(`http://98.71.53.99/api/v1/books${bookId}`, book, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt_token}`,
+        },
+      });
+      return response.data 
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+);
 
 const booksSlice = createSlice({
   name: "books",
@@ -97,20 +131,26 @@ const booksSlice = createSlice({
   reducers: {
     selectCurrentBook: (state, action) => {
       state.currentBook = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllBooks.fulfilled, (state, action) => {
+    builder
+      .addCase(getAllBooks.fulfilled, (state, action) => {
         state.books = action.payload;
         state.loading = false;
         state.error = null;
-    })
-    .addCase(deleteBook.fulfilled, (state, action) => {
-      state.books = state.books.filter(book => book.bookId !== action.payload);
-      state.loading = false;
-      state.error = null;
-    })
-  }
+      })
+      .addCase(deleteBook.fulfilled, (state, action) => {
+        state.books = state.books.filter(
+          (book) => book.bookId !== action.payload
+        );
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(updateBook.fulfilled, (state, action) => {
+        
+      })
+  },
 });
 
 export const { selectCurrentBook } = booksSlice.actions;

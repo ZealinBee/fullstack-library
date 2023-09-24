@@ -1,9 +1,10 @@
 @use "./variables.scss";
 @use "./components/header.scss";
 @use "./components/signup";
-@use "./components/book";
+@use "./components/bookList";
 @use "./components/create-book";
 @use "./components/user-list";
+@use "./components/book";
 
 @use "./pages/auth.scss";
 @use "./pages/book-page";
@@ -60,4 +61,10 @@ form {
 .top {
   margin-left: $margin-left;
   padding-top:1rem;
+  margin-bottom:0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color:black;
 }

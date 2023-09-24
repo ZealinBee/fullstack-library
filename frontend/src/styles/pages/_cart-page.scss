@@ -11,16 +11,17 @@
         .img-wrapper {
             img {
                 width:120px;
+                border:1px black solid;
             }
             display:flex;
             align-items: center;
             .book-details {
                 margin-left:1rem;
                 h2 {
-                    font-size:1.65rem;
+                    font-size:1.5rem;
                 }
                 h3 {
-                    font-size:1.25rem;
+                    font-size:1.2rem;
                     font-weight:300
                 }
             }
@@ -35,7 +36,7 @@
         &::after {
             content: '';
             width: 100%;
-            height: 0.5px;
+            height: 0.25px;
             background-color: $gray;
             position:absolute;
             bottom: -15px;

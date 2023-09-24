@@ -1,0 +1,23 @@
+@import "../variables.scss";
+
+.bookList {
+  margin-left: $margin-left;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.bookList__book {
+  display: flex;
+  flex-direction: column;
+  img {
+    border:1px black solid;
+    max-width: 160px;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+  }
+}
+
+.bookList__add-book {
+  width:150px;
+  font-size:0.75rem;
+}

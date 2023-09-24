@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { deleteAuthor } from "../redux/reducers/authorsReducer";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { selectCurrentBook } from "../redux/reducers/booksReducer";
+import Book from "../components/Book";
 
 function AuthorPage() {
   const currentAuthor = useAppSelector((state) => state.authors.currentAuthor);
@@ -39,16 +40,7 @@ function AuthorPage() {
         <div className="author-page__books-wrapper">
           <h3>{currentAuthor?.authorName}'s books</h3>
           {currentAuthor?.books.map((book) => {
-            return (
-              <div key={book.bookId} className="author-page__book">
-                <Link
-                  to={`/books/${book.bookId}`}
-                  onClick={() => dispatch(selectCurrentBook(book))}
-                >
-                  <img src={book.bookImage} alt="an image for the book" />
-                </Link>
-              </div>
-            );
+            return <Book book={book}></Book>;
           })}
         </div>
       </div>

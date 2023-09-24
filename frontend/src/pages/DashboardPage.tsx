@@ -21,7 +21,7 @@ function DashboardPage() {
   return (
     <div>
       <Header />
-      <h1>Dashboard</h1>
+      <h1 className="top">Dashboard</h1>
       <CreateBook />
       <UserList />
     </div>
