@@ -1,15 +1,19 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import Header from "../components/Header";
 import useAppSelector from "../redux/hooks/useAppSelector";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { getAllLoans, getOwnLoans } from "../redux/reducers/loansReducer";
+import { setCurrentLoan } from "../redux/reducers/loansReducer";
 
 function LoansPage() {
   const loans = useAppSelector((state) => state.loans.loans);
   const dispatch = useAppDispatch();
   let jwt_token = useAppSelector((state) => state.users.currentToken);
   const currentUser = useAppSelector((state) => state.users.currentUser);
+
+  console.log("loans", loans)
 
   useEffect(() => {
     if (currentUser?.role === "Librarian") {
@@ -31,15 +35,14 @@ function LoansPage() {
           <h1 className="top">My Loans</h1>
         </div>
       )}
-      <div className="loans">
+      <div className="loans-page">
         {" "}
         {loans.map((loan) => {
           return (
             <div key={loan.bookId} className="loan">
-              {/* Add a unique key for each element in the map */}
-              <h2>Book ID: {loan.bookId}</h2>
-              <h3>Loan Date: {loan.loanDate}</h3>
-              <h3>Due Date: {loan.dueDate}</h3>
+              <Link to={`/loans/${loan.loanId}`} onClick={() => dispatch(setCurrentLoan(loan))}>
+                <button>View Details</button>
+              </Link>
             </div>
           );
         })}

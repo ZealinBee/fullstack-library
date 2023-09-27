@@ -3,6 +3,7 @@ using IntegrifyLibrary.Domain;
 namespace IntegrifyLibrary.Business;
 public class GetLoanDto
 {
+    public Guid LoanId { get; set; }
     public Guid UserId { get; set; }
     public DateOnly LoanDate { get; set; }
     public DateOnly DueDate { get; set; }

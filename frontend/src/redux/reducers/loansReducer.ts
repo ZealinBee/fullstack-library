@@ -71,7 +71,11 @@ export const getOwnLoans = createAsyncThunk(
 const loansSlice = createSlice({
   name: "loans",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentLoan(state, action) {
+      state.currentLoan = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllLoans.fulfilled, (state, action) => {
@@ -85,4 +89,5 @@ const loansSlice = createSlice({
   },
 });
 
+export const { setCurrentLoan } = loansSlice.actions;
 export default loansSlice.reducer;

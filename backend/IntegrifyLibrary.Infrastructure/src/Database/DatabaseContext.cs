@@ -46,5 +46,9 @@ public class DatabaseContext : DbContext
             .HasMany(genre => genre.Books)
             .WithOne(book => book.Genre)
             .HasForeignKey(book => book.GenreId);
+        modelBuilder.Entity<Book>()
+            .HasMany(book => book.LoanDetails)
+            .WithOne(loanDetail => loanDetail.Book)
+            .HasForeignKey(loanDetail => loanDetail.BookId);
     }
 }

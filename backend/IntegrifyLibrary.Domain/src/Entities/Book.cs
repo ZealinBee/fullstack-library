@@ -18,6 +18,7 @@ namespace IntegrifyLibrary.Domain
         public Genre Genre { get; set; }
         public Guid GenreId { get; set; }
         public string GenreName { get; set; }
+        public ICollection<LoanDetails> LoanDetails { get; set; } = new List<LoanDetails>();
 
     }
 }

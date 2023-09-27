@@ -105,7 +105,7 @@ export const updateBook = createAsyncThunk(
     jwt_token: string | null;
   }) => {
     try {
-      const response = await axios.put<CreateBook>(`http://98.71.53.99/api/v1/books${bookId}`, book, {
+      const response = await axios.patch<CreateBook>(`http://98.71.53.99/api/v1/books/${bookId}`, book, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${jwt_token}`,
@@ -148,7 +148,7 @@ const booksSlice = createSlice({
         state.error = null;
       })
       .addCase(updateBook.fulfilled, (state, action) => {
-        
+        console.log(action.payload)
       })
   },
 });

@@ -13,6 +13,7 @@ import AuthorsPage from "./pages/AuthorsPage";
 import AuthorPage from "./pages/AuthorPage";
 import LoansPage from "./pages/LoansPage";
 import GenrePage from "./pages/GenrePage";
+import LoanPage from "./pages/LoanPage";
 
 
 const router = createBrowserRouter([
@@ -68,6 +69,11 @@ const router = createBrowserRouter([
   {
     path: "/genres",
     element: <GenrePage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/loans/:id",
+    element: <LoanPage />,
     errorElement: <NotFoundPage />,
   }
 ]);

@@ -7,7 +7,7 @@ import { addToCart } from "../redux/reducers/cartReducer";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { setCurrentAuthor } from "../redux/reducers/authorsReducer";
 import { deleteBook } from "../redux/reducers/booksReducer";
-
+import EditBook from "../components/EditBook";
 
 function BookPage() {
   const currentBook = useAppSelector((state) => state.books.currentBook);
@@ -17,6 +17,7 @@ function BookPage() {
   const isBookInCart = useAppSelector((state) =>
     state.cart.cartItems.find((item) => item.bookId === currentBook?.bookId)
   );
+  const [editMode, setEditMode] = React.useState(false);
 
   function addToCartHandler() {
     dispatch(addToCart(currentBook));
@@ -62,12 +63,15 @@ function BookPage() {
                   Delete
                 </button>
               </Link>
-              <button style={{marginLeft:"0.5rem"}}>
+              <button
+                style={{ marginLeft: "0.5rem" }}
+                onClick={() => setEditMode(!editMode)}
+              >
                 Edit
               </button>
             </>
           ) : null}
-
+          {editMode ? <EditBook /> : null}
         </div>
       </div>
     </>

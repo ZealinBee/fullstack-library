@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import { updateBook } from "../redux/reducers/booksReducer";
@@ -33,14 +33,17 @@ function EditBook() {
     });
   }
 
-  function submitFormHandler() {
-    if(!book) return;
-    dispatch(updateBook({bookId: currentBook?.bookId, book: book, jwt_token: token}))
+  function submitFormHandler(event: React.FormEvent) {
+    event.preventDefault();
+    dispatch(
+      updateBook({ bookId: currentBook?.bookId, book: book, jwt_token: token })
+    );
   }
 
-  return <div>
-    <form className="form edit-book-form" onSubmit={submitFormHandler}>
-    <label htmlFor="book-name">Book Name</label>
+  return (
+    <div>
+      <form className="form edit-book-form" onSubmit={submitFormHandler}>
+        <label htmlFor="book-name">Book Name</label>
         <input
           type="text"
           onChange={formChangeHandler}
@@ -120,8 +123,9 @@ function EditBook() {
           id="book-image"
         />
         <button type="submit">Update Book</button>
-    </form>
-  </div>;
+      </form>
+    </div>
+  );
 }
 
 export default EditBook;

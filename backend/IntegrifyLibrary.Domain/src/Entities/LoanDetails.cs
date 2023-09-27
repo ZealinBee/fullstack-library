@@ -6,5 +6,6 @@ namespace IntegrifyLibrary.Domain
         public Guid LoanId { get; init; }
         public Loan Loan { get; init; }
         public Guid BookId { get; init; }
+        public Book Book { get; init; }
     }
 }
