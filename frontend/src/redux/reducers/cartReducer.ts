@@ -6,7 +6,7 @@ import GetBook from "../../interfaces/books/GetBook";
 interface CartState {
   cartItems: GetBook[];
   loading: boolean;
-  error: AxiosError | null;
+  error: string | null;
 }
 
 const initialState: CartState = {
@@ -17,11 +17,17 @@ const initialState: CartState = {
 
 export const loanBooks = createAsyncThunk(
   "cart/loanBooks",
-  async ({ bookIds, jwt_token }: { bookIds: string[]; jwt_token: string | null }) => {
+  async ({
+    books,
+    jwt_token,
+  }: {
+    books: GetBook[];
+    jwt_token: string | null;
+  }) => {
     try {
       const dateOnlyString = new Date().toISOString().slice(0, 10);
       const loanData = {
-        bookIds: bookIds,
+        books: books,
         loanDate: dateOnlyString,
       };
       const response = await axios.post(
@@ -58,8 +64,9 @@ const cartSlice = createSlice({
         (item) => item.bookId === book.bookId
       );
       if (existingBook) {
-        return;
+        state.error = "error"
       } else {
+        state.error = null
         state.cartItems.push({ ...book });
       }
     },
@@ -69,11 +76,10 @@ const cartSlice = createSlice({
         (item) => item.bookId === bookToRemove
       );
       if (existingBook) {
+        state.error = null
         state.cartItems = state.cartItems.filter(
           (item) => item.bookId !== bookToRemove
         );
-      } else {
-        return;
       }
     },
   },

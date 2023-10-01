@@ -1,14 +1,15 @@
 import axios, { AxiosError } from "axios";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, isFulfilled } from "@reduxjs/toolkit";
 
 import CreateUser from "../../interfaces/users/CreateUser";
 import LoginUser from "../../interfaces/users/LoginUser";
 import GetUser from "../../interfaces/users/GetUser";
+import { createNew } from "typescript";
 
 interface UsersState {
   users: GetUser[];
   loading: boolean;
-  error: AxiosError | null;
+  error: string | null;
   currentUser: GetUser | null;
   isLoggedIn: boolean;
   currentToken: string | null;
@@ -27,15 +28,11 @@ export const createNewUser = createAsyncThunk(
   "users/createNewUser",
   async (user: CreateUser) => {
     try {
-      const result = await axios.post(
-        "http://98.71.53.99/api/v1/users",
-        user,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const result = await axios.post("http://98.71.53.99/api/v1/users", user, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -269,6 +266,16 @@ const usersSlice = createSlice({
           currentToken: null,
         };
       })
+      .addCase(createNewUser.fulfilled, (state, action) => {
+        return {
+          ...state,
+          users: [...state.users, action.payload],
+        };
+      })
+      .addCase(createNewUser.rejected, (state, action) => {
+        state.error = action.error.message as string;
+        action.payload = "error";
+      })
       .addCase(makeUserLibrarian.fulfilled, (state, action) => {
         return {
           ...state,
@@ -279,11 +286,10 @@ const usersSlice = createSlice({
                 role: "Librarian",
               };
             }
-            return user; 
+            return user;
           }),
         };
-      })
-      
+      });
   },
 });
 

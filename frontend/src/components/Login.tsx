@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import LoginUser from "../interfaces/users/LoginUser";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
@@ -23,10 +24,12 @@ function Login({
 
   async function createAccountHandler(event: React.FormEvent) {
     event.preventDefault();
-    console.log(user);
     const response = await dispatch(loginUser(user));
     if (response.meta.requestStatus === "fulfilled") {
+      toast.success("Logged in");
       navigate("/");
+    }else {
+      toast.error("Invalid credentials");
     }
   }
 
@@ -72,6 +75,18 @@ function Login({
           </button>
         </form>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

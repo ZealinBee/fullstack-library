@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { getAllBooks } from "../redux/reducers/booksReducer";
@@ -15,16 +16,21 @@ function BookList() {
   let token = useAppSelector((state) => state.users.currentToken);
   const currentUser = useAppSelector((state) => state.users.currentUser);
   const currentBook = useAppSelector((state) => state.books.currentBook);
-  // const isBookInCart = useAppSelector((state) =>
-  //   state.cart.cartItems.find((item) => item.bookId === currentBook?.bookId)
-  // );
+  const isBookInCart = useAppSelector((state) =>
+    state.cart.cartItems.find((item) => item.bookId === currentBook?.bookId)
+  );
 
   useEffect(() => {
     dispatch(getAllBooks());
   }, []);
 
-  function addToCartHandler(book: GetBook) {
-    dispatch(addToCart(book));
+  async function addToCartHandler(book: GetBook) {
+    const response = await dispatch(addToCart(book));
+    if (response.payload === "error") {
+      toast.error("Book is already in loan cart");
+    } else {
+      toast.success(`Book added to loan cart`);
+    }
   }
 
   return (
@@ -38,24 +44,25 @@ function BookList() {
                 onClick={() => addToCartHandler(book)}
                 className="bookList__add-book"
               >
-                Add to Loan Cart
+                Add to Cart
               </button>
-            ) : // !isBookInCart ? (
-            //   <button
-            //     onClick={() => addToCartHandler(book)}
-            //     className="bookList__add-book"
-            //   >
-            //     Add to Loan Cart
-            //   </button>
-            // ) : (
-            //   <button disabled className="bookList__add-book">
-            //     Already in Loan Cart
-            //   </button>
-            // )
-            null}
+            ) : null}
           </div>
         );
       })}
+
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

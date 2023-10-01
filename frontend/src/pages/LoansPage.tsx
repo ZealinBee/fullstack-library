@@ -13,8 +13,6 @@ function LoansPage() {
   let jwt_token = useAppSelector((state) => state.users.currentToken);
   const currentUser = useAppSelector((state) => state.users.currentUser);
 
-  console.log("loans", loans)
-
   useEffect(() => {
     if (currentUser?.role === "Librarian") {
       dispatch(getAllLoans(jwt_token));

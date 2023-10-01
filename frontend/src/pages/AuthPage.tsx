@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import { ToastContainer, toast } from "react-toastify";
+
 
 import SignUp from "../components/SignUp";
 import Login from "../components/Login";
@@ -10,6 +12,7 @@ function AuthPage() {
   function toggle() {
     setIsSignup((prevState) => !prevState);
   }
+
   return (
     <div>
       <Header></Header>
@@ -17,6 +20,7 @@ function AuthPage() {
         <SignUp isSignUp={isSignup} setIsSignUp={setIsSignup} toggle={toggle}></SignUp>
         <Login isSignUp={isSignup} setIsSignUp={setIsSignup} toggle={toggle}></Login>
       </div>
+
     </div>
   );
 }

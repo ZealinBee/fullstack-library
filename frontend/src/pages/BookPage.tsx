@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import Header from "../components/Header";
@@ -8,6 +10,7 @@ import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { setCurrentAuthor } from "../redux/reducers/authorsReducer";
 import { deleteBook } from "../redux/reducers/booksReducer";
 import EditBook from "../components/EditBook";
+
 
 function BookPage() {
   const currentBook = useAppSelector((state) => state.books.currentBook);
@@ -74,6 +77,18 @@ function BookPage() {
           {editMode ? <EditBook /> : null}
         </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

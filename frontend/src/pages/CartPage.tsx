@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 import Header from "../components/Header";
 import useAppSelector from "../redux/hooks/useAppSelector";
@@ -18,9 +19,9 @@ function CartPage() {
   }
 
   function loanBooksHandler() {
-    const bookIds = cartItems.map((item) => item.bookId);
-    dispatch(loanBooks({ bookIds, jwt_token }));
-    bookIds.forEach((bookId) => dispatch(removeFromCart(bookId)));
+    const books = cartItems.map((item) => item);
+    dispatch(loanBooks({ books, jwt_token }));
+    books.forEach((book) => dispatch(removeFromCart(book.bookId)));
   }
 
   return (
@@ -34,7 +35,9 @@ function CartPage() {
               <img src={item.bookImage} alt="" />
               <div className="book-details">
                 <Link to={`/books/${item.bookId}`}>
-                  <h2 onClick={() => dispatch(selectCurrentBook(item))}>{item.bookName}</h2>
+                  <h2 onClick={() => dispatch(selectCurrentBook(item))}>
+                    {item.bookName}
+                  </h2>
                 </Link>
                 <h3>{item.authorName}</h3>
               </div>
