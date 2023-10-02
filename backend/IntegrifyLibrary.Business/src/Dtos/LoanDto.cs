@@ -13,8 +13,8 @@ public class GetLoanDto
 
 public class CreateLoanDto
 {
-    public List<Guid> BookIds { get; set; }
     public DateOnly LoanDate { get; set; }
+    public List<Guid> BookIds { get; set; } = new List<Guid>();
 }
 
 public class UpdateLoanDto

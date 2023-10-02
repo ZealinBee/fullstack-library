@@ -16,4 +16,5 @@ public class BookDto
 public class GetBookDto : BookDto
 {
     public Guid BookId { get; set; }
+    public Guid AuthorId { get; set; }
 }

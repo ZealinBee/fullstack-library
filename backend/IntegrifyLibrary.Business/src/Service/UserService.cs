@@ -13,7 +13,7 @@ namespace IntegrifyLibrary.Business
             _mapper = mapper;
             _userRepo = userRepo;
         }
-        public async Task<CreateUserDto> CreateAdmin(CreateUserDto dto)
+        public async Task<GetUserDto> CreateAdmin(CreateUserDto dto)
         {
             var user = _mapper.Map<User>(dto);
             if (await _userRepo.GetOneByEmail(dto.Email) != null) throw new Exception($"User with email {dto.Email} already exists");
@@ -21,10 +21,10 @@ namespace IntegrifyLibrary.Business
             user.Password = hashedPassword;
             user.Salt = salt;
             user.Role = Role.Librarian;
-            return _mapper.Map<CreateUserDto>(await _userRepo.CreateOne(user));
+            return _mapper.Map<GetUserDto>(await _userRepo.CreateOne(user));
         }
 
-        public override async Task<CreateUserDto> CreateOne(CreateUserDto dto)
+        public override async Task<GetUserDto> CreateOne(CreateUserDto dto)
         {
             var user = _mapper.Map<User>(dto);
             if (await _userRepo.GetOneByEmail(dto.Email) != null) throw new Exception($"User with email {dto.Email} already exists");
@@ -32,7 +32,7 @@ namespace IntegrifyLibrary.Business
             user.Password = hashedPassword;
             user.Salt = salt;
             user.Role = Role.User;
-            return _mapper.Map<CreateUserDto>(await _userRepo.CreateOne(user));
+            return _mapper.Map<GetUserDto>(await _userRepo.CreateOne(user));
         }
 
         public async Task<string> MakeUserLibrarian(string userEmail)

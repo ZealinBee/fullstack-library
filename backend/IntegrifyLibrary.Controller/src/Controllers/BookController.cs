@@ -17,7 +17,7 @@ public class BookController : BaseController<Book, BookDto, GetBookDto, BookDto>
         _bookService = bookService;
     }
 
-    // [Authorize(Roles = "Librarian")]
+    [Authorize(Roles = "Librarian")]
     [HttpPost]
     [ProducesResponseType(statusCode: 201)]
     [ProducesResponseType(statusCode: 400)]

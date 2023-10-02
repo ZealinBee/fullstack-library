@@ -8,7 +8,7 @@ namespace IntegrifyLibrary.Business
     public interface IUserService : IBaseService<CreateUserDto, GetUserDto, UpdateUserDto>
     {
 
-        Task<CreateUserDto> CreateAdmin(CreateUserDto dto);
+        Task<GetUserDto> CreateAdmin(CreateUserDto dto);
         Task<string> MakeUserLibrarian(string userEmail);
         Task<UpdateUserDto> UpdateOwnProfile(Guid id, UpdateUserDto dto);
     }

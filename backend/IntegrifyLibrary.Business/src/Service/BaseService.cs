@@ -14,7 +14,7 @@ public class BaseService<T, TCreateDto, TGetDto, TUpdateDto> : IBaseService<TCre
         _mapper = mapper;
     }
 
-    public virtual async Task<TCreateDto> CreateOne(TCreateDto dto)
+    public virtual async Task<TGetDto> CreateOne(TCreateDto dto)
     {
         if (dto == null) throw new ArgumentNullException(nameof(dto));
         var properties = typeof(TCreateDto).GetProperties();
@@ -27,7 +27,7 @@ public class BaseService<T, TCreateDto, TGetDto, TUpdateDto> : IBaseService<TCre
             }
         }
         var newItem = _mapper.Map<T>(dto);
-        return _mapper.Map<TCreateDto>(await _repo.CreateOne(newItem));
+        return _mapper.Map<TGetDto>(await _repo.CreateOne(newItem));
     }
 
     public virtual async Task<TGetDto> GetOne(Guid id)
