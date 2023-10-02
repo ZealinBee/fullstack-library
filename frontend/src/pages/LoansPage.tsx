@@ -6,12 +6,14 @@ import useAppSelector from "../redux/hooks/useAppSelector";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { getAllLoans, getOwnLoans } from "../redux/reducers/loansReducer";
 import { setCurrentLoan } from "../redux/reducers/loansReducer";
+import Book from "../components/Book";
 
 function LoansPage() {
   const loans = useAppSelector((state) => state.loans.loans);
   const dispatch = useAppDispatch();
   let jwt_token = useAppSelector((state) => state.users.currentToken);
   const currentUser = useAppSelector((state) => state.users.currentUser);
+  const books = useAppSelector((state) => state.books.books);
 
   useEffect(() => {
     if (currentUser?.role === "Librarian") {
@@ -38,7 +40,23 @@ function LoansPage() {
         {loans.map((loan) => {
           return (
             <div key={loan.bookId} className="loan">
-              <Link to={`/loans/${loan.loanId}`} onClick={() => dispatch(setCurrentLoan(loan))}>
+              <div className="books-wrapper">
+                {loan.loanDetails.map((loanDetail) => {
+                  const book = books.find(
+                    (book) => book.bookId === loanDetail.bookId
+                  )!;
+                  return (
+                    <>
+                      <Book book={book}></Book>
+                    </>
+                  );
+                })}
+              </div>
+
+              <Link
+                to={`/loans/${loan.loanId}`}
+                onClick={() => dispatch(setCurrentLoan(loan))}
+              >
                 <button>View Details</button>
               </Link>
             </div>

@@ -18,10 +18,17 @@ function CartPage() {
     dispatch(removeFromCart(bookId));
   }
 
-  function loanBooksHandler() {
-    const books = cartItems.map((item) => item);
-    dispatch(loanBooks({ books, jwt_token }));
-    books.forEach((book) => dispatch(removeFromCart(book.bookId)));
+  async function loanBooksHandler() {
+    const bookIds = cartItems.map((item) => item.bookId);
+    if (bookIds.length === 0) {
+      toast.error("Cart is empty");
+      return;
+    }
+    const response = await dispatch(loanBooks({ bookIds, jwt_token }));
+    if(response.type === "cart/loanBooks/fulfilled") {
+      toast.success("Books loaned");
+      bookIds.forEach((bookId) => dispatch(removeFromCart(bookId)));
+    }
   }
 
   return (
@@ -53,6 +60,18 @@ function CartPage() {
       <button onClick={loanBooksHandler} className="loan-books-button">
         Loan books
       </button>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

@@ -18,17 +18,17 @@ const initialState: CartState = {
 export const loanBooks = createAsyncThunk(
   "cart/loanBooks",
   async ({
-    books,
+    bookIds,
     jwt_token,
   }: {
-    books: GetBook[];
+    bookIds: string[];
     jwt_token: string | null;
   }) => {
     try {
       const dateOnlyString = new Date().toISOString().slice(0, 10);
       const loanData = {
-        books: books,
         loanDate: dateOnlyString,
+        bookIds: bookIds,
       };
       const response = await axios.post(
         "http://98.71.53.99/api/v1/loans",
@@ -64,9 +64,9 @@ const cartSlice = createSlice({
         (item) => item.bookId === book.bookId
       );
       if (existingBook) {
-        state.error = "error"
+        state.error = "error";
       } else {
-        state.error = null
+        state.error = null;
         state.cartItems.push({ ...book });
       }
     },
@@ -76,7 +76,7 @@ const cartSlice = createSlice({
         (item) => item.bookId === bookToRemove
       );
       if (existingBook) {
-        state.error = null
+        state.error = null;
         state.cartItems = state.cartItems.filter(
           (item) => item.bookId !== bookToRemove
         );
