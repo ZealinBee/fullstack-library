@@ -18,7 +18,7 @@ public class BookService : BaseService<Book, BookDto, GetBookDto, BookDto>, IBoo
         _mapper = mapper;
     }
 
-    public async Task<BookDto> CreateOne(BookDto dto)
+    public async Task<GetBookDto> CreateOne(BookDto dto)
     {
         if (dto == null) throw new ArgumentNullException(nameof(dto));
 
@@ -43,8 +43,6 @@ public class BookService : BaseService<Book, BookDto, GetBookDto, BookDto>, IBoo
         newBook.AuthorId = existingAuthor.AuthorId;
         newBook.GenreId = existingGenre.GenreId;
 
-        return _mapper.Map<BookDto>(await _bookRepo.CreateOne(newBook));
+        return _mapper.Map<GetBookDto>(await _bookRepo.CreateOne(newBook));
     }
-
-
 }

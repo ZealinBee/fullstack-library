@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { createBook } from "../redux/reducers/booksReducer";
 import ICreateBook from "../interfaces/books/CreateBook";
+import useAppSelector from "../redux/hooks/useAppSelector";
 
 function CreateBook() {
   const dispatch = useAppDispatch();
@@ -18,12 +19,13 @@ function CreateBook() {
     bookImage: "",
     genreName: "",
   });
+  const token = useAppSelector((state) => state.users.currentToken);
 
   async function createBookHandler(event: React.FormEvent) {
     event.preventDefault();
-    const response = await dispatch(createBook(book));
+    const response = await dispatch(createBook({ book: book, jwt_token: token }));
     console.log(response);
-    if (response.payload !== undefined) {
+    if (response.type === "books/createBook/fulfilled") {
       setBook({
         bookName: "",
         authorName: "",
@@ -34,9 +36,11 @@ function CreateBook() {
         publishedDate: new Date().toISOString().split("T")[0],
         bookImage: "",
         genreName: "",
-      });
+      })
+      toast.success("Book created");
+    }else {
+      toast.error(`Failed to create book`)
     }
-    toast.success("Book created");
   }
 
   function formChangeHandler(

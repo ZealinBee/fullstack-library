@@ -38,7 +38,13 @@ export const getAllBooks = createAsyncThunk("books/getAllBooks", async () => {
 
 export const createBook = createAsyncThunk(
   "books/createBook",
-  async (book: CreateBook) => {
+  async ({
+    book,
+    jwt_token,
+  }: {
+    book: CreateBook;
+    jwt_token: string | null;
+  }) => {
     try {
       const response = await axios.post<GetBook>(
         "http://98.71.53.99/api/v1/books",
@@ -46,6 +52,7 @@ export const createBook = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
           },
         }
       );
@@ -105,13 +112,17 @@ export const updateBook = createAsyncThunk(
     jwt_token: string | null;
   }) => {
     try {
-      const response = await axios.patch<GetBook>(`http://98.71.53.99/api/v1/books/${bookId}`, book, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt_token}`,
-        },
-      });
-      return response.data 
+      const response = await axios.patch<GetBook>(
+        `http://98.71.53.99/api/v1/books/${bookId}`,
+        book,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
+      return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const responseData = error.response?.data;
@@ -154,7 +165,7 @@ const booksSlice = createSlice({
             return updatedBook;
           }
           return book;
-        })
+        });
         state.loading = false;
         state.error = null;
       })
@@ -162,7 +173,7 @@ const booksSlice = createSlice({
         state.books.push(action.payload);
         state.loading = false;
         state.error = null;
-      })
+      });
   },
 });
 
