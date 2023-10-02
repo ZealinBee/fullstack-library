@@ -40,7 +40,7 @@ export const createBook = createAsyncThunk(
   "books/createBook",
   async (book: CreateBook) => {
     try {
-      const response = await axios.post<CreateBook>(
+      const response = await axios.post<GetBook>(
         "http://98.71.53.99/api/v1/books",
         book,
         {
@@ -105,7 +105,7 @@ export const updateBook = createAsyncThunk(
     jwt_token: string | null;
   }) => {
     try {
-      const response = await axios.patch<CreateBook>(`http://98.71.53.99/api/v1/books/${bookId}`, book, {
+      const response = await axios.patch<GetBook>(`http://98.71.53.99/api/v1/books/${bookId}`, book, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${jwt_token}`,
@@ -148,7 +148,20 @@ const booksSlice = createSlice({
         state.error = null;
       })
       .addCase(updateBook.fulfilled, (state, action) => {
-        console.log(action.payload)
+        const updatedBook = action.payload;
+        state.books = state.books.map((book) => {
+          if (book.bookId === updatedBook.bookId) {
+            return updatedBook;
+          }
+          return book;
+        })
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(createBook.fulfilled, (state, action) => {
+        state.books.push(action.payload);
+        state.loading = false;
+        state.error = null;
       })
   },
 });

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect} from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import Header from "../components/Header";
@@ -13,11 +13,19 @@ function AuthorPage() {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.users.currentUser);
   const token = useAppSelector((state) => state.users.currentToken);
+  const navigate = useNavigate();
 
   function deleteAuthorHandler(authorId: string | undefined) {
     if (!authorId || !token) return;
     dispatch(deleteAuthor({ authorId: authorId, jwt_token: token }));
   }
+
+  useEffect(() => {
+    if (currentAuthor === null) {
+      navigate("/")
+    }
+  }, [])
+
 
   return (
     <div>

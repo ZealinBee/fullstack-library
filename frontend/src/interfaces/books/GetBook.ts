@@ -3,7 +3,7 @@ export default interface GetBook {
     bookName: string;
     authorName: string;
     description: string;
-    ISBN: string;
+    isbn: string;
     quantity: number;
     pageCount: number;
     publishedDate: string;

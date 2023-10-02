@@ -1,16 +1,22 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import { updateBook } from "../redux/reducers/booksReducer";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 
-function EditBook() {
+interface EditBookProps {
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  
+}
+
+function EditBook({ setEditMode }: EditBookProps) {
   const currentBook = useAppSelector((state) => state.books.currentBook)!;
   const [book, setBook] = useState({
     bookName: currentBook.bookName,
     authorName: currentBook.authorName,
     description: currentBook.description,
-    ISBN: currentBook.ISBN,
+    isbn: currentBook.isbn,
     quantity: currentBook.quantity,
     pageCount: currentBook.pageCount,
     publishedDate: currentBook.publishedDate,
@@ -33,11 +39,15 @@ function EditBook() {
     });
   }
 
-  function submitFormHandler(event: React.FormEvent) {
+  async function submitFormHandler(event: React.FormEvent) {
     event.preventDefault();
-    dispatch(
+    const response = await dispatch(
       updateBook({ bookId: currentBook?.bookId, book: book, jwt_token: token })
     );
+    if (response.type === "books/updateBook/fulfilled") {
+      toast.success("Book updated, changes will be seen later");
+      setEditMode(false);
+    }
   }
 
   return (
@@ -72,14 +82,14 @@ function EditBook() {
           placeholder="Description"
           id="description"
         />
-        <label htmlFor="isbn">ISBN</label>
+        <label htmlFor="isbn">isbn</label>
         <input
           type="text"
           onChange={formChangeHandler}
-          name="ISBN"
-          value={book.ISBN}
+          name="isbn"
+          value={book.isbn}
           required
-          placeholder="ISBN"
+          placeholder="isbn"
           id="isbn"
         />
         <label htmlFor="quantity">Quantity in Library</label>

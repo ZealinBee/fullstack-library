@@ -1,7 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import Header from "../components/Header";
@@ -10,10 +9,10 @@ import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { setCurrentAuthor } from "../redux/reducers/authorsReducer";
 import { deleteBook } from "../redux/reducers/booksReducer";
 import EditBook from "../components/EditBook";
-
+import { selectCurrentBook } from "../redux/reducers/booksReducer";
 
 function BookPage() {
-  const currentBook = useAppSelector((state) => state.books.currentBook);
+  let currentBook = useAppSelector((state) => state.books.currentBook);
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.users.currentUser);
   let token = useAppSelector((state) => state.users.currentToken);
@@ -21,7 +20,8 @@ function BookPage() {
     state.cart.cartItems.find((item) => item.bookId === currentBook?.bookId)
   );
   const [editMode, setEditMode] = React.useState(false);
-
+  const navigate = useNavigate();
+  
   function addToCartHandler() {
     dispatch(addToCart(currentBook));
   }
@@ -30,6 +30,12 @@ function BookPage() {
     if (!bookId) return;
     dispatch(deleteBook({ bookId: bookId, jwt_token: token }));
   }
+
+  useEffect(() => {
+    if (currentBook === null) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <>
@@ -54,7 +60,7 @@ function BookPage() {
           <p className="book-page__book-description">
             {currentBook?.description}
           </p>
-          <p>ISBN: {currentBook?.ISBN}</p>
+          <p>isbn: {currentBook?.isbn}</p>
           <p>
             {currentBook?.pageCount} pages, first published on{" "}
             {currentBook?.publishedDate}
@@ -74,7 +80,7 @@ function BookPage() {
               </button>
             </>
           ) : null}
-          {editMode ? <EditBook /> : null}
+          {editMode ? <EditBook setEditMode={setEditMode} /> : null}
         </div>
       </div>
       <ToastContainer

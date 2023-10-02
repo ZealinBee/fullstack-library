@@ -22,7 +22,7 @@ function BookList() {
 
   useEffect(() => {
     dispatch(getAllBooks());
-  }, []);
+  }, [dispatch]);
 
   async function addToCartHandler(book: GetBook) {
     const response = await dispatch(addToCart(book));
