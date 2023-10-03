@@ -9,6 +9,7 @@ interface BooksState {
   loading: boolean;
   error: AxiosError | null;
   currentBook: GetBook | null;
+  originalBooks: GetBook[];
 }
 
 const initialState: BooksState = {
@@ -16,6 +17,7 @@ const initialState: BooksState = {
   loading: false,
   error: null,
   currentBook: null,
+  originalBooks: [],
 };
 
 export const getAllBooks = createAsyncThunk("books/getAllBooks", async () => {
@@ -143,11 +145,26 @@ const booksSlice = createSlice({
     selectCurrentBook: (state, action) => {
       state.currentBook = action.payload;
     },
+    searchBooks: (state, action) => {
+      const searchValue = action.payload.toLowerCase();
+      if (searchValue !== "") {
+        state.books = state.originalBooks;
+        state.books = state.books.filter(
+          (book) =>
+            book.bookName.toLowerCase().includes(searchValue) ||
+            book.authorName.toLowerCase().includes(searchValue) ||
+            book.genreName.toLowerCase().includes(searchValue)
+        );
+      }else {
+        state.books = state.originalBooks;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getAllBooks.fulfilled, (state, action) => {
         state.books = action.payload;
+        state.originalBooks = action.payload;
         state.loading = false;
         state.error = null;
       })
@@ -177,5 +194,5 @@ const booksSlice = createSlice({
   },
 });
 
-export const { selectCurrentBook } = booksSlice.actions;
+export const { selectCurrentBook, searchBooks } = booksSlice.actions;
 export default booksSlice.reducer;

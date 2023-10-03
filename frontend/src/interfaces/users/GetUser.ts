@@ -4,4 +4,5 @@ export default interface GetUser {
     lastName: string;
     email: string;
     role: "Librarian" | "User";
+    userImage: string;
 }

@@ -38,8 +38,8 @@ function ProfilePage() {
       <div className="profile-page">
         <div className="img-wrapper">
           <img
-            src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
-            alt=""
+            src={user?.userImage}
+            alt="profile-pic"
           />
         </div>
         <div className="profile-details">

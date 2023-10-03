@@ -1,0 +1,35 @@
+@import "../variables.scss";
+
+.search {
+  margin-left: $margin-left;
+  padding-top: 0.5rem;
+  display:flex;
+  .search-box {
+    display: flex;
+    width: 35%;
+    align-items: center;
+    background-color: rgba(242, 235, 235, 0.381);
+    input {
+      background-color: rgba(242, 235, 235, 0.381);
+      padding: 0.6rem 1rem;
+      width: 90%;
+      border: none;
+      border-radius: 0.2rem;
+      color: rgba(0, 0, 0, 0.831);
+      position: relative;
+    }
+    .magnifying-glass {
+        margin-left:1rem;
+        margin-right:0.5rem;
+        cursor:pointer;
+        margin-bottom:0.1rem;
+    }
+  }
+}
+
+.reset-button {
+    margin:0;
+    margin-left:1rem;
+    font-size:0.8rem;
+    padding:0.25rem 1.25rem;
+}

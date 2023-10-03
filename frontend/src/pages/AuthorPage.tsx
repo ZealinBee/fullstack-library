@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import useAppSelector from "../redux/hooks/useAppSelector";
@@ -22,10 +22,9 @@ function AuthorPage() {
 
   useEffect(() => {
     if (currentAuthor === null) {
-      navigate("/")
+      navigate("/");
     }
-  }, [])
-
+  }, []);
 
   return (
     <div>
@@ -47,9 +46,11 @@ function AuthorPage() {
         </div>
         <div className="author-page__books-wrapper">
           <h3>{currentAuthor?.authorName}'s books</h3>
-          {currentAuthor?.books.map((book) => {
-            return <Book book={book}></Book>;
-          })}
+          <div className="books-wrapper">
+            {currentAuthor?.books.map((book) => {
+              return <Book book={book}></Book>;
+            })}
+          </div>
         </div>
       </div>
     </div>

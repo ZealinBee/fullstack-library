@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk, isFulfilled } from "@reduxjs/toolkit";
 import CreateUser from "../../interfaces/users/CreateUser";
 import LoginUser from "../../interfaces/users/LoginUser";
 import GetUser from "../../interfaces/users/GetUser";
-import { createNew } from "typescript";
+import UpdateUser from "../../interfaces/users/UpdateUser";
 
 interface UsersState {
   users: GetUser[];
@@ -109,6 +109,42 @@ export const getUserProfile = createAsyncThunk(
     try {
       const response = await axios.get<GetUser>(
         "http://98.71.53.99/api/v1/users/profile",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "users/updateUser",
+  async ({
+    userId,
+    user,
+    jwt_token,
+  }: {
+    userId: string;
+    user: UpdateUser;
+    jwt_token: string | null;
+  }) => {
+    try {
+      const response = await axios.patch<GetUser>(
+        `http://98.71.53.99/api/v1/users/${userId}`,
+        user,
         {
           headers: {
             "Content-Type": "application/json",
@@ -253,6 +289,12 @@ const usersSlice = createSlice({
         };
       })
       .addCase(getUserProfile.fulfilled, (state, action) => {
+        return {
+          ...state,
+          currentUser: action.payload,
+        };
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
         return {
           ...state,
           currentUser: action.payload,

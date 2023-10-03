@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 
 import Header from "../components/Header";
 import BookList from "../components/BookList";
+import Search from "../components/Search";
 
 function Homepage() {
   return (
     <>
+    
       <Header />
-      <h1 className="top">Discover (MORE STYLING AND FEATURE COMING SOON)</h1>
+      <Search></Search>
+
+      <h1 className="top">Discover (RESPONSIVE COMING SOON)</h1>
       <BookList />
+
     </>
   );
 }
