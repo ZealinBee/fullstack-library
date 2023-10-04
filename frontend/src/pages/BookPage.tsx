@@ -42,7 +42,7 @@ function BookPage() {
       <Header />
       <div className="book-page">
         <div className="book-page__img-wrapper">
-          <img src={currentBook?.bookImage} alt="image for a book" />
+          <img src={currentBook?.bookImage} alt="book" />
           {currentUser?.role === "User" &&
             (!isBookInCart ? (
               <button onClick={addToCartHandler}>Add To Loan Cart</button>

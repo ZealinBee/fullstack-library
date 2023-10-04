@@ -15,7 +15,7 @@ function Header() {
   const currentUser = useAppSelector((state) => state.users.currentUser);
   return (
       <nav className="header">
-        <h1>INTEGRIFY LIB</h1>
+        <h1><span className="accent">I</span>NTEGR<span className="accent">I</span>FY L<span className="accent">I</span>B</h1>
         <ul>
           <li>
             <NavLink

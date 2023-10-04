@@ -152,6 +152,7 @@ export const updateUser = createAsyncThunk(
           },
         }
       );
+      console.log(response.data)
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -295,9 +296,10 @@ const usersSlice = createSlice({
         };
       })
       .addCase(updateUser.fulfilled, (state, action) => {
+        console.log(action.payload)
         return {
           ...state,
-          currentUser: action.payload,
+          currentUser: action.payload
         };
       })
       .addCase(deleteProfile.fulfilled, (state, action) => {

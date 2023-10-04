@@ -10,12 +10,11 @@ interface EditUserProps {
   
 }
 
-function EditBook({ setEditMode }: EditUserProps) {
+function EditUser({ setEditMode }: EditUserProps) {
   const currentUser = useAppSelector((state) => state.users.currentUser)!;
   const [user, setUser] = useState({
     firstName: currentUser.firstName,
     lastName: currentUser.lastName,
-    password: "xxxxxx",
     userImage: currentUser.userImage,
   });
   const token = useAppSelector((state) => state.users.currentToken);
@@ -40,47 +39,43 @@ function EditBook({ setEditMode }: EditUserProps) {
       updateUser({ userId: currentUser?.userId, user: user, jwt_token: token })
     );
     if (response.type === "users/updateUser/fulfilled") {
-      toast.success("User updated, changes will be seen later");
+      toast.success("User updated");
       setEditMode(false);
     }
   }
 
   return (
     <div>
-      <form className="form edit-book-form" onSubmit={submitFormHandler}>
-        <label htmlFor="book-name">First Name</label>
+      <form className="form edit-user-form" onSubmit={submitFormHandler}>
+        <label htmlFor="first-name">First Name</label>
         <input
           type="text"
           onChange={formChangeHandler}
           name="firstName"
           value={user.firstName}
+          id="first-name"
         />
-        <label htmlFor="book-name">Last Name</label>
+        <label htmlFor="last-name">Last Name</label>
         <input
           type="text"
           onChange={formChangeHandler}
           name="lastName"
           value={user.lastName}
+          id="last-name"
         />
-        <label htmlFor="book-name">Password</label>
-        <input
-          type="password"
-          onChange={formChangeHandler}
-          name="password"
-          value={user.password}
-        />
-        <label htmlFor="book-name">User Image</label>
+        <label htmlFor="user-image">User Image</label>
         <input
           type="text"
           onChange={formChangeHandler}
           name="userImage"
           value={user.userImage}
+          id="user-image"
         />
         <button type="submit">Update</button>
-        <ToastContainer />
       </form>
+
     </div>
   );
 }
 
-export default EditBook;
+export default EditUser;

@@ -45,7 +45,7 @@ function EditBook({ setEditMode }: EditBookProps) {
       updateBook({ bookId: currentBook?.bookId, book: book, jwt_token: token })
     );
     if (response.type === "books/updateBook/fulfilled") {
-      toast.success("Book updated, changes will be seen later");
+      toast.success("Book updated!");
       setEditMode(false);
     }
   }

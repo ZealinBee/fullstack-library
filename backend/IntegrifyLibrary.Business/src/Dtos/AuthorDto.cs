@@ -19,7 +19,6 @@ public class GetAuthorDto
 
 public class UpdateAuthorDto
 {
-    public List<Book>? Books { get; set; }
     public string AuthorName { get; set; } = string.Empty;
     public string AuthorImage { get; set; } = string.Empty;
 }

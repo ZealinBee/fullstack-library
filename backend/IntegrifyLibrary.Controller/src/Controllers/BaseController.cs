@@ -58,7 +58,8 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [ProducesResponseType(statusCode: 404)]
     public virtual async Task<ActionResult<TGetDto>> UpdateOne([FromRoute] Guid id, [FromBody] TUpdateDto dto)
     {
-        var item = await _service.UpdateOne(id, dto);
+        await _service.UpdateOne(id, dto);
+        var item = await _service.GetOne(id);
         if (item == null)
         {
             return NotFound();

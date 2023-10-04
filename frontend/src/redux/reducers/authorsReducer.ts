@@ -41,6 +41,42 @@ export const getAllAuthors = createAsyncThunk(
   }
 );
 
+export const updateAuthor = createAsyncThunk(
+  "authors/updateAuthor",
+  async({
+    authorId,
+    author,
+    jwt_token,
+  }: {
+    authorId: string;
+    author: UpdateAuthor;
+    jwt_token: string | null;
+  }) => {
+    try {
+      const response = await axios.put<GetAuthor>(
+        `http://98.71.53.99/api/v1/books/${authorId}`,
+        author,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      )
+      return response.data;
+    }catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+)
+
 export const deleteAuthor = createAsyncThunk(
   "authors/deleteAuthor",
   async ({
@@ -88,6 +124,18 @@ const authorsSlice = createSlice({
       state.authors = state.authors.filter(
         (author) => author.authorId !== action.payload
       );
+      state.loading = false;
+      state.error = null;
+    })
+    .addCase(updateAuthor.fulfilled, (state, action) => {
+      state.currentAuthor = action.payload;
+      state.authors = state.authors.map((author) => {
+        if (author.authorId === action.payload.authorId) {
+          return action.payload;
+        } else {
+          return author;
+        }
+      });
       state.loading = false;
       state.error = null;
     })

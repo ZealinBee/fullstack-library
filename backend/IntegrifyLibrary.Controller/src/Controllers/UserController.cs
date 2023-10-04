@@ -122,10 +122,11 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
     [HttpPatch("profile")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 404)]
-    public async Task<ActionResult<UpdateUserDto>> ChangeOwnProfile([FromBody] UpdateUserDto dto)
+    public async Task<ActionResult<GetUserDto>> ChangeOwnProfile([FromBody] UpdateUserDto dto)
     {
         var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-        var updateItem = await _userService.UpdateOwnProfile(userId, dto);
-        return Ok(updateItem);
+        await _userService.UpdateOwnProfile(userId, dto);
+        var userProfile = await _userService.GetOne(userId);
+        return Ok(userProfile);
     }
 }

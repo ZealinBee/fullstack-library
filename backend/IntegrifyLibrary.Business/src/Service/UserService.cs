@@ -44,14 +44,14 @@ namespace IntegrifyLibrary.Business
             return user.Email;
         }
 
-        public async Task<UpdateUserDto> UpdateOwnProfile(Guid id, UpdateUserDto dto)
+        public async Task<GetUserDto> UpdateOwnProfile(Guid id, UpdateUserDto dto)
         {
             var user = await _userRepo.GetOne(id);
             var updatedUser = _mapper.Map(dto, user);
-            PasswordService.HashPassword(dto.Password, out var hashedPassword, out var salt);
-            updatedUser.Password = hashedPassword;
-            updatedUser.Salt = salt;
-            return _mapper.Map<UpdateUserDto>(await _userRepo.UpdateOne(updatedUser));
+            // PasswordService.HashPassword(dto.Password, out var hashedPassword, out var salt);
+            // updatedUser.Password = hashedPassword;
+            // updatedUser.Salt = salt;
+            return _mapper.Map<GetUserDto>(await _userRepo.UpdateOne(updatedUser));
         }
     }
 }

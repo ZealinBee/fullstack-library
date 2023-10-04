@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 
 import GetBook from "../../interfaces/books/GetBook";
 import CreateBook from "../../interfaces/books/CreateBook";
@@ -177,6 +177,7 @@ const booksSlice = createSlice({
       })
       .addCase(updateBook.fulfilled, (state, action) => {
         const updatedBook = action.payload;
+        state.currentBook = updatedBook;
         state.books = state.books.map((book) => {
           if (book.bookId === updatedBook.bookId) {
             return updatedBook;
