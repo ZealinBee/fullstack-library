@@ -2,8 +2,8 @@ import axios, { AxiosError } from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import GetAuthor from "../../interfaces/authors/GetAuthor";
-import { create } from "domain";
 import { deleteBook } from "./booksReducer";
+import UpdateAuthor from "../../interfaces/authors/UpdateAuthor";
 
 interface AuthorsState {
   authors: GetAuthor[];
@@ -53,8 +53,8 @@ export const updateAuthor = createAsyncThunk(
     jwt_token: string | null;
   }) => {
     try {
-      const response = await axios.put<GetAuthor>(
-        `http://98.71.53.99/api/v1/books/${authorId}`,
+      const response = await axios.patch<GetAuthor>(
+        `http://98.71.53.99/api/v1/authors/${authorId}`,
         author,
         {
           headers: {
@@ -63,6 +63,7 @@ export const updateAuthor = createAsyncThunk(
           },
         }
       )
+      console.log(response.data)
       return response.data;
     }catch (error) {
       if (axios.isAxiosError(error)) {

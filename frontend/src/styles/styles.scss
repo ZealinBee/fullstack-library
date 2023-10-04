@@ -5,7 +5,7 @@
 @use "./components/create-book";
 @use "./components/user-list";
 @use "./components/book";
-@use "./components/edit-book";
+@use "./components/edit";
 @use "./components/search";
 
 @use "./pages/auth.scss";
@@ -78,4 +78,8 @@ textarea {
 
 .accent {
   color:$secondary;
+}
+
+.flex {
+  display:flex;
 }

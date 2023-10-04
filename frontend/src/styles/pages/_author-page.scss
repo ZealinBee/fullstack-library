@@ -3,8 +3,7 @@
 .author-page {
   margin-left: $margin-left;
   padding-top: 1.5rem;
-  display:flex;
-
+  display: flex;
   .img-wrapper {
     width: 200px;
     display: flex;
@@ -12,23 +11,29 @@
     align-items: center;
     img {
       width: 200px;
+      height: 200px;
       border-radius: 50%;
+      object-fit: cover;
     }
     h2 {
       margin-top: 0.5rem;
     }
   }
+  button {
+    width: 100px;
+    margin: 0.2rem;
+  }
 }
 
 .author-page__books-wrapper {
-  margin-left:5rem;
+  margin-left: 5rem;
 }
 
 .author-page__book {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   img {
-    width:150px;
+    width: 150px;
   }
 }

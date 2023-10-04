@@ -17,7 +17,7 @@ function ProfilePage() {
   const dispatch = useAppDispatch();
   let token = useAppSelector((state) => state.users.currentToken);
   const navigate = useNavigate();
-  const [editMode, setEditMode] = React.useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     if (user === null) {

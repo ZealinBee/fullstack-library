@@ -1,5 +1,5 @@
 export default interface UpdateAuthor{
-    authorId: string;
+    authorName: string;
     authorImage: string;
 
 }
