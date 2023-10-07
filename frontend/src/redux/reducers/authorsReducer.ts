@@ -24,7 +24,7 @@ export const getAllAuthors = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get<GetAuthor[]>(
-        "http://98.71.53.99/api/v1/authors"
+        "https://integrify-library.azurewebsites.net/api/v1/authors"
       );
       console.log(response.data)
       return response.data;
@@ -54,7 +54,7 @@ export const updateAuthor = createAsyncThunk(
   }) => {
     try {
       const response = await axios.patch<GetAuthor>(
-        `http://98.71.53.99/api/v1/authors/${authorId}`,
+        `https://integrify-library.azurewebsites.net/api/v1/authors/${authorId}`,
         author,
         {
           headers: {
@@ -88,7 +88,7 @@ export const deleteAuthor = createAsyncThunk(
     jwt_token: string | null;
   }) => {
     try {
-      await axios.delete(`http://98.71.53.99/api/v1/authors/${authorId}`, {
+      await axios.delete(`https://integrify-library.azurewebsites.net/api/v1/authors/${authorId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${jwt_token}`,

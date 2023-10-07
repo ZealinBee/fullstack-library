@@ -23,7 +23,7 @@ const initialState: BooksState = {
 export const getAllBooks = createAsyncThunk("books/getAllBooks", async () => {
   try {
     const response = await axios.get<GetBook[]>(
-      "http://98.71.53.99/api/v1/books"
+      "https://integrify-library.azurewebsites.net/api/v1/books"
     );
     return response.data;
   } catch (error) {
@@ -49,7 +49,7 @@ export const createBook = createAsyncThunk(
   }) => {
     try {
       const response = await axios.post<GetBook>(
-        "http://98.71.53.99/api/v1/books",
+        "https://integrify-library.azurewebsites.net/api/v1/books",
         book,
         {
           headers: {
@@ -82,7 +82,7 @@ export const deleteBook = createAsyncThunk(
     jwt_token: string | null;
   }) => {
     try {
-      await axios.delete<GetBook>(`http://98.71.53.99/api/v1/books/${bookId}`, {
+      await axios.delete<GetBook>(`https://integrify-library.azurewebsites.net/api/v1/books/${bookId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${jwt_token}`,
@@ -115,7 +115,7 @@ export const updateBook = createAsyncThunk(
   }) => {
     try {
       const response = await axios.patch<GetBook>(
-        `http://98.71.53.99/api/v1/books/${bookId}`,
+        `https://integrify-library.azurewebsites.net/api/v1/books/${bookId}`,
         book,
         {
           headers: {

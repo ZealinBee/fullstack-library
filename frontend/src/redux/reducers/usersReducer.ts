@@ -28,7 +28,7 @@ export const createNewUser = createAsyncThunk(
   "users/createNewUser",
   async (user: CreateUser) => {
     try {
-      const result = await axios.post("http://98.71.53.99/api/v1/users", user, {
+      const result = await axios.post("https://integrify-library.azurewebsites.net/api/v1/users", user, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -52,7 +52,7 @@ export const loginUser = createAsyncThunk(
   async (user: LoginUser, { dispatch }) => {
     try {
       const response = await axios.post<string>(
-        "http://98.71.53.99/api/v1/auth",
+        "https://integrify-library.azurewebsites.net/api/v1/auth",
         user,
         {
           headers: {
@@ -80,7 +80,7 @@ export const getAllUsers = createAsyncThunk(
   async (jwt_token: string | null) => {
     try {
       const response = await axios.get<GetUser[]>(
-        "http://98.71.53.99/api/v1/users",
+        "https://integrify-library.azurewebsites.net/api/v1/users",
         {
           headers: {
             "Content-Type": "application/json",
@@ -108,7 +108,7 @@ export const getUserProfile = createAsyncThunk(
   async (jwt_token: string | null) => {
     try {
       const response = await axios.get<GetUser>(
-        "http://98.71.53.99/api/v1/users/profile",
+        "https://integrify-library.azurewebsites.net/api/v1/users/profile",
         {
           headers: {
             "Content-Type": "application/json",
@@ -143,7 +143,7 @@ export const updateUser = createAsyncThunk(
   }) => {
     try {
       const response = await axios.patch<GetUser>(
-        `http://98.71.53.99/api/v1/users/${userId}`,
+        `https://integrify-library.azurewebsites.net/api/v1/users/${userId}`,
         user,
         {
           headers: {
@@ -177,7 +177,7 @@ export const deleteUser = createAsyncThunk(
     jwt_token: string | null;
   }) => {
     try {
-      await axios.delete(`http://98.71.53.99/api/v1/users/${userId}`, {
+      await axios.delete(`https://integrify-library.azurewebsites.net/api/v1/users/${userId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${jwt_token}`,
@@ -202,7 +202,7 @@ export const deleteProfile = createAsyncThunk(
   async (jwt_token: string | null) => {
     try {
       const response = await axios.delete(
-        `http://98.71.53.99/api/v1/users/profile`,
+        `https://integrify-library.azurewebsites.net/api/v1/users/profile`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -235,7 +235,7 @@ export const makeUserLibrarian = createAsyncThunk(
   }) => {
     try {
       const response = await axios.patch(
-        `http://98.71.53.99/api/v1/users/make-user-librarian`,
+        `https://integrify-library.azurewebsites.net/api/v1/users/make-user-librarian`,
         userEmail,
         {
           headers: {

@@ -23,7 +23,7 @@ export const getAllGenres = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get<GetGenre[]>(
-        "http://98.71.53.99/api/v1/Genres"
+        "https://integrify-library.azurewebsites.net/api/v1/genres"
       );
       return response.data;
     } catch (error) {
