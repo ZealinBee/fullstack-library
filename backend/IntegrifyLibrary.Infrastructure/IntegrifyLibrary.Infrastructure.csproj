@@ -27,8 +27,5 @@
     <ProjectReference Include="..\IntegrifyLibrary.Controller\IntegrifyLibrary.Controller.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-   <None Include="appsettings.Production.json" CopyToPublishDirectory="Always" />
-</ItemGroup>
 
 </Project>
