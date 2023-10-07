@@ -9,6 +9,8 @@ import GetBook from "../interfaces/books/GetBook";
 import { deleteBook, selectCurrentBook } from "../redux/reducers/booksReducer";
 import { addToCart } from "../redux/reducers/cartReducer";
 import Book from "./Book";
+import { BeatLoader } from "react-spinners";
+import Footer from "./Footer";
 
 function BookList() {
   const dispatch = useAppDispatch();
@@ -34,36 +36,45 @@ function BookList() {
   }
 
   return (
-    <div className="bookList">
-      {books.map((book: GetBook) => {
-        return (
-          <div key={book.bookId} className="bookList__book">
-            <Book book={book}></Book>
-            {currentUser?.role === "User" ? (
-              <button
-                onClick={() => addToCartHandler(book)}
-                className="bookList__add-book"
-              >
-                Add to Cart
-              </button>
-            ) : null}
-          </div>
-        );
-      })}
+    <>
+      {books.length === 0 ? (
+        <div className="loader">
+          <BeatLoader color="#6b58e3" />
+        </div>
+      ) : (
+        <div className="bookList">
+          {books.map((book: GetBook) => {
+            return (
+              <div key={book.bookId} className="bookList__book">
+                <Book book={book}></Book>
+                {currentUser?.role === "User" ? (
+                  <button
+                    onClick={() => addToCartHandler(book)}
+                    className="bookList__add-book"
+                  >
+                    Add to Cart
+                  </button>
+                ) : null}
+              </div>
+            );
+          })}
 
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-    </div>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          <Footer></Footer>
+        </div>
+      )}
+    </>
   );
 }
 

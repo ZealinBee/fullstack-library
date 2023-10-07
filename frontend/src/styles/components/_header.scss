@@ -12,6 +12,7 @@
 }
 
 .header {
+  margin-top:5rem;
   padding-left: 2rem;
   width: 250px;
   min-height: 100vh;
@@ -57,6 +58,7 @@
 .horizontal-bar {
   display:flex;
   align-items: center;
+  position:fixed;
   @media(max-width: $mobile-port) {
     flex-direction: column;
   }

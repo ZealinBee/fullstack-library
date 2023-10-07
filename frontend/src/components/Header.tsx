@@ -23,7 +23,6 @@ function Header() {
           <span className="accent">I</span>
           FY L<span className="accent">I</span>B
         </h1>
-        <Search></Search>
       </div>
 
       <nav className="header">
