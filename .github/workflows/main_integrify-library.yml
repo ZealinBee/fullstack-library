@@ -12,14 +12,16 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
+    defaults:
+      run:
+        working-directory: ./backend/IntegrifyLibrary.Infrastructure
     steps:
       - uses: actions/checkout@v2
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '7.x'
+          dotnet-version: "7.x"
           include-prerelease: true
 
       - name: Build with dotnet
@@ -38,7 +40,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -51,7 +53,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'integrify-library'
-          slot-name: 'Production'
+          app-name: "integrify-library"
+          slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CCBB8D4C9DBF419A8B0CCE9E5390B5B1 }}
           package: .
