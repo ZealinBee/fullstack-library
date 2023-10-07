@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
@@ -10,12 +10,23 @@ import PaymentsIcon from "@mui/icons-material/Payments";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 
 import useAppSelector from "../redux/hooks/useAppSelector";
+import Search from "./Search";
 
 function Header() {
   const currentUser = useAppSelector((state) => state.users.currentUser);
+  const [showMenu, setShowMenu] = useState(false);
   return (
+    <>
+      <div className="horizontal-bar">
+        <h1 className="logo" onClick={() => setShowMenu(!showMenu)}>
+          <span className="accent">I</span>NTEGR
+          <span className="accent">I</span>
+          FY L<span className="accent">I</span>B
+        </h1>
+        <Search></Search>
+      </div>
+
       <nav className="header">
-        <h1><span className="accent">I</span>NTEGR<span className="accent">I</span>FY L<span className="accent">I</span>B</h1>
         <ul>
           <li>
             <NavLink
@@ -39,7 +50,7 @@ function Header() {
               <p> Authors </p>
             </NavLink>
           </li>
-          <li >
+          <li>
             <NavLink
               to={"/genres"}
               className={({ isActive }) => (isActive ? "active-link" : "")}
@@ -119,6 +130,7 @@ function Header() {
           ) : null}
         </ul>
       </nav>
+    </>
   );
 }
 

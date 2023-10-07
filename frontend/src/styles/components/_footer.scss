@@ -1,0 +1,19 @@
+@import "../variables.scss";
+
+footer {
+    display:flex;
+    background-color: $primary-desaturated;
+    justify-content: center;
+    align-items: center;
+    margin-top:2rem;
+    p {
+        margin:0.5rem 3rem;
+    }
+
+    a{
+        text-decoration:underline;
+        &:hover {
+            color:white;
+        }
+    }
+}

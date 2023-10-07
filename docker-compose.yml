@@ -1,0 +1,19 @@
+services: 
+  backend: 
+    container_name: 'integrify-library-backend'
+    image: 'integrify-library/backend'
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile 
+    ports: 
+      - 5000:80
+  frontend:
+    container_name: 'integrify-library-frontend'
+    image: 'integrify-library/frontend'
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile 
+    ports: 
+      - 3000:3000
+    command: npm start
+

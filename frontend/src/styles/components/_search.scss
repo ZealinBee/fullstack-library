@@ -6,11 +6,11 @@
   display:flex;
   .search-box {
     display: flex;
-    width: 35%;
+    width: 320px;
     align-items: center;
     background-color: rgba(242, 235, 235, 0.381);
     input {
-      background-color: rgba(242, 235, 235, 0.381);
+      background-color: rgba(242, 235, 235, 0);
       padding: 0.6rem 1rem;
       width: 90%;
       border: none;

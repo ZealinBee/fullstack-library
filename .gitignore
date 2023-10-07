@@ -111,3 +111,5 @@ frontend/package-*.json
 
 deployment/
 test.js
+
+out/

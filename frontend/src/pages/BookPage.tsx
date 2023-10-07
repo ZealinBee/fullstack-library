@@ -10,6 +10,7 @@ import { setCurrentAuthor } from "../redux/reducers/authorsReducer";
 import { deleteBook } from "../redux/reducers/booksReducer";
 import EditBook from "../components/EditBook";
 import { selectCurrentBook } from "../redux/reducers/booksReducer";
+import Footer from "../components/Footer";
 
 function BookPage() {
   let currentBook = useAppSelector((state) => state.books.currentBook);

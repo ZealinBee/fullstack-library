@@ -1,9 +1,14 @@
+@import "../variables.scss";
+
 .book {
   img {
     border: 1px black solid;
-    max-width: 160px;
+    max-width: $book-size;
     aspect-ratio: 2/3;
     object-fit: cover;
+    @media (max-width: 768px) {
+      max-width: $book-size-mobile;
+    }
   }
 }
 

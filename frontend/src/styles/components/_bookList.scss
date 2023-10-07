@@ -5,6 +5,11 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap:1rem;
+  @media(max-width: 768px) {
+    margin-left:$margin-left-mobile;
+    grid-template-columns: repeat(3, 1fr);
+    gap:0.5rem;
+  }
 }
 
 .bookList__book {
