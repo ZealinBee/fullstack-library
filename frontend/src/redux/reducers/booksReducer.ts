@@ -10,6 +10,7 @@ interface BooksState {
   error: AxiosError | null;
   currentBook: GetBook | null;
   originalBooks: GetBook[];
+  hasFetched: boolean;
 }
 
 const initialState: BooksState = {
@@ -18,6 +19,7 @@ const initialState: BooksState = {
   error: null,
   currentBook: null,
   originalBooks: [],
+  hasFetched: false,
 };
 
 export const getAllBooks = createAsyncThunk("books/getAllBooks", async () => {
@@ -167,6 +169,7 @@ const booksSlice = createSlice({
         state.originalBooks = action.payload;
         state.loading = false;
         state.error = null;
+        state.hasFetched = true;
       })
       .addCase(deleteBook.fulfilled, (state, action) => {
         state.books = state.books.filter(

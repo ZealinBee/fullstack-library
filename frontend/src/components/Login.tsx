@@ -27,7 +27,9 @@ function Login({
     const response = await dispatch(loginUser(user));
     if (response.meta.requestStatus === "fulfilled") {
       toast.success("Logged in");
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 500);
     }else {
       toast.error("Invalid credentials");
     }

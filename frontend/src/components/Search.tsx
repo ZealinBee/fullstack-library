@@ -11,11 +11,10 @@ function Search() {
   const [search, setSearch] = useState("");
   const [reset, setReset] = useState(false);
   const navigate = useNavigate();
-  
+
   function onSearchHandler() {
     dispatch(searchBooks(search));
     setReset(true);
-    navigate("/");
   }
   function resetHandler() {
     setSearch("");
@@ -25,19 +24,23 @@ function Search() {
   return (
     <div className="search">
       <div className="search-box">
-        <FontAwesomeIcon
-          icon={faMagnifyingGlass}
-          className="magnifying-glass"
-          onClick={onSearchHandler}
-        />
         <input
           type="text"
           placeholder="Search for books, authors, genres..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        <FontAwesomeIcon
+          icon={faMagnifyingGlass}
+          className="magnifying-glass"
+          onClick={onSearchHandler}
+        />
       </div>
-      {reset ? <button className="reset-button" onClick={resetHandler}>Reset</button> : null}
+      {reset ? (
+        <button className="reset-button" onClick={resetHandler}>
+          Reset
+        </button>
+      ) : null}
     </div>
   );
 }

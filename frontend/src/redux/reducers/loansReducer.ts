@@ -21,12 +21,15 @@ export const getAllLoans = createAsyncThunk(
   "loans/getAllLoans",
   async (jwt_token: string | null) => {
     try {
-      const response = await axios.get("https://integrify-library.azurewebsites.net/api/v1/loans", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt_token}`,
-        },
-      });
+      const response = await axios.get(
+        "https://integrify-library.azurewebsites.net/api/v1/loans",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -46,7 +49,41 @@ export const getOwnLoans = createAsyncThunk(
   async (jwt_token: string | null) => {
     try {
       const response = await axios.get(
-        "https://integrify-library.azurewebsites.net/api/v1/own-loans",
+        "https://integrify-library.azurewebsites.net/api/v1/loans/own-loans",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+);
+
+export const returnLoan = createAsyncThunk(
+  "loans/returnLoan",
+  async ({
+    jwt_token,
+    loanId,
+  }: {
+    jwt_token: string | null;
+    loanId: string;
+  }) => {
+    try {
+      const response = await axios.patch(
+        `https://integrify-library.azurewebsites.net/api/v1/loans/return/${loanId}`,
+        null,
         {
           headers: {
             "Content-Type": "application/json",
@@ -85,7 +122,11 @@ const loansSlice = createSlice({
       .addCase(getOwnLoans.fulfilled, (state, action) => {
         state.loans = action.payload;
         state.loading = false;
-      });
+      })
+      .addCase(returnLoan.fulfilled, (state, action) => {
+        state.currentLoan = action.payload;
+        state.loading = false;
+      })
   },
 });
 
