@@ -77,7 +77,7 @@ function BookList() {
             />
           </div>
           {books.length === 0 ? (
-            <div className="no-books">
+            <div className="empty">
               <h2>No books found</h2>
             </div>
           ) : (

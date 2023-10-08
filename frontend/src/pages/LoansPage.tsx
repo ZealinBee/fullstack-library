@@ -36,32 +36,64 @@ function LoansPage() {
         </div>
       )}
       <div className="loans-page">
-        {" "}
-        {loans.map((loan) => {
-          return (
-            <div key={loan.bookId} className="loan">
-              <div className="books-wrapper">
-                {loan.loanDetails.map((loanDetail) => {
-                  const book = books.find(
-                    (book) => book.bookId === loanDetail.bookId
-                  )!;
-                  return (
-                    <>
-                      <Book book={book}></Book>
-                    </>
-                  );
-                })}
-              </div>
+        <div className="active-loans">
+          <h2>Active Loans</h2>
+          {loans.map((loan) => {
+            if (loan.returnedDate) return null;
+            return (
+              <div key={loan.bookId} className="loan">
+                <div className="books-wrapper">
+                  {loan.loanDetails.map((loanDetail) => {
+                    const book = books.find(
+                      (book) => book.bookId === loanDetail.bookId
+                    )!;
+                    return (
+                      <>
+                        <Book book={book}></Book>
+                      </>
+                    );
+                  })}
+                </div>
 
-              <Link
-                to={`/loans/${loan.loanId}`}
-                onClick={() => dispatch(setCurrentLoan(loan))}
-              >
-                <button>View Details</button>
-              </Link>
-            </div>
-          );
-        })}
+                <Link
+                  to={`/loans/${loan.loanId}`}
+                  onClick={() => dispatch(setCurrentLoan(loan))}
+                >
+                  <button>View Details</button>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+        <div className="returned-loans">
+          <h2>Returned Loans</h2>
+          {loans.map((loan) => {
+            if (!loan.returnedDate) return null;
+            return (
+              <div key={loan.bookId} className="loan">
+                <div className="books-wrapper">
+                  {loan.loanDetails.map((loanDetail) => {
+                    const book = books.find(
+                      (book) => book.bookId === loanDetail.bookId
+                    )!;
+                    return (
+                      <>
+                        <Book book={book}></Book>
+                      </>
+                    );
+                  })}
+                </div>
+
+                <Link
+                  to={`/loans/${loan.loanId}`}
+                  onClick={() => dispatch(setCurrentLoan(loan))}
+                >
+                  <button>View Details</button>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

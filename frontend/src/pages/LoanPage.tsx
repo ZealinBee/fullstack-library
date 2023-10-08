@@ -6,12 +6,14 @@ import Book from "../components/Book";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { returnLoan } from "../redux/reducers/loansReducer";
 import { ToastContainer, toast } from "react-toastify";
+import { current } from "@reduxjs/toolkit";
 
 function LoanPage() {
   const currentLoan = useAppSelector((state) => state.loans.currentLoan);
   const books = useAppSelector((state) => state.books.books);
   const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.users.currentToken);
+  const currentUser = useAppSelector((state) => state.users.currentUser);
 
   async function returnLoanHandler() {
     if (currentLoan) {
@@ -44,6 +46,9 @@ function LoanPage() {
           })}
         </div>
         <div className="loan-details">
+          {currentUser?.role === "Librarian" ? (
+            <h3>User: {currentLoan?.userId}</h3>
+          ) : null}
           <h3>Loan date: {currentLoan?.loanDate}</h3>
           <h3>Due date: {currentLoan?.dueDate}</h3>
           <h3>
@@ -54,7 +59,10 @@ function LoanPage() {
               <span>not returned</span>
             )}
           </h3>
-          <button onClick={returnLoanHandler}>Return Loan</button>
+          {currentUser?.role ===
+          "Librarian" ? null : currentLoan?.returnedDate ? null : (
+            <button onClick={returnLoanHandler}>Return Loan</button>
+          )}
         </div>
       </div>
       <ToastContainer
