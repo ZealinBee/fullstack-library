@@ -22,13 +22,10 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
         if (dto == null) throw new ArgumentNullException(nameof(dto));
         var newLoan = _mapper.Map<Loan>(dto);
         newLoan.UserId = userId;
+        newLoan.DueDate = DateOnly.FromDateTime(DateTime.Now.AddDays(10));
         foreach (var bookId in dto.BookIds)
         {
             var existingBook = await _bookRepo.GetOne(bookId);
-            Console.WriteLine("existingBook: " + existingBook.BookName);
-            Console.WriteLine("existingBook: " + existingBook.BookId);
-            Console.WriteLine("existingBook: " + existingBook.AuthorName);
-            Console.WriteLine("existingBook: " + existingBook);
             newLoan.LoanDetails.Add(new LoanDetails
             {
                 LoanDetailsId = Guid.NewGuid(),
@@ -36,7 +33,6 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
                 Loan = newLoan,
                 Book = existingBook
             });
-            Console.WriteLine("newLoan.LoanDetails: " + newLoan.LoanDetails);
         }
         return _mapper.Map<GetLoanDto>(await _repo.CreateOne(newLoan));
     }
@@ -55,5 +51,13 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
             }
         }
         return ownLoans;
+    }
+
+    public async Task<GetLoanDto> ReturnLoan(Guid loanId)
+    {
+        var loan = await _repo.GetOne(loanId);
+        if (loan == null) throw new ArgumentNullException(nameof(loan));
+        loan.ReturnedDate = DateOnly.FromDateTime(DateTime.Now);
+        return _mapper.Map<GetLoanDto>(await _repo.UpdateOne(loan));
     }
 }

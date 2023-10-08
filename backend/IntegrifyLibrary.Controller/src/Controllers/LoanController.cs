@@ -44,4 +44,13 @@ public class LoanController : BaseController<Loan, CreateLoanDto, GetLoanDto, Up
         return Ok(result);
     }
 
+    [Authorize(Roles = "User")]
+    [HttpPatch("return/{loanId:Guid}")]
+    [ProducesResponseType(statusCode: 200)]
+    [ProducesResponseType(statusCode: 404)]
+    public async Task<ActionResult<GetLoanDto>> ReturnLoan([FromRoute] Guid loanId)
+    {
+        var result = await _loanService.ReturnLoan(loanId);
+        return Ok(result);
+    }
 }

@@ -6,5 +6,6 @@ public interface ILoanService : IBaseService<CreateLoanDto, GetLoanDto, UpdateLo
 {
     Task<GetLoanDto> CreateLoan(CreateLoanDto dto, Guid userId);
     Task<List<GetLoanDto>> GetOwnLoans(Guid userId);
+    Task<GetLoanDto> ReturnLoan(Guid loanId);
 
 }
