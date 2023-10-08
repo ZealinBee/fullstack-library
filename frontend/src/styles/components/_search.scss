@@ -1,5 +1,9 @@
 @import "../variables.scss";
 
+.search-wrapper {
+  display:flex;
+}
+
 .search {
   margin-left: $margin-left;
   padding-top: 1.25rem;

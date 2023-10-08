@@ -89,8 +89,7 @@ function CartPage() {
             <h4>Cost per book: 1$</h4>
             <h4>Total cost: {cartItems.length}$</h4>
             <h4>
-              You can put a fake payment info, the Stripe is on test mode and
-              won't take money
+              The Stripe is on Test mode, it will not take any money
             </h4>
           </div>
           <Elements stripe={stripePromise} options={options}>
