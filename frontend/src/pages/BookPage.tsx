@@ -29,6 +29,10 @@ function BookPage() {
 
   function deleteBookHandler(bookId: string | undefined) {
     if (!bookId) return;
+    const isConfirmed = window.confirm(`Are you sure you want to delete ${currentBook?.bookName}?`);
+    if (!isConfirmed) {
+      return;
+    }
     dispatch(deleteBook({ bookId: bookId, jwt_token: token }));
   }
 
@@ -63,7 +67,7 @@ function BookPage() {
           </p>
           <p>isbn: {currentBook?.isbn}</p>
           <p>
-            {currentBook?.pageCount} pages, first published on{" "}
+            {currentBook?.pageCount} pages, first uploaded to the website on{" "}
             {currentBook?.publishedDate}
           </p>
           {currentUser?.role === "Librarian" ? (

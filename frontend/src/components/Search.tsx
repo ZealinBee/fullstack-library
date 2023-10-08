@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import { Select, MenuItem, FormControl, SelectChangeEvent } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  FormControl,
+  SelectChangeEvent,
+} from "@mui/material";
 
 import useAppDispatch from "../redux/hooks/useAppDispatch";
-import { searchBooks } from "../redux/reducers/booksReducer";
+import { searchBooks, sortBooks } from "../redux/reducers/booksReducer";
 
 function Search() {
   const dispatch = useAppDispatch();
   const [search, setSearch] = useState("");
   const [reset, setReset] = useState(false);
-  const navigate = useNavigate();
-  const [select, setSelect] = useState("Publish Date Descending");
+  const [select, setSelect] = useState("Upload Date Descending");
 
   function onSearchHandler() {
     dispatch(searchBooks(search));
@@ -26,7 +30,13 @@ function Search() {
 
   function selectChangeHandler(e: SelectChangeEvent) {
     setSelect(e.target.value);
+    dispatch(sortBooks(e.target.value));
   }
+
+  useEffect(() => {
+    dispatch(searchBooks(""));
+  }, []);
+
   return (
     <>
       <div className="search-wrapper">
@@ -56,13 +66,13 @@ function Search() {
             id="demo-select-small"
             value={select}
             onChange={selectChangeHandler}
-            sx={{fontSize: "0.85rem", fontFamily: "poppins"}}
+            sx={{ fontSize: "0.85rem", fontFamily: "poppins" }}
           >
-            <MenuItem value="Publish Date Descending">
-              Publish Date Descending
+            <MenuItem value="Upload Date Descending">
+              Upload Date Descending
             </MenuItem>
-            <MenuItem value="Publish Date Ascending">
-              Publish Date Ascending
+            <MenuItem value="Upload Date Ascending">
+              Upload Date Ascending
             </MenuItem>
           </Select>
         </FormControl>

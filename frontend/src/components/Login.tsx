@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
 
 import LoginUser from "../interfaces/users/LoginUser";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { loginUser } from "../redux/reducers/usersReducer";
+import useAppSelector from "../redux/hooks/useAppSelector";
 
 function Login({
   isSignUp,
@@ -21,6 +23,7 @@ function Login({
     password: "",
   });
   const navigate = useNavigate();
+  let loading = useAppSelector((state) => state.users.loading);
 
   async function createAccountHandler(event: React.FormEvent) {
     event.preventDefault();
@@ -30,7 +33,7 @@ function Login({
       setTimeout(() => {
         navigate("/");
       }, 500);
-    }else {
+    } else {
       toast.error("Invalid credentials");
     }
   }
@@ -73,7 +76,16 @@ function Login({
             id="password-login"
           />
           <button type="submit" className="auth-button">
-            Login
+            Login{" "}
+            {loading ? (
+              <BeatLoader 
+                color="white"
+                size="5"
+                cssOverride={{
+                  marginLeft: "0.4rem",
+                }}
+              ></BeatLoader>
+            ) : null}
           </button>
         </form>
       </div>

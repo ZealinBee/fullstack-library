@@ -19,6 +19,10 @@ function UserList() {
   }, [token, dispatch]);
 
   function deleteUserHandler(userId: string) {
+    const isConfirmed = window.confirm(`Are you sure you want to delete user ${userId}?`);
+    if (!isConfirmed) {
+      return;
+    }
     dispatch(deleteUser({ userId: userId, jwt_token: token }));
   }
 

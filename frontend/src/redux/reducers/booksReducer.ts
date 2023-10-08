@@ -161,6 +161,18 @@ const booksSlice = createSlice({
         state.books = state.originalBooks;
       }
     },
+    sortBooks: (state, action) => {
+      const sortValue = action.payload;
+      if(sortValue === "Upload Date Descending") {
+        state.books.sort((a, b) => {
+          return new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime();
+        });
+      }else if(sortValue === "Upload Date Ascending") {
+        state.books.sort((a, b) => {
+          return new Date(a.publishedDate).getTime() - new Date(b.publishedDate).getTime();
+        });
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -198,5 +210,5 @@ const booksSlice = createSlice({
   },
 });
 
-export const { selectCurrentBook, searchBooks } = booksSlice.actions;
+export const { selectCurrentBook, searchBooks, sortBooks } = booksSlice.actions;
 export default booksSlice.reducer;

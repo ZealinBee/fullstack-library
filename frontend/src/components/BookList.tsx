@@ -42,6 +42,7 @@ function BookList() {
     <>
       {!hasFetched ? (
         <div className="loader">
+          <h3>First time loading all the books will take a while</h3>
           <BeatLoader color="#6b58e3" />
         </div>
       ) : (

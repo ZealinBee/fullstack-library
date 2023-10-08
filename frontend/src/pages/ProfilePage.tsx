@@ -27,6 +27,10 @@ function ProfilePage() {
   }, []);
 
   async function deleteProfileHandler() {
+    const isConfirmed = window.confirm("Are you sure you want to delete your account?");
+    if (!isConfirmed) {
+      return;
+    }
     await dispatch(deleteProfile(token));
     navigate("/");
   }

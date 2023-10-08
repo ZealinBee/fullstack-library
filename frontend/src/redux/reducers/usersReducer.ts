@@ -28,11 +28,15 @@ export const createNewUser = createAsyncThunk(
   "users/createNewUser",
   async (user: CreateUser) => {
     try {
-      const result = await axios.post("https://integrify-library.azurewebsites.net/api/v1/users", user, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const result = await axios.post(
+        "https://integrify-library.azurewebsites.net/api/v1/users",
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -152,7 +156,7 @@ export const updateUser = createAsyncThunk(
           },
         }
       );
-      console.log(response.data)
+      console.log(response.data);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -177,12 +181,15 @@ export const deleteUser = createAsyncThunk(
     jwt_token: string | null;
   }) => {
     try {
-      await axios.delete(`https://integrify-library.azurewebsites.net/api/v1/users/${userId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt_token}`,
-        },
-      });
+      await axios.delete(
+        `https://integrify-library.azurewebsites.net/api/v1/users/${userId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
       return userId;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -270,9 +277,13 @@ const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(loginUser.pending, (state, action) => {
+        state.loading = true;
+      })
       .addCase(loginUser.fulfilled, (state, action) => {
         return {
           ...state,
+          loading: false,
           isLoggedIn: true,
           currentToken: action.payload,
         };
@@ -296,10 +307,10 @@ const usersSlice = createSlice({
         };
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        console.log(action.payload)
+        console.log(action.payload);
         return {
           ...state,
-          currentUser: action.payload
+          currentUser: action.payload,
         };
       })
       .addCase(deleteProfile.fulfilled, (state, action) => {
