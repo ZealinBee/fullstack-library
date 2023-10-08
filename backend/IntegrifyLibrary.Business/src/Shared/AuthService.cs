@@ -37,7 +37,7 @@ public class AuthService : IAuthService
         var securityTokenDescriptor = new SecurityTokenDescriptor
         {
             Issuer = "integrify-assignment",
-            Expires = DateTime.Now.AddMinutes(10),
+            Expires = DateTime.Now.AddMinutes(300),
             Subject = new ClaimsIdentity(claims),
             SigningCredentials = signingCredentials
         };

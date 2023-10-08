@@ -1,6 +1,6 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
@@ -15,7 +15,6 @@ import AuthorPage from "./pages/AuthorPage";
 import LoansPage from "./pages/LoansPage";
 import GenrePage from "./pages/GenrePage";
 import LoanPage from "./pages/LoanPage";
-
 
 const router = createBrowserRouter([
   {
@@ -76,7 +75,7 @@ const router = createBrowserRouter([
     path: "/loans/:id",
     element: <LoanPage />,
     errorElement: <NotFoundPage />,
-  }
+  },
 ]);
 
 const App = () => {
