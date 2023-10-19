@@ -32,23 +32,18 @@ public class DatabaseContext : DbContext
         modelBuilder.HasPostgresEnum<Role>();
         modelBuilder.Entity<Author>()
             .HasMany(author => author.Books)
-            .WithOne(book => book.Author)
-            .HasForeignKey(book => book.AuthorId);
+            .WithOne(book => book.Author);
         modelBuilder.Entity<User>()
             .HasMany(user => user.Loans)
-            .WithOne(loan => loan.User)
-            .HasForeignKey(loan => loan.UserId);
+            .WithOne(loan => loan.User);
         modelBuilder.Entity<Loan>()
             .HasMany(loan => loan.LoanDetails)
-            .WithOne(loanDetail => loanDetail.Loan)
-            .HasForeignKey(loanDetail => loanDetail.LoanId);
+            .WithOne(loanDetail => loanDetail.Loan);
         modelBuilder.Entity<Genre>()
             .HasMany(genre => genre.Books)
-            .WithOne(book => book.Genre)
-            .HasForeignKey(book => book.GenreId);
+            .WithOne(book => book.Genre);
         modelBuilder.Entity<Book>()
             .HasMany(book => book.LoanDetails)
-            .WithOne(loanDetail => loanDetail.Book)
-            .HasForeignKey(loanDetail => loanDetail.BookId);
+            .WithOne(loanDetail => loanDetail.Book);
     }
 }
