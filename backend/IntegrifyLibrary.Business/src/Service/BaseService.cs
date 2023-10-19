@@ -44,7 +44,6 @@ public class BaseService<T, TCreateDto, TGetDto, TUpdateDto> : IBaseService<TCre
     public virtual async Task<TUpdateDto> UpdateOne(Guid id, TUpdateDto itemToUpdate)
     {
         var foundItem = await _repo.GetOne(id);
-        if (foundItem == null) throw new Exception($"Item with id {id} not found");
         var updatedItem = _mapper.Map(itemToUpdate, foundItem);
         _repo.UpdateOne(updatedItem);
         return _mapper.Map<TUpdateDto>(updatedItem);

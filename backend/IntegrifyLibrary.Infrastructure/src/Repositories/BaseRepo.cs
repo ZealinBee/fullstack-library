@@ -29,7 +29,6 @@ public class BaseRepo<T> : IBaseRepo<T> where T : class
         {
             throw new KeyNotFoundException("Id is not found");
         }
-
         return entity;
     }
 
