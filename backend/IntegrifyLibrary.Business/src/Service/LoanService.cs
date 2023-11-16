@@ -26,6 +26,10 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
         foreach (var bookId in dto.BookIds)
         {
             var existingBook = await _bookRepo.GetOne(bookId);
+            if(existingBook.Quantity == 0) {
+                throw new Exception("Book is not available");
+            }
+            existingBook.Quantity--;
             newLoan.LoanDetails.Add(new LoanDetails
             {
                 LoanDetailsId = Guid.NewGuid(),

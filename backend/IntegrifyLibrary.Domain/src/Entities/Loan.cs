@@ -6,7 +6,7 @@ namespace IntegrifyLibrary.Domain
         public Guid LoanId { get; init; }
         public Guid UserId { get; set; }
         public User User { get; set; }
-        public DateOnly LoanDate { get; set; }
+        public DateOnly LoanDate { get; init; }
         public DateOnly DueDate { get; set; }
         public DateOnly ReturnedDate { get; set; }
         public DateOnly CreatedAt { get; set; }
