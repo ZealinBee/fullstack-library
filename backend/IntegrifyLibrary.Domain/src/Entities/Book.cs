@@ -14,6 +14,7 @@ namespace IntegrifyLibrary.Domain
         public DateOnly PublishedDate { get; set; }
         public DateOnly CreatedAt { get; set; }
         public DateOnly ModifiedAt { get; set; } = DateOnly.MinValue;
+        public int LoanedTimes { get; set; } = 0;
         public string BookImage { get; set; } = "https://www.pngitem.com/pimgs/m/199-1997941_blank-book-cover-png-transparent-png.png";
         public Genre Genre { get; set; }
         public Guid GenreId { get; set; }

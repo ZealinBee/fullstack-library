@@ -9,5 +9,4 @@ namespace IntegrifyLibrary.Domain
         public ICollection<Book> Books { get; set; } = new List<Book>();
         public string GenreImage { get; init; } = string.Empty;
     }
-
 }

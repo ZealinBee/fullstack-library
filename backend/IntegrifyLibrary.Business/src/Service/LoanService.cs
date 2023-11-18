@@ -30,6 +30,7 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
                 throw new Exception("Book is not available");
             }
             existingBook.Quantity--;
+            existingBook.LoanedTimes++;
             newLoan.LoanDetails.Add(new LoanDetails
             {
                 LoanDetailsId = Guid.NewGuid(),
