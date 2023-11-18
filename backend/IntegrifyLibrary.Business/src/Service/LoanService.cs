@@ -61,6 +61,11 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
     {
         var loan = await _repo.GetOne(loanId);
         if (loan == null) throw new ArgumentNullException(nameof(loan));
+        foreach (var loanDetail in loan.LoanDetails)
+        {
+        var book = await _bookRepo.GetOne(loanDetail.BookId);
+        book.Quantity++;
+        }   
         loan.ReturnedDate = DateOnly.FromDateTime(DateTime.Now);
         return _mapper.Map<GetLoanDto>(await _repo.UpdateOne(loan));
     }
