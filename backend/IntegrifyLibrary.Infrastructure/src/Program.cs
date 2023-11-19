@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -74,7 +75,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("integrify-assignment-secret-key-1234567890")),
         ValidateIssuerSigningKey = true
     };
-});
+})
+.AddGoogle(options => {
+    options.ClientId = configuration["Google:ClientId"];
+    options.ClientSecret = configuration["Google:ClientSecret"];
+})
 
 
 builder.Services.AddAuthorization(options =>
