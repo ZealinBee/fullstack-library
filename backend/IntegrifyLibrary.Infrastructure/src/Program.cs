@@ -79,7 +79,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddGoogle(options => {
     options.ClientId = configuration["Google:ClientId"];
     options.ClientSecret = configuration["Google:ClientSecret"];
-})
+});
 
 
 builder.Services.AddAuthorization(options =>

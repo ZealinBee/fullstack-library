@@ -59,9 +59,7 @@ function BookPage() {
         </div>
         <div className="book-page__book-details">
           <h2 className="book-page__book-name">{currentBook?.bookName}</h2>
-          {/* <Link to={`/authors/${currentBook?.authorName}}`}> */}{" "}
           <h3 className="book-page__book-author">{currentBook?.authorName}</h3>
-          {/* </Link> */}
           <p className="book-page__book-description">
             {currentBook?.description}
           </p>
@@ -69,6 +67,9 @@ function BookPage() {
           <p>
             {currentBook?.pageCount} pages, first uploaded to the website on{" "}
             {currentBook?.publishedDate}
+          </p>
+          <p>
+            {currentBook?.quantity} copies available
           </p>
           {currentUser?.role === "Librarian" ? (
             <>
