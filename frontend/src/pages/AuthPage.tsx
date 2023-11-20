@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { ToastContainer, toast } from "react-toastify";
 
-
 import SignUp from "../components/SignUp";
 import Login from "../components/Login";
 import Header from "../components/Header";

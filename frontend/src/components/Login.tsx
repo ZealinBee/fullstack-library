@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
+import { GoogleLogin } from "react-google-login";
 
 import LoginUser from "../interfaces/users/LoginUser";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
@@ -78,7 +79,7 @@ function Login({
           <button type="submit" className="auth-button">
             Login{" "}
             {loading ? (
-              <BeatLoader 
+              <BeatLoader
                 color="white"
                 size="5"
                 cssOverride={{
@@ -87,6 +88,17 @@ function Login({
               ></BeatLoader>
             ) : null}
           </button>
+          <GoogleLogin
+            clientId="1096646429447-u3c733v9j1sf3t0maqkmn9tmp4ka3c3q.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={(response) => {
+              console.log(response);
+            }}
+            onFailure={(response) => {
+              console.log(response);
+            }}
+            cookiePolicy={"single_host_origin"}
+          ></GoogleLogin>
         </form>
       </div>
       <ToastContainer
