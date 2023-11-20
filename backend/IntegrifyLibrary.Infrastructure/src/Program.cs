@@ -78,7 +78,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     };
 })
 .AddGoogle(options => {
-    options.ClientId = configuration["Google:ClientId"];
+    options.ClientId = "1096646429447-u3c733v9j1sf3t0maqkmn9tmp4ka3c3q.apps.googleusercontent.com";
     options.ClientSecret = configuration["Google:ClientSecret"];
 });
 
