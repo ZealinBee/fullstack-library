@@ -33,9 +33,9 @@ function Search() {
     dispatch(sortBooks(e.target.value));
   }
 
-  useEffect(() => {
-    dispatch(searchBooks(""));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(searchBooks(""));
+  // }, []);
 
   return (
     <>

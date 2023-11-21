@@ -2,6 +2,8 @@ import axios, { AxiosError } from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import GetBook from "../../interfaces/books/GetBook";
+import LoanDetails from "../../interfaces/loans/LoanDetails";
+import { getBookById } from "./booksReducer";
 
 interface CartState {
   cartItems: GetBook[];
@@ -17,13 +19,16 @@ const initialState: CartState = {
 
 export const loanBooks = createAsyncThunk(
   "cart/loanBooks",
-  async ({
-    bookIds,
-    jwt_token,
-  }: {
-    bookIds: string[];
-    jwt_token: string | null;
-  }) => {
+  async (
+    {
+      bookIds,
+      jwt_token,
+    }: {
+      bookIds: string[];
+      jwt_token: string | null;
+    },
+    { dispatch }
+  ) => {
     try {
       const dateOnlyString = new Date().toISOString().slice(0, 10);
       const loanData = {
@@ -40,6 +45,9 @@ export const loanBooks = createAsyncThunk(
           },
         }
       );
+      response.data.loanDetails.forEach((loan: LoanDetails) => {
+        dispatch(getBookById(loan.bookId));
+      });
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -82,6 +90,15 @@ const cartSlice = createSlice({
         );
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(loanBooks.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(loanBooks.fulfilled, (state, action) => {
+      state.loading = false;
+      state.cartItems = [];
+    });
   },
 });
 

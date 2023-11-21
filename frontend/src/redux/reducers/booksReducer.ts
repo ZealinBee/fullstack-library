@@ -40,6 +40,28 @@ export const getAllBooks = createAsyncThunk("books/getAllBooks", async () => {
   }
 });
 
+// When loan is successful, update the state of the loaned books, because the quantity of the books has changed
+export const getBookById = createAsyncThunk(
+  "books/getBookById",
+  async (bookId: string) => {
+    try {
+      const response = await axios.get<GetBook>(
+        `https://integrify-library.azurewebsites.net/api/v1/books/${bookId}`
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+);
+
 export const createBook = createAsyncThunk(
   "books/createBook",
   async ({
@@ -84,12 +106,15 @@ export const deleteBook = createAsyncThunk(
     jwt_token: string | null;
   }) => {
     try {
-      await axios.delete<GetBook>(`https://integrify-library.azurewebsites.net/api/v1/books/${bookId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt_token}`,
-        },
-      });
+      await axios.delete<GetBook>(
+        `https://integrify-library.azurewebsites.net/api/v1/books/${bookId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
       return bookId;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -157,19 +182,25 @@ const booksSlice = createSlice({
             book.authorName.toLowerCase().includes(searchValue) ||
             book.genreName.toLowerCase().includes(searchValue)
         );
-      }else {
+      } else {
         state.books = state.originalBooks;
       }
     },
     sortBooks: (state, action) => {
       const sortValue = action.payload;
-      if(sortValue === "Upload Date Descending") {
+      if (sortValue === "Upload Date Descending") {
         state.books.sort((a, b) => {
-          return new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime();
+          return (
+            new Date(b.publishedDate).getTime() -
+            new Date(a.publishedDate).getTime()
+          );
         });
-      }else if(sortValue === "Upload Date Ascending") {
+      } else if (sortValue === "Upload Date Ascending") {
         state.books.sort((a, b) => {
-          return new Date(a.publishedDate).getTime() - new Date(b.publishedDate).getTime();
+          return (
+            new Date(a.publishedDate).getTime() -
+            new Date(b.publishedDate).getTime()
+          );
         });
       }
     },
@@ -206,6 +237,14 @@ const booksSlice = createSlice({
         state.books.push(action.payload);
         state.loading = false;
         state.error = null;
+      })
+      .addCase(getBookById.fulfilled, (state, action) => {
+        state.books = state.books.map((book) => {
+          if (book.bookId === action.payload.bookId) {
+            return action.payload;
+          }
+          return book;
+        });
       });
   },
 });
