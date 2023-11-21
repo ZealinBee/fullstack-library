@@ -11,17 +11,18 @@ import { addToCart } from "../redux/reducers/cartReducer";
 import Book from "./Book";
 import { BeatLoader } from "react-spinners";
 import Footer from "./Footer";
+import { Pagination } from "@mui/material";
+import { usePaginate } from "../utils/usePaginate";
 
 function BookList() {
   const dispatch = useAppDispatch();
   const books = useAppSelector((state) => state.books.books);
-  let token = useAppSelector((state) => state.users.currentToken);
   const currentUser = useAppSelector((state) => state.users.currentUser);
-  const currentBook = useAppSelector((state) => state.books.currentBook);
-  const isBookInCart = useAppSelector((state) =>
-    state.cart.cartItems.find((item) => item.bookId === currentBook?.bookId)
-  );
   const hasFetched = useAppSelector((state) => state.books.hasFetched);
+  const { handlePageChange, paginatedItems } = usePaginate({
+    items: books,
+    booksPerPage: 10,
+  });
 
   useEffect(() => {
     if (hasFetched === false) {
@@ -48,7 +49,7 @@ function BookList() {
       ) : (
         <>
           <div className="bookList">
-            {books.map((book: GetBook) => {
+            {paginatedItems.map((book: GetBook) => {
               return (
                 <div key={book.bookId} className="bookList__book">
                   <Book book={book}></Book>
@@ -94,6 +95,11 @@ function BookList() {
               theme="light"
             />
           </div>
+          <Pagination
+            count={Math.ceil(books.length / 10)}
+            onChange={handlePageChange}
+            className="pagination"
+          ></Pagination>
           {books.length === 0 ? (
             <div className="empty">
               <h2>No books found</h2>
