@@ -39,7 +39,7 @@ function LoansPage() {
         <div className="active-loans">
           <h2>Active Loans</h2>
           {loans.map((loan) => {
-            if (loan.returnedDate) return null;
+            if (loan.returnedDate !== "0001-01-01") return null;
             return (
               <div key={loan.bookId} className="loan">
                 <div className="books-wrapper">
@@ -68,7 +68,7 @@ function LoansPage() {
         <div className="returned-loans">
           <h2>Returned Loans</h2>
           {loans.map((loan) => {
-            if (!loan.returnedDate) return null;
+            if (loan.returnedDate === "0001-01-01") return null;
             return (
               <div key={loan.bookId} className="loan">
                 <div className="books-wrapper">

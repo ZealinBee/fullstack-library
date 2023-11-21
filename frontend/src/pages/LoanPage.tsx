@@ -52,17 +52,20 @@ function LoanPage() {
           <h3>Loan date: {currentLoan?.loanDate}</h3>
           <h3>Due date: {currentLoan?.dueDate}</h3>
           <h3>
+            {
+              /// "0001-01-01" is the default value for returnedDate}
+            }
             Returned date:{" "}
-            {currentLoan?.returnedDate ? (
-              currentLoan?.returnedDate
-            ) : (
+            {currentLoan?.returnedDate === "0001-01-01" ? (
               <span>not returned</span>
+            ) : (
+              currentLoan?.returnedDate
             )}
           </h3>
           {currentUser?.role ===
-          "Librarian" ? null : currentLoan?.returnedDate ? null : (
-            <button onClick={returnLoanHandler}>Return Loan</button>
-          )}
+          "Librarian" ? null : currentLoan?.returnedDate ===
+            "0001-01-01" ?             <button onClick={returnLoanHandler}>Return Loan</button>
+            : null}
         </div>
       </div>
       <ToastContainer
