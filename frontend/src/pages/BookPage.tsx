@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import Header from "../components/Header";
@@ -22,6 +22,7 @@ function BookPage() {
 
   function addToCartHandler() {
     dispatch(addToCart(currentBook));
+    toast.success("Book added to loan cart");
   }
 
   function deleteBookHandler(bookId: string | undefined) {
@@ -54,11 +55,8 @@ function BookPage() {
                   <button onClick={addToCartHandler}>Add To Loan Cart</button>
                 ) : (
                   <>
-                    <button disabled className="bookList__add-book">
-                      Out of Stock
-                    </button>
-                    <button disabled className="bookList__add-book">
-                      Notify me when available
+                    <button className="bookList__add-book reserve">
+                      No Copies Left, Click to Reserve
                     </button>
                   </>
                 )
