@@ -36,7 +36,7 @@ export const loanBooks = createAsyncThunk(
         bookIds: bookIds,
       };
       const response = await axios.post(
-        "https://integrify-library.azurewebsites.net/api/v1/loans",
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/loans`,
         loanData,
         {
           headers: {

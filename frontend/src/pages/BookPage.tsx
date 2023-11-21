@@ -87,7 +87,7 @@ function BookPage() {
             <p>
               loaned by others <span className="bold">{currentBook.loanedTimes} </span>times{" "}
             </p>
-            <p>{currentBook.quantity} copies available</p>
+            <p> <span className="bold"> {currentBook.quantity}</span> copies available</p>
             {currentUser?.role === "Librarian" ? (
               <>
                 <Link to="/">

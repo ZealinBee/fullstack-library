@@ -22,7 +22,7 @@ export const getAllLoans = createAsyncThunk(
   async (jwt_token: string | null) => {
     try {
       const response = await axios.get(
-        "https://integrify-library.azurewebsites.net/api/v1/loans",
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/loans`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export const getOwnLoans = createAsyncThunk(
   async (jwt_token: string | null) => {
     try {
       const response = await axios.get(
-        "https://integrify-library.azurewebsites.net/api/v1/loans/own-loans",
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/loans/own-loans`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export const returnLoan = createAsyncThunk(
   }) => {
     try {
       const response = await axios.patch(
-        `https://integrify-library.azurewebsites.net/api/v1/loans/return/${loanId}`,
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/loans/return/${loanId}`,
         null,
         {
           headers: {

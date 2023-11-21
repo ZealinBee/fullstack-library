@@ -46,7 +46,7 @@ export const getBookById = createAsyncThunk(
   async (bookId: string) => {
     try {
       const response = await axios.get<GetBook>(
-        `https://integrify-library.azurewebsites.net/api/v1/books/${bookId}`
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/books/${bookId}`
       );
       return response.data;
     } catch (error) {
@@ -73,7 +73,7 @@ export const createBook = createAsyncThunk(
   }) => {
     try {
       const response = await axios.post<GetBook>(
-        "https://integrify-library.azurewebsites.net/api/v1/books",
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/books`,
         book,
         {
           headers: {
@@ -107,7 +107,7 @@ export const deleteBook = createAsyncThunk(
   }) => {
     try {
       await axios.delete<GetBook>(
-        `https://integrify-library.azurewebsites.net/api/v1/books/${bookId}`,
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/books/${bookId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export const updateBook = createAsyncThunk(
   }) => {
     try {
       const response = await axios.patch<GetBook>(
-        `https://integrify-library.azurewebsites.net/api/v1/books/${bookId}`,
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/books/${bookId}`,
         book,
         {
           headers: {
