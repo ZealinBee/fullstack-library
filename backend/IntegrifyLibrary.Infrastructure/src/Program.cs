@@ -51,7 +51,8 @@ builder.Services
     .AddScoped<IBookRepo, BookRepo>()
     .AddScoped<ILoanRepo, LoanRepo>()
     .AddScoped<IAuthorRepo, AuthorRepo>()
-    .AddScoped<IGenreRepo, GenreRepo>();
+    .AddScoped<IGenreRepo, GenreRepo>()
+    .AddScoped<INotificationRepo, NotificationRepo>();
 
 builder.Services
     .AddScoped<IUserService, UserService>()
@@ -59,7 +60,8 @@ builder.Services
     .AddScoped<IAuthService, AuthService>()
     .AddScoped<ILoanService, LoanService>()
     .AddScoped<IAuthorService, AuthorService>()
-    .AddScoped<IGenreService, GenreService>();
+    .AddScoped<IGenreService, GenreService>()
+    .AddScoped<INotificationService, NotificationService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 

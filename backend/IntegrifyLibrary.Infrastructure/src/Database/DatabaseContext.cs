@@ -15,6 +15,7 @@ public class DatabaseContext : DbContext
     public DbSet<Author> Authors { get; set; }
     public DbSet<LoanDetails> LoanDetails { get; set; }
     public DbSet<Genre> Genres { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
 
     public DatabaseContext(IConfiguration configuration, DbContextOptions options) : base(options)
     {
@@ -45,5 +46,8 @@ public class DatabaseContext : DbContext
         modelBuilder.Entity<Book>()
             .HasMany(book => book.LoanDetails)
             .WithOne(loanDetail => loanDetail.Book);
+        modelBuilder.Entity<User>()
+            .HasMany(user => user.Notifications)
+            .WithOne(notification => notification.User);
     }
 }
