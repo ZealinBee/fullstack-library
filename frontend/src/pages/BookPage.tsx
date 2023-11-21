@@ -84,6 +84,9 @@ function BookPage() {
               {currentBook.pageCount} pages, first uploaded to the website on{" "}
               {currentBook.publishedDate}
             </p>
+            <p>
+              loaned by others <span className="bold">{currentBook.loanedTimes} </span>times{" "}
+            </p>
             <p>{currentBook.quantity} copies available</p>
             {currentUser?.role === "Librarian" ? (
               <>

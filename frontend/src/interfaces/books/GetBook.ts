@@ -10,4 +10,5 @@ export default interface GetBook {
     bookImage: string;
     genreName: string;
     authorId: string;
+    loanedTimes: number;
 }

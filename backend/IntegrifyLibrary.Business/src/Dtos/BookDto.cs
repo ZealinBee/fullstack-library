@@ -11,6 +11,7 @@ public class BookDto
     public DateOnly PublishedDate { get; set; }
     public string BookImage { get; set; }
     public string GenreName { get; set; }
+    public int loanedTimes { get; set; }
 }
 
 public class GetBookDto : BookDto

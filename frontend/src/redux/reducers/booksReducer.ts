@@ -25,7 +25,7 @@ const initialState: BooksState = {
 export const getAllBooks = createAsyncThunk("books/getAllBooks", async () => {
   try {
     const response = await axios.get<GetBook[]>(
-      "https://integrify-library.azurewebsites.net/api/v1/books"
+      `${process.env.REACT_APP_FETCH_HOST}/api/v1/books`
     );
     return response.data;
   } catch (error) {
