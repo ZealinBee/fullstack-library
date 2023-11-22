@@ -2,4 +2,6 @@
 
 .reservations-page {
     margin-left:$margin-left;
+    display:grid;
+    grid-template-columns: repeat(6,1fr);
 }

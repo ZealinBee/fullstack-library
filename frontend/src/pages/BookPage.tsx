@@ -8,6 +8,8 @@ import { addToCart } from "../redux/reducers/cartReducer";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { deleteBook } from "../redux/reducers/booksReducer";
 import EditBook from "../components/EditBook";
+import { createReservation } from "../redux/reducers/reservationsReducer";
+import { current } from "@reduxjs/toolkit";
 
 function BookPage() {
   let currentBook = useAppSelector((state) => state.books.currentBook);
@@ -36,6 +38,11 @@ function BookPage() {
     dispatch(deleteBook({ bookId: bookId, jwt_token: token }));
   }
 
+  function reserveBookHandler() {
+    console.log(currentBook?.bookId, token)
+    dispatch(createReservation({ bookId: currentBook?.bookId, jwt_token: token }));
+  }
+
   useEffect(() => {
     if (currentBook === null) {
       navigate("/");
@@ -55,7 +62,7 @@ function BookPage() {
                   <button onClick={addToCartHandler}>Add To Loan Cart</button>
                 ) : (
                   <>
-                    <button className="bookList__add-book reserve">
+                    <button className="bookList__add-book reserve" onClick={reserveBookHandler}>
                       No Copies Left, Click to Reserve
                     </button>
                   </>

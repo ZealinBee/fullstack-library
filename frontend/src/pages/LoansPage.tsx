@@ -46,7 +46,8 @@ function LoansPage() {
                   {loan.loanDetails.map((loanDetail) => {
                     const book = books.find(
                       (book) => book.bookId === loanDetail.bookId
-                    )!;
+                    );
+                    if (!book) return null;
                     return (
                       <>
                         <Book book={book}></Book>

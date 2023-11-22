@@ -38,7 +38,8 @@ function ReservationPage() {
         {reservations.map((reservation) => {
           const book = books.find(
             (book) => book.bookId === reservation.bookId
-          )!;
+          );
+          if (!book) return null;
           return (
             <>
               <Book book={book}></Book>
