@@ -1,6 +1,6 @@
 namespace IntegrifyLibrary.Business;
 
-public interface IReservationService : IBaseService<ReservationDto, ReservationDto, ReservationDto>
+public interface IReservationService : IBaseService<CreateReservationDto, ReservationDto, ReservationDto>
 {
-    
+    Task<ReservationDto> CreateReservation(CreateReservationDto dto, Guid userId);
 }

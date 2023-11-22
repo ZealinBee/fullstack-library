@@ -45,5 +45,7 @@ public class AutoMapperProfile : Profile
         CreateMap<NotificationDto, Notification>();
         CreateMap<Reservation, ReservationDto>();
         CreateMap<ReservationDto, Reservation>();
+        CreateMap<CreateReservationDto, Reservation>();
+        CreateMap<Reservation, CreateReservationDto>();
     }
 }
