@@ -26,4 +26,15 @@ public class ReservationController : BaseController<Reservation, CreateReservati
         var createdObject = await _reservationService.CreateReservation(dto, userId);
         return CreatedAtAction(nameof(CreateOne), createdObject);
     }
+
+    [Authorize(Roles = "User")]
+    [HttpGet("own-reservations")]
+    [ProducesResponseType(statusCode: 200)]
+    [ProducesResponseType(statusCode: 404)]
+    public async Task<ActionResult<List<ReservationDto>>> GetOwnReservations()
+    {
+        var userIdClaim = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        var result = await _reservationService.GetOwnReservations(userIdClaim);
+        return Ok(result);
+    }
 }

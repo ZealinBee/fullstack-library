@@ -4,7 +4,7 @@ namespace IntegrifyLibrary.Business;
 
 public class ReservationDto {
     public Guid ReservationId { get; init; }
-    public BookDto Book { get; set; }
+    public Guid BookId { get; set; }
     public DateOnly CreatedAt { get; init; }
 }
 

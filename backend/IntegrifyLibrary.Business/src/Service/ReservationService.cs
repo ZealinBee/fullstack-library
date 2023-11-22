@@ -24,5 +24,17 @@ public class ReservationService : BaseService<Reservation, CreateReservationDto,
         return _mapper.Map<ReservationDto>(createdReservation);
     }
 
+    public async Task<List<ReservationDto>> GetOwnReservations(Guid userId) {
+        QueryOptions queryOptions = new QueryOptions();
+        var reservations = await _reservationRepo.GetAll(queryOptions);
+        List<ReservationDto> ownReservations = new List<ReservationDto>();
+        foreach (var reservation in reservations) {
+            if (reservation.UserId == userId) {
+                ownReservations.Add(_mapper.Map<ReservationDto>(reservation));
+            }
+        }
+        return ownReservations;
+    }
+
 
 }
