@@ -16,6 +16,7 @@ public class User
     public List<Loan> Loans { get; set; } = new();
     public string UserImage { get; set; } = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
     public List<Notification> Notifications { get; set; } = new();
+    public List<Reservation> Reservations { get; set; } = new();
 }
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Role

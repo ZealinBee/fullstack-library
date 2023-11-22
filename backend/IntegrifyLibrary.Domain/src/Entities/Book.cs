@@ -20,6 +20,6 @@ namespace IntegrifyLibrary.Domain
         public Guid GenreId { get; set; }
         public string GenreName { get; set; }
         public ICollection<LoanDetails> LoanDetails { get; set; } = new List<LoanDetails>();
-
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
 }
