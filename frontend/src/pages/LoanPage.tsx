@@ -6,7 +6,6 @@ import Book from "../components/Book";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { returnLoan } from "../redux/reducers/loansReducer";
 import { ToastContainer, toast } from "react-toastify";
-import { current } from "@reduxjs/toolkit";
 
 function LoanPage() {
   const currentLoan = useAppSelector((state) => state.loans.currentLoan);
@@ -31,7 +30,6 @@ function LoanPage() {
     }
   }
 
-  console.log(currentLoan);
   return (
     <>
       <Header></Header>

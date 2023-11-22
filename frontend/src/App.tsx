@@ -16,6 +16,7 @@ import LoansPage from "./pages/LoansPage";
 import GenrePage from "./pages/GenrePage";
 import LoanPage from "./pages/LoanPage";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
+import ReservationPage from "./pages/ReservationPage";
 
 const router = createBrowserRouter([
   {
@@ -81,7 +82,12 @@ const router = createBrowserRouter([
     path: "/payment/success",
     element: <PaymentSuccessPage />,
     errorElement: <NotFoundPage />,
-  }
+  },
+  {
+    path: "/reservations",
+    element: <ReservationPage />,
+    errorElement: <NotFoundPage />,
+  },
 
 ]);
 

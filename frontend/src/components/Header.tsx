@@ -8,6 +8,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import StarHalfRoundedIcon from '@mui/icons-material/StarHalfRounded';
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import Search from "./Search";
@@ -124,6 +125,19 @@ function Header() {
                   <PaymentsIcon />
                 </div>
                 {currentUser.role === "Librarian" ? "All Loans" : "My Loans"}
+              </NavLink>{" "}
+            </li>
+          ) : null}
+          {currentUser ? (
+            <li>
+              <NavLink
+                to={"/reservations"}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                <div className="icon-wrapper">
+                  <StarHalfRoundedIcon />
+                </div>
+                {currentUser.role === "Librarian" ? "All Reservations" : "My Reservations"}
               </NavLink>{" "}
             </li>
           ) : null}
