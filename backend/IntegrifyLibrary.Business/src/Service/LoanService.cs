@@ -11,13 +11,15 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
     private readonly IMapper _mapper;
     private readonly IBookRepo _bookRepo;
     private readonly INotificationService _notificationService;
+    private readonly IReservationService _reservationService;
 
-    public LoanService(ILoanRepo loanRepo, IMapper mapper, IBookRepo bookRepo, INotificationService notificationService) : base(loanRepo, mapper)
+    public LoanService(ILoanRepo loanRepo, IMapper mapper, IBookRepo bookRepo, INotificationService notificationService, IReservationService reservationService) : base(loanRepo, mapper)
     {
         _repo = loanRepo;
         _mapper = mapper;
         _bookRepo = bookRepo;
         _notificationService = notificationService;
+        _reservationService = reservationService;
     }
 
     public async Task<GetLoanDto> CreateLoan(CreateLoanDto dto, Guid userId)
@@ -71,11 +73,19 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
             book.Quantity++;
             // if the quantity is 1, then the book went from not available to available
             if(book.Quantity == 1) {
-                NotificationDto notificationDto = new NotificationDto();
-                notificationDto.NotificationMessage = "Book " + book.BookName + " is now available";
-                notificationDto.NotificationType = "BookAvailable";
-                notificationDto.UserId = loan.UserId;
-                await _notificationService.CreateOne(notificationDto);
+                // check if there is a reservation for this book
+                var reservations = await _reservationService.GetOwnReservations(loan.UserId);
+                foreach (var reservation in reservations)
+                {
+                    if(reservation.BookId == book.BookId) {
+                        // if there is a reservation, then send a notification to the user
+                        NotificationDto notificationDto = new NotificationDto();
+                        notificationDto.NotificationMessage = "Book " + book.BookName + " is now available";
+                        notificationDto.NotificationType = "BookAvailable";
+                        notificationDto.UserId = loan.UserId;
+                        await _notificationService.CreateOne(notificationDto);
+                    }
+                }
             }
         }   
         loan.ReturnedDate = DateOnly.FromDateTime(DateTime.Now);
