@@ -54,7 +54,7 @@ export const createReservation = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_FETCH_HOST}/api/v1/reservations`,
-      {bookId},
+        { bookId },
         {
           headers: {
             "Content-Type": "application/json",
@@ -63,6 +63,39 @@ export const createReservation = createAsyncThunk(
         }
       );
       return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+);
+
+export const deleteReservation = createAsyncThunk(
+  "reservations/deleteReservation",
+  async ({
+    jwt_token,
+    reservationId,
+  }: {
+    jwt_token: string | null;
+    reservationId: string | undefined;
+  }) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/reservations/own-reservations/${reservationId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
+      return reservationId;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const responseData = error.response?.data;
@@ -90,6 +123,13 @@ const reservationsSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.reservations.push(action.payload);
+    });
+    builder.addCase(deleteReservation.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = null;
+      state.reservations = state.reservations.filter(
+        (reservation) => reservation.reservationId !== action.payload
+      );
     });
   },
 });

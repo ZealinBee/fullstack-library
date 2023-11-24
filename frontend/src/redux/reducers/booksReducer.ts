@@ -200,8 +200,16 @@ const booksSlice = createSlice({
           return (
             new Date(a.publishedDate).getTime() -
             new Date(b.publishedDate).getTime()
-          );
-        });
+          )
+        })
+      }else if(sortValue === "Popularity Descending"){
+          state.books.sort((a,b) => {
+            return b.loanedTimes - a.loanedTimes
+          })
+      }else if(sortValue === "Popularity Ascending"){
+        state.books.sort((a,b) => {
+          return a.loanedTimes - b.loanedTimes
+        })
       }
     },
   },

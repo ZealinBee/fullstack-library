@@ -37,4 +37,20 @@ public class ReservationController : BaseController<Reservation, CreateReservati
         var result = await _reservationService.GetOwnReservations(userIdClaim);
         return Ok(result);
     }
+
+    [Authorize(Roles = "User")]
+    [HttpDelete("own-reservations/{id}")]
+    [ProducesResponseType(statusCode: 204)]
+    [ProducesResponseType(statusCode: 404)]
+    public  async Task<ActionResult<bool>> DeleteOwnReservation([FromRoute] Guid id)
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        Console.WriteLine(userIdClaim);
+        var result = await _reservationService.DeleteOne(id);
+        if (result == null)
+        {
+            return NotFound();
+        }
+        return NoContent();
+    }
 }

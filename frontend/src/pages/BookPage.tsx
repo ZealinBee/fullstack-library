@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import Header from "../components/Header";
@@ -21,6 +22,11 @@ function BookPage() {
   );
   const [editMode, setEditMode] = React.useState(false);
   const navigate = useNavigate();
+  const isReserved = useAppSelector((state) =>
+    state.reservations.reservations.find(
+      (reservation) => reservation.bookId === currentBook?.bookId
+    )
+  );
 
   function addToCartHandler() {
     dispatch(addToCart(currentBook));
@@ -38,9 +44,13 @@ function BookPage() {
     dispatch(deleteBook({ bookId: bookId, jwt_token: token }));
   }
 
-  function reserveBookHandler() {
-    console.log(currentBook?.bookId, token)
-    dispatch(createReservation({ bookId: currentBook?.bookId, jwt_token: token }));
+  async function reserveBookHandler() {
+    const response = await dispatch(
+      createReservation({ bookId: currentBook?.bookId, jwt_token: token })
+    );
+    if (response.type === "reservations/createReservation/fulfilled") {
+      toast.success("Book reserved");
+    }
   }
 
   useEffect(() => {
@@ -52,6 +62,12 @@ function BookPage() {
   return (
     <>
       <Header />
+      <Link to="/" >
+        {" "}
+        <button className="back-button">
+          Home
+        </button>
+      </Link>
       {currentBook && (
         <div className="book-page">
           <div className="book-page__img-wrapper">
@@ -60,9 +76,16 @@ function BookPage() {
               (!isBookInCart ? (
                 currentBook.quantity > 0 ? (
                   <button onClick={addToCartHandler}>Add To Loan Cart</button>
+                ) : isReserved ? (
+                  <button className="bookList__add-book reserve" disabled>
+                    Already Reserved
+                  </button>
                 ) : (
                   <>
-                    <button className="bookList__add-book reserve" onClick={reserveBookHandler}>
+                    <button
+                      className="bookList__add-book reserve"
+                      onClick={reserveBookHandler}
+                    >
                       No Copies Left, Click to Reserve
                     </button>
                   </>
@@ -90,9 +113,14 @@ function BookPage() {
               {currentBook.publishedDate}
             </p>
             <p>
-              loaned by others <span className="bold">{currentBook.loanedTimes} </span>times{" "}
+              loaned by others{" "}
+              <span className="bold">{currentBook.loanedTimes} </span>times{" "}
             </p>
-            <p> <span className="bold"> {currentBook.quantity}</span> copies available</p>
+            <p>
+              {" "}
+              <span className="bold"> {currentBook.quantity}</span> copies
+              available
+            </p>
             {currentUser?.role === "Librarian" ? (
               <>
                 <Link to="/">

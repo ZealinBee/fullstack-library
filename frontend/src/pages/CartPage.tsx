@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import {
@@ -8,6 +8,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { BeatLoader } from "react-spinners";
 
 import Header from "../components/Header";
 import useAppSelector from "../redux/hooks/useAppSelector";
@@ -21,6 +22,7 @@ function CartPage() {
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const dispatch = useAppDispatch();
   let jwt_token = useAppSelector((state) => state.users.currentToken);
+  let loading = useAppSelector((state) => state.cart.loading);
 
   const stripePromise = loadStripe(
     "pk_test_51NygIWCuxdYH5UkGTReTgNsbWCtEeYZKWa3954W7hjOfHCszJKxhStoNuyFp4RJi85aoZOB6QNqSqGu4zlunQIaA000Pe9AIdy"
@@ -43,12 +45,11 @@ function CartPage() {
       return;
     }
     const response = await dispatch(loanBooks({ bookIds, jwt_token }));
+    console.log(response);
     if (response.type === "cart/loanBooks/fulfilled") {
       toast.success("Books loaned");
-      bookIds.forEach((bookId) => dispatch(removeFromCart(bookId)));
     }
   }
-
   return (
     <>
       <Header></Header>
@@ -61,6 +62,18 @@ function CartPage() {
               <button>Back to Home</button>{" "}
             </Link>
           </div>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </>
       ) : (
         <>
@@ -88,9 +101,7 @@ function CartPage() {
           <div className="check-out">
             <h4>Cost per book: 1$</h4>
             <h4>Total cost: {cartItems.length}$</h4>
-            <h4>
-              The Stripe is on Test mode, it will not take any money
-            </h4>
+            <h4>The Stripe is on Test mode, it will not take any money</h4>
           </div>
           <Elements stripe={stripePromise} options={options}>
             <CheckoutForm></CheckoutForm>
@@ -109,21 +120,17 @@ function CartPage() {
             </h4>
             <button onClick={loanBooksHandler} className="loan-books-button">
               Loan books
+              {loading ? (
+                <BeatLoader
+                  color="white"
+                  size="5"
+                  cssOverride={{
+                    marginLeft: "0.4rem",
+                  }}
+                ></BeatLoader>
+              ) : null}
             </button>
           </div>
-
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
         </>
       )}
     </>

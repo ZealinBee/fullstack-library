@@ -1,7 +1,18 @@
 @import "../variables.scss";
 
 .reservations-page {
-    margin-left:$margin-left;
-    display:grid;
-    grid-template-columns: repeat(6,1fr);
+  margin-left: $margin-left;
+  .reservation-note {
+    margin-bottom: 1rem;
+  }
+  .reservations {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    .reservations-page-book {
+      button {
+        width:150px;
+      }
+    }
+  }
 }
+

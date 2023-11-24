@@ -30,12 +30,14 @@ function Search() {
 
   function selectChangeHandler(e: SelectChangeEvent) {
     setSelect(e.target.value);
+    setReset(true);
     dispatch(sortBooks(e.target.value));
   }
 
-  // useEffect(() => {
-  //   dispatch(searchBooks(""));
-  // }, []);
+  // this useEffect is used to reset the books array to the original state without additional fetching
+  useEffect(() => {
+    dispatch(searchBooks(""));
+  }, [dispatch]);
 
   return (
     <>
@@ -69,10 +71,16 @@ function Search() {
             sx={{ fontSize: "0.85rem", fontFamily: "poppins" }}
           >
             <MenuItem value="Upload Date Descending">
-              Upload Date Descending
+              Newest Uploads
             </MenuItem>
             <MenuItem value="Upload Date Ascending">
-              Upload Date Ascending
+              Oldest Uploads
+            </MenuItem>
+            <MenuItem value="Popularity Descending">
+              Most Popular
+            </MenuItem>
+            <MenuItem value="Popularity Ascending">
+              Least Popular
             </MenuItem>
           </Select>
         </FormControl>

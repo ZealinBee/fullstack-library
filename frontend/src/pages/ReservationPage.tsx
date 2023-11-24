@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import useAppSelector from "../redux/hooks/useAppSelector";
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { getOwnReservations } from "../redux/reducers/reservationsReducer";
+import { deleteReservation } from "../redux/reducers/reservationsReducer";
 
 import Header from "../components/Header";
 import Book from "../components/Book";
@@ -19,7 +20,9 @@ function ReservationPage() {
     dispatch(getOwnReservations(jwt_token));
   }, []);
 
-  function removeReservationHandler(reservationId: string) {}
+  function removeReservationHandler(reservationId: string) {
+    dispatch(deleteReservation({ reservationId, jwt_token }));
+  }
 
   return (
     <>
@@ -35,24 +38,30 @@ function ReservationPage() {
       )}
 
       <div className="reservations-page">
-        {reservations.map((reservation) => {
-          const book = books.find(
-            (book) => book.bookId === reservation.bookId
-          );
-          if (!book) return null;
-          return (
-            <>
-              <Book book={book}></Book>
-              {/* <button
-                onClick={() =>
-                  removeReservationHandler(reservation.reservationId)
-                }
-              >
-                Remove
-              </button> */}
-            </>
-          );
-        })}
+        <p className="reservation-note">
+          You'll get notified when any of the book you reserved is available to
+          loan
+        </p>
+        <div className="reservations">
+          {reservations.map((reservation) => {
+            const book = books.find(
+              (book) => book.bookId === reservation.bookId
+            );
+            if (!book) return null;
+            return (
+              <div className="reservations-page-book" key={book.bookId}>
+                <Book book={book}></Book>
+                <button
+                  onClick={() =>
+                    removeReservationHandler(reservation.reservationId)
+                  }
+                >
+                  Remove
+                </button>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );
