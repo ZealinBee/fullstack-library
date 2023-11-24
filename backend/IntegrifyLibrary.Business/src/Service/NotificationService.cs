@@ -13,4 +13,19 @@ public class NotificationService : BaseService<Notification, NotificationDto,Not
         _notificationRepo = notificationRepo;
         _mapper = mapper;
     }
+
+    public async Task<List<NotificationDto>> GetOwnNotifications(Guid userId)
+    {
+        QueryOptions queryOptions = new QueryOptions();
+        var notifications = await _notificationRepo.GetAll(queryOptions);
+        List<NotificationDto> ownNotifications = new List<NotificationDto>();
+        foreach (var notification in notifications)
+        {
+            if (notification.UserId == userId)
+            {
+                ownNotifications.Add(_mapper.Map<NotificationDto>(notification));
+            }
+        }
+        return ownNotifications;
+    }
 }

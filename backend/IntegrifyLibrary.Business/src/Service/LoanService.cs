@@ -10,11 +10,14 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
     private readonly ILoanRepo _repo;
     private readonly IMapper _mapper;
     private readonly IBookRepo _bookRepo;
-    public LoanService(ILoanRepo loanRepo, IMapper mapper, IBookRepo bookRepo) : base(loanRepo, mapper)
+    private readonly INotificationService _notificationService;
+
+    public LoanService(ILoanRepo loanRepo, IMapper mapper, IBookRepo bookRepo, INotificationService notificationService) : base(loanRepo, mapper)
     {
         _repo = loanRepo;
         _mapper = mapper;
         _bookRepo = bookRepo;
+        _notificationService = notificationService;
     }
 
     public async Task<GetLoanDto> CreateLoan(CreateLoanDto dto, Guid userId)
@@ -64,8 +67,16 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
         if (loan == null) throw new ArgumentNullException(nameof(loan));
         foreach (var loanDetail in loan.LoanDetails)
         {
-        var book = await _bookRepo.GetOne(loanDetail.BookId);
-        book.Quantity++;
+            var book = await _bookRepo.GetOne(loanDetail.BookId);
+            book.Quantity++;
+            // if the quantity is 1, then the book went from not available to available
+            if(book.Quantity == 1) {
+                NotificationDto notificationDto = new NotificationDto();
+                notificationDto.NotificationMessage = "Book " + book.BookName + " is now available";
+                notificationDto.NotificationType = "BookAvailable";
+                notificationDto.UserId = loan.UserId;
+                await _notificationService.CreateOne(notificationDto);
+            }
         }   
         loan.ReturnedDate = DateOnly.FromDateTime(DateTime.Now);
         return _mapper.Map<GetLoanDto>(await _repo.UpdateOne(loan));
