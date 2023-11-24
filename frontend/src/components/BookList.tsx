@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useEffect } from "react";
 
 import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { getAllBooks } from "../redux/reducers/booksReducer";
 import useAppSelector from "../redux/hooks/useAppSelector";
 import GetBook from "../interfaces/books/GetBook";
-import { selectCurrentBook } from "../redux/reducers/booksReducer";
-import { addToCart } from "../redux/reducers/cartReducer";
-import Book from "./Book";
 import { BeatLoader } from "react-spinners";
 import Footer from "./Footer";
 import { Pagination } from "@mui/material";
 import { usePaginate } from "../utils/usePaginate";
+import BookListCard from "./BookListCard";
 
 function BookList() {
   const dispatch = useAppDispatch();
@@ -30,15 +26,6 @@ function BookList() {
     }
   }, [dispatch, hasFetched]);
 
-  async function addToCartHandler(book: GetBook) {
-    const response = await dispatch(addToCart(book));
-    if (response.payload === "error") {
-      toast.error("Book is already in loan cart");
-    } else {
-      toast.success(`Book added to loan cart`);
-    }
-  }
-
   return (
     <>
       {!hasFetched ? (
@@ -51,49 +38,9 @@ function BookList() {
           <div className="bookList">
             {paginatedItems.map((book: GetBook) => {
               return (
-                <div key={book.bookId} className="bookList__book">
-                  <Book book={book}></Book>
-                  {currentUser?.role === "User" && (
-                    <button
-                      onClick={() => addToCartHandler(book)}
-                      className="bookList__add-book"
-                    >
-                      Add to Cart
-                    </button>
-                  )}
-                  {!currentUser && (
-                    <Link to={"/auth"}>
-                      <button className="bookList__add-book">
-                        Log In to Loan
-                      </button>
-                    </Link>
-                  )}
-                  {currentUser?.role === "Librarian" && (
-                    <Link
-                      to={`/books/${book.bookId}`}
-                      onClick={() => dispatch(selectCurrentBook(book))}
-                    >
-                      <button className="bookList__add-book">
-                        Manage Book
-                      </button>
-                    </Link>
-                  )}
-                </div>
+                <BookListCard book={book} key={book.bookId}></BookListCard>
               );
             })}
-
-            <ToastContainer
-              position="bottom-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
           </div>
           <Pagination
             count={Math.ceil(books.length / 10)}

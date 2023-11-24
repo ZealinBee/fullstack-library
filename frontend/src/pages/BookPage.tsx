@@ -92,7 +92,7 @@ function BookPage() {
                 )
               ) : (
                 <button disabled className="bookList__add-book">
-                  Already in Loan Cart
+                  Already in Cart
                 </button>
               ))}
             {!currentUser && (

@@ -105,3 +105,8 @@ textarea {
   margin-top:1.75rem;
   margin-left: $margin-left;
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor:not-allowed;
+}
