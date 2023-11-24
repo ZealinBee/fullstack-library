@@ -7,6 +7,7 @@ import authorsReducer from "./reducers/authorsReducer";
 import loansReducer from "./reducers/loansReducer";
 import genresReducer from "./reducers/genresReducer";
 import reservationsReducer from "./reducers/reservationsReducer";
+import notificationReducer from "./reducers/notificationReducer";
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     loans: loansReducer,
     genres: genresReducer,
     reservations: reservationsReducer,
+    notifications: notificationReducer,
   },
 });
 

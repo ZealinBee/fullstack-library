@@ -8,7 +8,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import StarHalfRoundedIcon from '@mui/icons-material/StarHalfRounded';
+import StarHalfRoundedIcon from "@mui/icons-material/StarHalfRounded";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import Search from "./Search";
@@ -137,10 +138,26 @@ function Header() {
                 <div className="icon-wrapper">
                   <StarHalfRoundedIcon />
                 </div>
-                {currentUser.role === "Librarian" ? "All Reservations" : "My Reservations"}
+                {currentUser.role === "Librarian"
+                  ? "All Reservations"
+                  : "My Reservations"}
               </NavLink>{" "}
             </li>
           ) : null}
+          {currentUser && (
+            <li>
+              
+              <NavLink
+                to={"/notifications"}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                <div className="icon-wrapper">
+                  <NotificationsIcon />
+                </div>
+                Notifications
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </>
