@@ -28,7 +28,6 @@ export const getOwnNotifications = createAsyncThunk(
           },
         }
       );
-      console.log(response.data)
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -43,6 +42,39 @@ export const getOwnNotifications = createAsyncThunk(
   }
 );
 
+export const deleteOwnNotification = createAsyncThunk(
+  "notifications/deleteOwnNotification",
+  async ({
+    jwt_token,
+    notificationId,
+  }: {
+    jwt_token: string | null;
+    notificationId: string;
+  }) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/notifications/own-notifications/${notificationId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        }
+      );
+      return notificationId;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+)
+
 const notificationSlice = createSlice({
   name: "notifications",
   initialState,
@@ -53,6 +85,11 @@ const notificationSlice = createSlice({
       state.error = null;
       state.notifications = action.payload;
     });
+    builder.addCase(deleteOwnNotification.fulfilled,(state, action) => {
+      state.loading = false;
+      state.error = null;
+      state.notifications = state.notifications.filter(notification => notification.notificationId !== action.payload);
+    })
   }
 });
 

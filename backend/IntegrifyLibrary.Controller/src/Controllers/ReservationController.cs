@@ -45,7 +45,6 @@ public class ReservationController : BaseController<Reservation, CreateReservati
     public async Task<ActionResult<bool>> DeleteOwnReservation([FromRoute] Guid id)
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-        Console.WriteLine(userIdClaim);
         var result = await _reservationService.DeleteOne(id);
         if (result == null)
         {

@@ -26,4 +26,19 @@ public class NotificationController : BaseController<Notification, NotificationD
         return Ok(result);
     }
 
+    [Authorize(Roles = "User, Librarian")]
+    [HttpDelete("own-notifications/{id}")]
+    [ProducesResponseType(statusCode: 200)]
+    [ProducesResponseType(statusCode: 404)]
+    public async Task<ActionResult> DeleteOwnNotification([FromRoute] Guid id)
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        var result = await _notificationService.DeleteOne(id);
+        if (result == null)
+        {
+            return NotFound();
+        }
+        return NoContent();
+    }
+
 }
