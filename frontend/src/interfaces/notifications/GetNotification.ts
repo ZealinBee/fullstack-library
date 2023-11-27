@@ -3,4 +3,5 @@ export interface GetNotification {
     notificationMessage: string;
     notificationType: string;
     userId: string;
+    notificationData: Record<string, string>;
 }

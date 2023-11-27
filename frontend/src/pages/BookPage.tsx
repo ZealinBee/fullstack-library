@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import Header from "../components/Header";
@@ -10,7 +9,8 @@ import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { deleteBook } from "../redux/reducers/booksReducer";
 import EditBook from "../components/EditBook";
 import { createReservation } from "../redux/reducers/reservationsReducer";
-import { current } from "@reduxjs/toolkit";
+import { selectCurrentBook } from "../redux/reducers/booksReducer";
+import { getBookById } from "../redux/reducers/booksReducer";
 
 function BookPage() {
   let currentBook = useAppSelector((state) => state.books.currentBook);
@@ -21,13 +21,11 @@ function BookPage() {
     state.cart.cartItems.find((item) => item.bookId === currentBook?.bookId)
   );
   const [editMode, setEditMode] = React.useState(false);
-  const navigate = useNavigate();
   const isReserved = useAppSelector((state) =>
     state.reservations.reservations.find(
       (reservation) => reservation.bookId === currentBook?.bookId
     )
   );
-
   function addToCartHandler() {
     dispatch(addToCart(currentBook));
     toast.success("Book added to loan cart");
@@ -55,18 +53,18 @@ function BookPage() {
 
   useEffect(() => {
     if (currentBook === null) {
-      navigate("/");
+      const bookId = window.location.pathname.split("/")[2];
+      const book = dispatch(getBookById(bookId));
+      dispatch(selectCurrentBook(book));
     }
   }, []);
 
   return (
     <>
       <Header />
-      <Link to="/" >
+      <Link to="/">
         {" "}
-        <button className="back-button">
-          Home
-        </button>
+        <button className="back-button">Home</button>
       </Link>
       {currentBook && (
         <div className="book-page">

@@ -165,6 +165,7 @@ export const updateBook = createAsyncThunk(
   }
 );
 
+
 const booksSlice = createSlice({
   name: "books",
   initialState,
@@ -244,6 +245,10 @@ const booksSlice = createSlice({
       .addCase(createBook.fulfilled, (state, action) => {
         state.books.push(action.payload);
         state.loading = false;
+        state.error = null;
+      })
+      .addCase(getBookById.pending, (state, action) => {
+        state.loading = true;
         state.error = null;
       })
       .addCase(getBookById.fulfilled, (state, action) => {

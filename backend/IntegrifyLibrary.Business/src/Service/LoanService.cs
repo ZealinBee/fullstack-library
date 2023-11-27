@@ -83,6 +83,7 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
                         notificationDto.NotificationMessage = "Book " + book.BookName + " is now available";
                         notificationDto.NotificationType = "BookAvailable";
                         notificationDto.UserId = reservation.UserId;
+                        notificationDto.NotificationData.Add("BookId", book.BookId.ToString());
                         await _notificationService.CreateOne(notificationDto);
                         await _reservationService.DeleteOne(reservation.ReservationId);
                     }

@@ -13,7 +13,6 @@ import BookListCard from "./BookListCard";
 function BookList() {
   const dispatch = useAppDispatch();
   const books = useAppSelector((state) => state.books.books);
-  const currentUser = useAppSelector((state) => state.users.currentUser);
   const hasFetched = useAppSelector((state) => state.books.hasFetched);
   const { handlePageChange, paginatedItems } = usePaginate({
     items: books,

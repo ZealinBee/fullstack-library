@@ -1,4 +1,26 @@
 @import "../variables.scss";
 
 .notification {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.notification::after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 1px;
+  opacity: 20%;
+  background-color: $gray;
+  bottom: -5px;
+}
+
+.notification__icon {
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  background-color: rgb(244, 244, 244, 0.75);
+  padding: 0.4rem 0.65rem 0.1rem 0.65rem;
+  border-radius:0.25rem;
 }
