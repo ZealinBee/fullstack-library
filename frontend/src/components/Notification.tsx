@@ -11,6 +11,7 @@ import useAppDispatch from "../redux/hooks/useAppDispatch";
 import { getBookById } from "../redux/reducers/booksReducer";
 import { deleteOwnNotification } from "../redux/reducers/notificationReducer";
 import useAppSelector from "../redux/hooks/useAppSelector";
+import { getLoanById } from "../redux/reducers/loansReducer";
 
 interface NotificationProps {
   notification: GetNotification;
@@ -35,8 +36,8 @@ function Notification({ notification }: NotificationProps) {
       const book = await dispatch(getBookById(notificationDataId));
       await dispatch(selectCurrentBook(book.payload));
     } else {
-      // fix later
-      dispatch(setCurrentLoan(notificationDataId));
+      const loan = await dispatch(getLoanById(notificationDataId));
+      dispatch(setCurrentLoan(loan.payload));
     }
     navigate(redirectionUrl);
   }

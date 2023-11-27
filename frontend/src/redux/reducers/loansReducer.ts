@@ -71,6 +71,27 @@ export const getOwnLoans = createAsyncThunk(
   }
 );
 
+export const getLoanById = createAsyncThunk(
+  "loans/getLoanById",
+  async (loanId: string) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_FETCH_HOST}/api/v1/loans/${loanId}`
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const responseData = error.response?.data;
+        const warningMessage = responseData.message;
+        throw new Error(warningMessage);
+      } else {
+        console.error(error);
+        throw error;
+      }
+    }
+  }
+);
+
 export const returnLoan = createAsyncThunk(
   "loans/returnLoan",
   async ({
@@ -126,7 +147,7 @@ const loansSlice = createSlice({
       .addCase(returnLoan.fulfilled, (state, action) => {
         state.currentLoan = action.payload;
         state.loading = false;
-      })
+      });
   },
 });
 

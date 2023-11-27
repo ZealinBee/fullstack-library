@@ -53,8 +53,6 @@ public class ScheduledService : BackgroundService
                     }
                 }
             }
-            // delay for 24 hours
-            // await Task.Delay(86400000, stoppingToken);
         }
     }
 }
