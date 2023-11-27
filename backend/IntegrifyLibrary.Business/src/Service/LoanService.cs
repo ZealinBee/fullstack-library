@@ -74,7 +74,7 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
             // if the quantity is 1, then the book went from not available to available
             if(book.Quantity == 1) {
                 // check if there is a reservation for this book
-                var reservations = await _reservationService.GetOwnReservations(loan.UserId);
+                var reservations = await _reservationService.GetAll(queryOptions: new QueryOptions());
                 foreach (var reservation in reservations)
                 {
                     if(reservation.BookId == book.BookId) {
@@ -82,8 +82,9 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
                         NotificationDto notificationDto = new NotificationDto();
                         notificationDto.NotificationMessage = "Book " + book.BookName + " is now available";
                         notificationDto.NotificationType = "BookAvailable";
-                        notificationDto.UserId = loan.UserId;
+                        notificationDto.UserId = reservation.UserId;
                         await _notificationService.CreateOne(notificationDto);
+                        await _reservationService.DeleteOne(reservation.ReservationId);
                     }
                 }
             }

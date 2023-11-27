@@ -8,6 +8,7 @@
 @use "./components/edit";
 @use "./components/search";
 @use "./components/footer";
+@use "./components/notification";
 
 @use "./pages/auth.scss";
 @use "./pages/book-page";
@@ -19,6 +20,7 @@
 @use "./pages/genre-page";
 @use "./pages/loan-page";
 @use "./pages/reservation-page";
+@use "./pages/notification-page";
 
 @import "./variables.scss";
 

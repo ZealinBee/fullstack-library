@@ -42,7 +42,7 @@ public class ReservationController : BaseController<Reservation, CreateReservati
     [HttpDelete("own-reservations/{id}")]
     [ProducesResponseType(statusCode: 204)]
     [ProducesResponseType(statusCode: 404)]
-    public  async Task<ActionResult<bool>> DeleteOwnReservation([FromRoute] Guid id)
+    public async Task<ActionResult<bool>> DeleteOwnReservation([FromRoute] Guid id)
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
         Console.WriteLine(userIdClaim);

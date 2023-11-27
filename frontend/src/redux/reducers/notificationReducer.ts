@@ -50,7 +50,7 @@ const notificationSlice = createSlice({
     builder.addCase(getOwnNotifications.fulfilled, (state, action) => {
       state.loading = false;
       state.error = null;
-      state.notifications = action.payload.notifications;
+      state.notifications = action.payload;
     });
   }
 });
