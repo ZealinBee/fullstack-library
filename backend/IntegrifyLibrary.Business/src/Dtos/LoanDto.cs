@@ -9,6 +9,8 @@ public class GetLoanDto
     public DateOnly DueDate { get; set; }
     public DateOnly ReturnedDate { get; set; }
     public List<LoanDetails> LoanDetails { get; set; }
+    public bool IsReturned { get; set; }
+    public bool IsOverdue { get; set; }
 }
 
 public class CreateLoanDto
@@ -24,4 +26,6 @@ public class UpdateLoanDto
     public DateOnly LoanDate { get; set; }
     public DateOnly DueDate { get; set; }
     public DateOnly ReturnedDate { get; set; }
+    public bool IsReturned { get; set; }
+    public bool IsOverdue { get; set; }
 }

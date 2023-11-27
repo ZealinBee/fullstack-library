@@ -12,5 +12,7 @@ namespace IntegrifyLibrary.Domain
         public DateOnly CreatedAt { get; set; }
         public DateOnly ModifiedAt { get; set; }
         public List<LoanDetails> LoanDetails { get; set; } = new List<LoanDetails>();
+        public bool IsReturned { get; set; } = false;
+        public bool IsOverdue { get; set; } = false;
     }
 }

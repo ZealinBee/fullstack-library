@@ -22,14 +22,20 @@ function NotificationPage() {
       <Header></Header>
       <h1 className="top">Notifications</h1>
       <div className="notifications">
-        {notifications.map((notification) => {
-          return (
-            <Notification
-              notification={notification}
-              key={notification.notificationId}
-            ></Notification>
-          );
-        })}
+        {
+          notifications.length === 0 ? (
+            <p className="no-notifications">Your notifications about your reserved books, overdue books will be here</p>
+          ) : (
+            notifications.map((notification) => {
+              return (
+                <Notification
+                  notification={notification}
+                  key={notification.notificationId}
+                ></Notification>
+              );
+            })
+          )
+        }
       </div>
     </>
   );

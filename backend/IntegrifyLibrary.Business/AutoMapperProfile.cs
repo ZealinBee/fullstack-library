@@ -47,5 +47,7 @@ public class AutoMapperProfile : Profile
         CreateMap<ReservationDto, Reservation>();
         CreateMap<CreateReservationDto, Reservation>();
         CreateMap<Reservation, CreateReservationDto>();
+        CreateMap<GetLoanDto, UpdateLoanDto>();
+        CreateMap<UpdateLoanDto, GetLoanDto>();
     }
 }
