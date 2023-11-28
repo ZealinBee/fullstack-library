@@ -9,7 +9,7 @@ interface BooksState {
   loading: boolean;
   error: AxiosError | null;
   currentBook: GetBook | null;
-  searchedBook: GetBook[] | null;
+  searchedBooks: GetBook[] | null;
   hasFetched: boolean;
 }
 
@@ -18,7 +18,7 @@ const initialState: BooksState = {
   loading: false,
   error: null,
   currentBook: null,
-  searchedBook: [],
+  searchedBooks: [],
   hasFetched: false,
 };
 
@@ -176,7 +176,7 @@ const booksSlice = createSlice({
     searchBooks: (state, action) => {
       const searchValue = action.payload.toLowerCase();
       if (searchValue !== "") {
-        state.searchedBook = state.books.filter(
+        state.searchedBooks = state.books.filter(
           (book) =>
             book.bookName.toLowerCase().includes(searchValue) ||
             book.authorName.toLowerCase().includes(searchValue) ||

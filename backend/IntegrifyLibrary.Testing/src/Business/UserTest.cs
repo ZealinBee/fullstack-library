@@ -19,7 +19,7 @@ public class UserTest
     }
 
     [Fact]
-    public void CreateOne_Should_Create_New_User_Successfully()
+    public async void CreateOne_Should_Create_New_User_Successfully()
     {
         var userService = new UserService(_mockUserRepo.Object, _mapper);
         var createDto = new CreateUserDto
@@ -31,9 +31,9 @@ public class UserTest
         };
         var createdUser = _mapper.Map<User>(createDto);
 
-        _mockUserRepo.Setup(repo => repo.CreateOne(It.IsAny<User>())).Returns(createdUser);
-
-        var result = userService.CreateOne(createDto);
+        _mockUserRepo.Setup((repo) => repo.CreateOne(It.IsAny<User>())).Returns(createdUser);
+        
+        var result = await userService.CreateOne(createDto);
 
         Assert.NotNull(result);
         Assert.Equal(createDto.FirstName, result.FirstName);
@@ -50,8 +50,8 @@ public class UserTest
             Email = "wrongemail@mail.com",
             Password = "wrongpassword"
         };
-
-        Assert.Throws<Exception>(() => authService.VerifyCredentials(loginDto));
+    
+        Assert.ThrowsAsync<Exception>(() => authService.VerifyCredentials(loginDto));
     }
 
 }

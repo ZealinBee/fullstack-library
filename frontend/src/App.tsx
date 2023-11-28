@@ -19,6 +19,7 @@ import LoanPage from "./pages/LoanPage";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import ReservationPage from "./pages/ReservationPage";
 import NotificationPage from "./pages/NotificationPage";
+import SearchPage from "./pages/SearchPage";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,11 @@ const router = createBrowserRouter([
   {
     path: "/notifications",
     element: <NotificationPage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/search",
+    element: <SearchPage />,
     errorElement: <NotFoundPage />,
   },
 

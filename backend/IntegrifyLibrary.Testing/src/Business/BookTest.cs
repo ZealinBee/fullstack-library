@@ -18,9 +18,8 @@ public class BookTest
     }
 
     [Fact]
-    public void CreateOne_Should_Create_New_Book_Successfully()
+    public async void CreateOne_Should_Create_New_Book_Successfully()
     {
-        // Arrange
         var bookService = new BookService(_mockBookRepo.Object, _mapper);
         var createDto = new BookDto
         {
@@ -32,13 +31,14 @@ public class BookTest
             PageCount = 200,
             PublishedDate = new DateOnly(2023, 8, 16),
             GenreId = Guid.NewGuid(),
-            AuthorId = Guid.NewGuid()
+            AuthorId = Guid.NewGuid(),
+            LoanedTimes = 0
         };
         var createdBook = _mapper.Map<Book>(createDto);
 
         _mockBookRepo.Setup(repo => repo.CreateOne(It.IsAny<Book>())).Returns(createdBook);
 
-        var result = bookService.CreateOne(createDto);
+        var result = await bookService.CreateOne(createDto);
 
         Assert.NotNull(result);
         Assert.Equal(createDto.BookName, result.BookName);
@@ -46,12 +46,12 @@ public class BookTest
     }
 
     [Fact]
-    public void CreateOne_Should_Throw_Exception_When_Book_Is_Null()
+    public async void CreateOne_Should_Throw_Exception_When_Book_Is_Null()
     {
         var bookService = new BookService(_mockBookRepo.Object, _mapper);
         BookDto createDto = null;
 
-        Assert.Throws<ArgumentNullException>(() => bookService.CreateOne(createDto));
+        Assert.ThrowsAsync<ArgumentNullException>(() => bookService.CreateOne(createDto));
     }
 
 

@@ -1,11 +1,11 @@
 # Introduction
 
-This is an online library that acts like your local city library. The user can create accounts and loan books, and the librarian can manage the books in the library. The website gives users and librarians different privileges, i.e. access to the different functionalities of the website. The admins have a detailed dashboard where they can manage the users, for example, admin have the right to delete an user or give the user the admin. It is also possible for the user to remove their own account. Feel free to make accounts and mess around with the functionalities. The website is hosted with azure virtual machine with ubuntu + nginx.
+This is an online library that acts like your local city library. The user can create accounts and loan books, and the librarian can manage the books in the library. The website gives users and librarians different privileges, i.e. access to the different functionalities of the website. The admins have a detailed dashboard where they can manage the users and books, for example, admin have the right to delete an user or give the user the admin. It is also possible for the user to remove their own account. Feel free to make accounts and mess around with the functionalities. The website API is hosted on Azure App Service.
 
 ### Deployment
 
-[FRONTEND LINK](https://integrify-library.netlify.app/)  
-[BACKEND LINK (Hosted on Azure App Service)](https://integrify-library.azurewebsites.net/swagger/index.html)
+[Front-End Link, Click here](https://integrify-library.netlify.app/)  
+[Back-end Link (Hosted on Azure App Service)](https://integrify-library.azurewebsites.net/swagger/index.html)
 
 ## Table of Content
 
@@ -35,6 +35,7 @@ This is an online library that acts like your local city library. The user can c
 
 - Authorization and authentication with JWT
 - Error handling
+- Notification for Book Reservation and Overdue
 
 #### Librarian :
 
@@ -42,16 +43,16 @@ This is an online library that acts like your local city library. The user can c
 - CRUD operations on the books
 - CRUD operation on the authors
 - CRUD operation on the genres
-- See all the loans of the users, can choose to manage them as well
+- See all the loans of the users, can manage them as well
 
 #### User :
 
 - Loan books and CRUD on own loans, ability view the loan history
-- Create new accounts
-- Read, update and delete their own profile
+- CRUD on own account
 - See all the books and able to search and sort through the books
 - Get all authors
 - Get all genres
+- Create Reservation for Unavailable Book
 
 ## Getting Started
 
@@ -61,3 +62,4 @@ This is an online library that acts like your local city library. The user can c
 To test the librarian functionalities for the website, the credentials for admin/librarian is:
 email: admin@mail.com
 password: admin123
+To test the user, feel free to just create an user

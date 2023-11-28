@@ -17,13 +17,16 @@ function Search() {
   const [search, setSearch] = useState("");
   const [reset, setReset] = useState(false);
   const [select, setSelect] = useState("Upload Date Descending");
+  const navigate = useNavigate();
 
   function onSearchHandler() {
     dispatch(searchBooks(search));
     setReset(true);
+    navigate("/search");
   }
   function resetHandler() {
     setSearch("");
+    navigate("/");
     setReset(false);
     dispatch(searchBooks(""));
   }
@@ -34,7 +37,6 @@ function Search() {
     dispatch(sortBooks(e.target.value));
   }
 
-  // this useEffect is used to reset the books array to the original state without additional fetching
   useEffect(() => {
     dispatch(searchBooks(""));
   }, [dispatch]);
@@ -58,7 +60,7 @@ function Search() {
           </div>
           {reset ? (
             <button className="reset-button" onClick={resetHandler}>
-              Reset
+              Back
             </button>
           ) : null}
         </div>
