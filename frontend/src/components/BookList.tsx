@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import { Pagination } from "@mui/material";
 import { usePaginate } from "../utils/usePaginate";
 import BookListCard from "./BookListCard";
+import { sortBooks } from "../redux/reducers/booksReducer";
 
 function BookList() {
   const dispatch = useAppDispatch();
@@ -22,6 +23,8 @@ function BookList() {
   useEffect(() => {
     if (hasFetched === false) {
       dispatch(getAllBooks());
+    } else if (hasFetched === true) {
+      dispatch(sortBooks("Upload Date Descending"));
     }
   }, [dispatch, hasFetched]);
 

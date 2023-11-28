@@ -33,13 +33,8 @@ function Search() {
 
   function selectChangeHandler(e: SelectChangeEvent) {
     setSelect(e.target.value);
-    setReset(true);
     dispatch(sortBooks(e.target.value));
   }
-
-  useEffect(() => {
-    dispatch(searchBooks(""));
-  }, [dispatch]);
 
   return (
     <>
@@ -72,18 +67,10 @@ function Search() {
             onChange={selectChangeHandler}
             sx={{ fontSize: "0.85rem", fontFamily: "poppins" }}
           >
-            <MenuItem value="Upload Date Descending">
-              Newest Uploads
-            </MenuItem>
-            <MenuItem value="Upload Date Ascending">
-              Oldest Uploads
-            </MenuItem>
-            <MenuItem value="Popularity Descending">
-              Most Popular
-            </MenuItem>
-            <MenuItem value="Popularity Ascending">
-              Least Popular
-            </MenuItem>
+            <MenuItem value="Upload Date Descending">Newest Uploads</MenuItem>
+            <MenuItem value="Upload Date Ascending">Oldest Uploads</MenuItem>
+            <MenuItem value="Popularity Descending">Most Popular</MenuItem>
+            <MenuItem value="Popularity Ascending">Least Popular</MenuItem>
           </Select>
         </FormControl>
       </div>

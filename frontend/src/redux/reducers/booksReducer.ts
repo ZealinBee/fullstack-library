@@ -218,6 +218,13 @@ const booksSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.hasFetched = true;
+        // Sort books by upload date descending
+        state.books = state.books.sort((a, b) => {
+          return (
+            new Date(b.publishedDate).getTime() -
+            new Date(a.publishedDate).getTime()
+          );
+        })
       })
       .addCase(deleteBook.fulfilled, (state, action) => {
         state.books = state.books.filter(
