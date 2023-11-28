@@ -9,7 +9,7 @@ using AutoMapper;
 namespace IntegrifyLibrary.Business;
 public class ScheduledService : BackgroundService
 {
-    // Checks for overdue loans every day, and sends notifications to users if they have overdue    loans
+    // Checks for overdue loans every day, and sends notifications to users if they have overdue loans
     private readonly PeriodicTimer _timer = new (TimeSpan.FromDays(1));
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly IMapper _mapper;
