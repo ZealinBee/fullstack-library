@@ -88,7 +88,7 @@ function Login({
               ></BeatLoader>
             ) : null}
           </button>
-          <GoogleLogin
+          {/* <GoogleLogin
             clientId="1096646429447-u3c733v9j1sf3t0maqkmn9tmp4ka3c3q.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={(response) => {
@@ -98,7 +98,7 @@ function Login({
               console.log(response);
             }}
             cookiePolicy={"single_host_origin"}
-          ></GoogleLogin>
+          ></GoogleLogin> */}
         </form>
       </div>
       <ToastContainer

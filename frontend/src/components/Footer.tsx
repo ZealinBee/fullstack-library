@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer>
       <a
-        href="http://98.71.53.99/swagger/index.html"
+        href="https://integrify-library.azurewebsites.net/swagger/index.html"
         target="_blank"
         rel="noreferrer"
       >

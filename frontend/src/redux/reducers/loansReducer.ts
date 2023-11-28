@@ -2,6 +2,8 @@ import axios, { AxiosError } from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import GetLoan from "../../interfaces/loans/GetLoan";
+import { getBookById } from "./booksReducer";
+import LoanDetails from "../../interfaces/loans/LoanDetails";
 
 interface LoansState {
   loans: GetLoan[];
@@ -94,13 +96,16 @@ export const getLoanById = createAsyncThunk(
 
 export const returnLoan = createAsyncThunk(
   "loans/returnLoan",
-  async ({
-    jwt_token,
-    loanId,
-  }: {
-    jwt_token: string | null;
-    loanId: string;
-  }) => {
+  async (
+    {
+      jwt_token,
+      loanId,
+    }: {
+      jwt_token: string | null;
+      loanId: string;
+    },
+    { dispatch }
+  ) => {
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_FETCH_HOST}/api/v1/loans/return/${loanId}`,
@@ -112,6 +117,12 @@ export const returnLoan = createAsyncThunk(
           },
         }
       );
+      if (response.data) {
+        response.data.loanDetails.forEach((loanDetail: LoanDetails) => {
+          // Update the book details in the store
+          dispatch(getBookById(loanDetail.bookId));
+        });
+      }
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -145,8 +156,16 @@ const loansSlice = createSlice({
         state.loading = false;
       })
       .addCase(returnLoan.fulfilled, (state, action) => {
-        state.currentLoan = action.payload;
+        const updatedLoan = action.payload;
+        state.currentLoan = updatedLoan;
         state.loading = false;
+        state.error = null;
+        state.loans = state.loans.map((loan) => {
+          if (loan.loanId === updatedLoan.loanId) {
+            return updatedLoan;
+          }
+          return loan;
+        });
       });
   },
 });

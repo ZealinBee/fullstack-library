@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 import useAppSelector from "../redux/hooks/useAppSelector";
 import Header from "../components/Header";
@@ -17,14 +17,17 @@ function AuthorPage() {
   const navigate = useNavigate();
   const [editMode, setEditMode] = useState(false);
 
-  function deleteAuthorHandler(authorId: string | undefined) {
+  async function deleteAuthorHandler(authorId: string | undefined) {
     if (!authorId || !token) return;
-    dispatch(deleteAuthor({ authorId: authorId, jwt_token: token }));
+    const response = await dispatch(deleteAuthor({ authorId: authorId, jwt_token: token }));
+    if (response.type === "authors/deleteAuthor/fulfilled") {
+      navigate("/authors");
+    }
   }
 
   useEffect(() => {
     if (currentAuthor === null) {
-      navigate("/");
+      toast.success("Author deleted");
     }
   }, []);
 

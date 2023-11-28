@@ -31,7 +31,7 @@ function BookPage() {
     toast.success("Book added to loan cart");
   }
 
-  function deleteBookHandler(bookId: string | undefined) {
+  async function deleteBookHandler(bookId: string | undefined) {
     if (!bookId) return;
     const isConfirmed = window.confirm(
       `Are you sure you want to delete ${currentBook?.bookName}?`
@@ -39,7 +39,10 @@ function BookPage() {
     if (!isConfirmed) {
       return;
     }
-    dispatch(deleteBook({ bookId: bookId, jwt_token: token }));
+    const response = await dispatch(deleteBook({ bookId: bookId, jwt_token: token }));
+    if (response.type === "books/deleteBook/fulfilled") {
+      toast.success("Book deleted");
+    }
   }
 
   async function reserveBookHandler() {

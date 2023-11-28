@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { gapi } from "gapi-script";
 
 import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
@@ -98,6 +99,15 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: "1096646429447-u3c733v9j1sf3t0maqkmn9tmp4ka3c3q.apps.googleusercontent.com",
+        scope: "https://www.googleapis.com/auth/gmail.readonly"
+      })
+    }
+    gapi.load('client:auth2', start)
+  }, [])
   return (
     <>
       <RouterProvider router={router} />

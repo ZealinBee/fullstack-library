@@ -45,9 +45,12 @@ export const loanBooks = createAsyncThunk(
           },
         }
       );
-      response.data.loanDetails.forEach((loan: LoanDetails) => {
-        dispatch(getBookById(loan.bookId));
-      });
+      if (response.data) {
+        response.data.loanDetails.forEach((loanDetail: LoanDetails) => {
+          // Update the book details in the store
+          dispatch(getBookById(loanDetail.bookId));
+        });
+      }
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {

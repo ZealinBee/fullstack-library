@@ -26,7 +26,6 @@ export const getAllAuthors = createAsyncThunk(
       const response = await axios.get<GetAuthor[]>(
         `${process.env.REACT_APP_FETCH_HOST}/api/v1/authors`
       );
-      console.log(response.data)
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
