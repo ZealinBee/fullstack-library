@@ -19,7 +19,7 @@ public class UserTest
     }
 
     [Fact]
-    public async void CreateOne_Should_Create_New_User_Successfully()
+    public async Task CreateOne_Should_Create_New_User_Successfully()
     {
         var userService = new UserService(_mockUserRepo.Object, _mapper);
         var createDto = new CreateUserDto
@@ -31,7 +31,7 @@ public class UserTest
         };
         var createdUser = _mapper.Map<User>(createDto);
 
-        _mockUserRepo.Setup((repo) => repo.CreateOne(It.IsAny<User>())).Returns(createdUser);
+        _mockUserRepo.Setup((repo) => repo.CreateOne(It.IsAny<User>())).ReturnsAsync(createdUser);
         
         var result = await userService.CreateOne(createDto);
 
