@@ -1,6 +1,6 @@
 # Introduction
 
-This is an online library that acts like your local city library. The user can create accounts and loan books, and the librarian can manage the books in the library. The website gives users and librarians different privileges, i.e. access to the different functionalities of the website. The admins have a detailed dashboard where they can manage the users and books, for example, admin have the right to delete an user or give the user the admin. It is also possible for the user to remove their own account. Feel free to make accounts and mess around with the functionalities. The website API is hosted on Azure App Service.
+Welcome to the Integrify Library Management System, an online platform designed to replicate the functionality of your local city library. This comprehensive documentation provides a detailed overview of the system's features, technologies used, deployment details, and instructions for getting started.
 
 ### Deployment
 
@@ -31,6 +31,17 @@ This is an online library that acts like your local city library. The user can c
 - .NET Core
 - Azure
 
+## Getting Started
+
+[FRONTEND LINK](https://integrify-library.netlify.app/)  
+[BACKEND LINK (Hosted on Azure App Service)](https://integrify-library.azurewebsites.net/swagger/index.html)
+
+To test the librarian functionalities for the website, the credentials for admin/librarian is:
+- email: admin@mail.com
+- password: admin123
+  
+To test the user, feel free to just create an user
+
 ## Features
 
 - Authorization and authentication with JWT
@@ -53,13 +64,3 @@ This is an online library that acts like your local city library. The user can c
 - Get all authors
 - Get all genres
 - Create Reservation for Unavailable Book
-
-## Getting Started
-
-[FRONTEND LINK](https://integrify-library.netlify.app/)  
-[BACKEND LINK (Hosted on Azure App Service)](https://integrify-library.azurewebsites.net/swagger/index.html)
-
-To test the librarian functionalities for the website, the credentials for admin/librarian is:
-email: admin@mail.com
-password: admin123
-To test the user, feel free to just create an user

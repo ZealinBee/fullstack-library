@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
+// I am only mainly testing the Book Service, because all services are using the same base class, if the tests here pass, then the other services should pass as well. I will only test other service methods that are not in the base class.
+
 namespace IntegrifyLibrary.Testing.Business
 {
     public class BookTest

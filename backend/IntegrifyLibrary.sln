@@ -3,23 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrifyLibrary.Infrastructure", "IntegrifyLibrary.Infrastructure\IntegrifyLibrary.Infrastructure.csproj", "{3E85FA1A-07B7-4A29-BEA9-C87933B74A2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrifyLibrary.Infrastructure", "IntegrifyLibrary.Infrastructure\IntegrifyLibrary.Infrastructure.csproj", "{3E85FA1A-07B7-4A29-BEA9-C87933B74A2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrifyLibrary.Business", "IntegrifyLibrary.Business\IntegrifyLibrary.Business.csproj", "{04D8966D-D88C-489F-BFD6-DBC8BB49A1E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrifyLibrary.Business", "IntegrifyLibrary.Business\IntegrifyLibrary.Business.csproj", "{04D8966D-D88C-489F-BFD6-DBC8BB49A1E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrifyLibrary.Domain", "IntegrifyLibrary.Domain\IntegrifyLibrary.Domain.csproj", "{523F76B4-A27F-431E-AC3A-91A03F499BFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrifyLibrary.Domain", "IntegrifyLibrary.Domain\IntegrifyLibrary.Domain.csproj", "{523F76B4-A27F-431E-AC3A-91A03F499BFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrifyLibrary.Controller", "IntegrifyLibrary.Controller\IntegrifyLibrary.Controller.csproj", "{AF0F92A2-F846-4541-BE43-C370806BDE4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrifyLibrary.Controller", "IntegrifyLibrary.Controller\IntegrifyLibrary.Controller.csproj", "{AF0F92A2-F846-4541-BE43-C370806BDE4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrifyLibrary.Testing", "IntegrifyLibrary.Testing\IntegrifyLibrary.Testing.csproj", "{E45D2187-62B5-4370-9A6C-778523D9496C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrifyLibrary.Testing", "IntegrifyLibrary.Testing\IntegrifyLibrary.Testing.csproj", "{E45D2187-62B5-4370-9A6C-778523D9496C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrifyLibrary.IntegrationTesting", "IntegrationTesting\IntegrifyLibrary.IntegrationTesting.csproj", "{7DDEA4FC-D1F1-4FDA-8747-49E565C0A822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3E85FA1A-07B7-4A29-BEA9-C87933B74A2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -42,5 +41,15 @@ Global
 		{E45D2187-62B5-4370-9A6C-778523D9496C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E45D2187-62B5-4370-9A6C-778523D9496C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E45D2187-62B5-4370-9A6C-778523D9496C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DDEA4FC-D1F1-4FDA-8747-49E565C0A822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DDEA4FC-D1F1-4FDA-8747-49E565C0A822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DDEA4FC-D1F1-4FDA-8747-49E565C0A822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DDEA4FC-D1F1-4FDA-8747-49E565C0A822}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E7F6EE4F-8C9A-44D6-B74F-1B4EC4357549}
 	EndGlobalSection
 EndGlobal
