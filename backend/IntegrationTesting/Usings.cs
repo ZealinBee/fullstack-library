@@ -1,0 +1,16 @@
+global using Xunit;
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Text;
+global using System.Threading.Tasks;
+global using System.Net;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.InMemory;
+global using Microsoft.AspNetCore.Mvc.Testing;
+global using IntegrifyLibrary.Business;
+global using IntegrifyLibrary.Domain;
+global using IntegrifyLibrary.Infrastructure;
