@@ -1,30 +1,44 @@
-using IntegrifyLibrary.Infrastructure;
+using System;
+using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Logging;
+
+
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureTestServices(services =>
+        builder.ConfigureServices(services =>
         {
-            services.RemoveAll(typeof(DatabaseContext));
+            var descriptor = services.SingleOrDefault(
+                d => d.ServiceType == typeof(DbContextOptions<DatabaseContext>));
+            if (descriptor != null)
+            {
+                services.Remove(descriptor);
+            }
+
+            services.AddDbContext<DatabaseContext>((options, context) =>
+            {
+                context.UseNpgsql("Host=localhost;Port=5432;Username=tester;Password=password;Database=integration_library").UseSnakeCaseNamingConvention();
+            });
+
+            var sp = services.BuildServiceProvider();
+            bool isDatabaseDeleted = false;
+
+            using (var scope = sp.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<DatabaseContext>();
+
+
+                db.Database.EnsureCreated();
+            }
 
 
         });
     }
 
-    private static string? GetConnectionString()
-    {
-        var configuration = new ConfigurationBuilder()
-            .AddUserSecrets<CustomWebApplicationFactory>()
-            .Build();
-
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
-
-        return configuration.GetConnectionString("DefaultConnection");
-    }
 }
