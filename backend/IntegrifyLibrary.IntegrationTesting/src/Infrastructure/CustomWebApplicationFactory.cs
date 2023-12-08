@@ -7,7 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 
-public class CustomWebApplicationFactory : WebApplicationFactory<Program>
+public class CustomWebApplicationFactory<TProgram>
+    : WebApplicationFactory<TProgram> where TProgram : class
+
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -26,18 +28,14 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             });
 
             var sp = services.BuildServiceProvider();
-            bool isDatabaseDeleted = false;
 
             using (var scope = sp.CreateScope())
             {
                 var scopedServices = scope.ServiceProvider;
                 var db = scopedServices.GetRequiredService<DatabaseContext>();
-
-
+                db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
             }
-
-
         });
     }
 
