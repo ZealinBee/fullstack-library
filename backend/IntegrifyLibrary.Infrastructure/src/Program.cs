@@ -22,6 +22,7 @@ public class Program
 
         builder.Services.AddDbContext<DatabaseContext>();
 
+
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowOrigin",

@@ -25,8 +25,12 @@ public class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var builder = new NpgsqlConnectionStringBuilder(_configuration.GetConnectionString("DefaultConnection"));
-        optionsBuilder.UseNpgsql(builder.ConnectionString).UseSnakeCaseNamingConvention();
+        if (!optionsBuilder.IsConfigured)
+        {
+            var builder = new NpgsqlConnectionStringBuilder(_configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseNpgsql(builder.ConnectionString).UseSnakeCaseNamingConvention();
+        }
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -56,5 +60,27 @@ public class DatabaseContext : DbContext
         modelBuilder.Entity<Book>()
             .HasMany(book => book.Reservations)
             .WithOne(reservation => reservation.Book);
+        // Comment this out when want to do migration
+        modelBuilder.Entity<User>()
+            .HasData(SeedUsers());
+    }
+
+    private List<User> SeedUsers()
+    {
+        return Enumerable.Range(1, 1)
+        .Select(index => new User
+        {
+            UserId = Guid.NewGuid(),
+            FirstName = "Zhiyuan",
+            LastName = "Liu",
+            Email = "user@mail.com",
+            Password = "12345678",
+            Salt = new byte[128 / 8],
+            Role = Role.User,
+            CreatedAt = DateOnly.FromDateTime(DateTime.UtcNow),
+            UpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow),
+            UserImage = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+        })
+        .ToList();
     }
 }

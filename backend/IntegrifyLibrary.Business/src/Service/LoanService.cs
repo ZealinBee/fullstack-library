@@ -32,7 +32,8 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
         foreach (var bookId in dto.BookIds)
         {
             var existingBook = await _bookRepo.GetOne(bookId);
-            if(existingBook.Quantity == 0) {
+            if (existingBook.Quantity == 0)
+            {
                 throw new Exception("Book is not available");
             }
             existingBook.Quantity--;
@@ -73,12 +74,14 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
             var book = await _bookRepo.GetOne(loanDetail.BookId);
             book.Quantity++;
             // if the quantity is 1, then the book went from not available to available
-            if(book.Quantity == 1) {
+            if (book.Quantity == 1)
+            {
                 // check if there is a reservation for this book
                 var reservations = await _reservationService.GetAll(queryOptions: new QueryOptions());
                 foreach (var reservation in reservations)
                 {
-                    if(reservation.BookId == book.BookId) {
+                    if (reservation.BookId == book.BookId)
+                    {
                         // if there is a reservation, then send a notification to the user
                         NotificationDto notificationDto = new NotificationDto();
                         notificationDto.NotificationMessage = "Book " + book.BookName + " is now available";
@@ -90,7 +93,7 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
                     }
                 }
             }
-        }   
+        }
         loan.ReturnedDate = DateOnly.FromDateTime(DateTime.Now);
         return _mapper.Map<GetLoanDto>(await _repo.UpdateOne(loan));
     }

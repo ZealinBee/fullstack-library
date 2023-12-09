@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Xunit;
 
 // I am only mainly testing the Book Service, because all services are using the same base class, if the tests here pass, then the other services should pass as well. I will only test other service methods that are not in the base class.
+// Loan tests and other complex service will be tested in the integration test project.
 
 namespace IntegrifyLibrary.Testing.Business
 {
@@ -95,7 +96,7 @@ namespace IntegrifyLibrary.Testing.Business
                     LoanedTimes = 0,
                 }
             };
-            
+
             QueryOptions queryOptions = new QueryOptions();
             _mockBookRepo.Setup(repo => repo.GetAll(queryOptions)).ReturnsAsync(books);
             var result = await bookService.GetAll(queryOptions);

@@ -32,7 +32,7 @@ public class UserTest
         var createdUser = _mapper.Map<User>(createDto);
 
         _mockUserRepo.Setup((repo) => repo.CreateOne(It.IsAny<User>())).ReturnsAsync(createdUser);
-        
+
         var result = await userService.CreateOne(createDto);
 
         Assert.NotNull(result);
@@ -67,7 +67,7 @@ public class UserTest
             Email = "wrongemail@mail.com",
             Password = "wrongpassword"
         };
-    
+
         Assert.ThrowsAsync<Exception>(() => authService.VerifyCredentials(loginDto));
     }
 }
