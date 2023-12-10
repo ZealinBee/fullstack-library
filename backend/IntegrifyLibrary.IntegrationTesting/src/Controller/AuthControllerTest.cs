@@ -26,6 +26,8 @@ public class AuthControllerTest : IAsyncLifetime
         var responseString = await response.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        // shhould contain JWT header signature
+        Assert.Contains("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9", responseString, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

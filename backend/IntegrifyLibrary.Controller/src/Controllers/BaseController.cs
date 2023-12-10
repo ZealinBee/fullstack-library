@@ -52,6 +52,7 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
         return CreatedAtAction(nameof(CreateOne), createdObject);
     }
 
+    [Authorize(Roles = "Librarian")]
     [HttpPatch("{id:Guid}")]
     [ProducesResponseType(statusCode: 200)]
     [ProducesResponseType(statusCode: 400)]

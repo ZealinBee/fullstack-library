@@ -17,3 +17,5 @@ global using IntegrifyLibrary.Domain;
 global using IntegrifyLibrary.Infrastructure;
 global using MediatR;
 global using Testcontainers.PostgreSql;
+global using System.Net.Http.Headers;
+global using AutoMapper;

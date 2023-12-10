@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace IntegrifyLibrary.Controllers;
 
-public class NotificationController : BaseController<Notification, NotificationDto, NotificationDto, NotificationDto> 
+public class NotificationController : BaseController<Notification, NotificationDto, NotificationDto, NotificationDto>
 {
     private readonly INotificationService _notificationService;
     public NotificationController(INotificationService notificationService) : base(notificationService)

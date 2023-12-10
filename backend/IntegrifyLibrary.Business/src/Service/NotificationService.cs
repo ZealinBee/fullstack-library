@@ -3,7 +3,7 @@ using AutoMapper;
 
 namespace IntegrifyLibrary.Business;
 
-public class NotificationService : BaseService<Notification, NotificationDto,NotificationDto, NotificationDto>, INotificationService
+public class NotificationService : BaseService<Notification, NotificationDto, NotificationDto, NotificationDto>, INotificationService
 {
     private readonly INotificationRepo _notificationRepo;
     private readonly IMapper _mapper;

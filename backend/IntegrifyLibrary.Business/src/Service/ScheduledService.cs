@@ -10,7 +10,7 @@ namespace IntegrifyLibrary.Business;
 public class ScheduledService : BackgroundService
 {
     // Checks for overdue loans every day, and sends notifications to users if they have overdue loans
-    private readonly PeriodicTimer _timer = new (TimeSpan.FromDays(1));
+    private readonly PeriodicTimer _timer = new(TimeSpan.FromDays(1));
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly IMapper _mapper;
 
@@ -24,7 +24,7 @@ public class ScheduledService : BackgroundService
     {
         while (await _timer.WaitForNextTickAsync(stoppingToken) && !stoppingToken.IsCancellationRequested)
         {
-            using(var scope = _scopeFactory.CreateScope())
+            using (var scope = _scopeFactory.CreateScope())
             {
                 var loanService = scope.ServiceProvider.GetRequiredService<ILoanService>();
                 var reservationService = scope.ServiceProvider.GetRequiredService<IReservationService>();
@@ -32,7 +32,8 @@ public class ScheduledService : BackgroundService
                 var loans = await loanService.GetAll(new QueryOptions());
                 foreach (var loan in loans)
                 {
-                    if(!loan.IsReturned && loan.DueDate < DateOnly.FromDateTime(DateTime.Now) && !loan.IsOverdue) {
+                    if (!loan.IsReturned && loan.DueDate < DateOnly.FromDateTime(DateTime.Now) && !loan.IsOverdue)
+                    {
                         var updateLoanDto = _mapper.Map<UpdateLoanDto>(await loanService.GetOne(loan.LoanId));
                         updateLoanDto.IsOverdue = true;
                         await loanService.UpdateOne(loan.LoanId, updateLoanDto);
@@ -43,7 +44,8 @@ public class ScheduledService : BackgroundService
                         notification.NotificationData.Add("LoanId", loan.LoanId.ToString());
                         await notificationService.CreateOne(notification);
                     }
-                    if(!loan.IsReturned && loan.DueDate == DateOnly.FromDateTime(DateTime.Now.AddDays(1)) && !loan.IsOverdue) {
+                    if (!loan.IsReturned && loan.DueDate == DateOnly.FromDateTime(DateTime.Now.AddDays(1)) && !loan.IsOverdue)
+                    {
                         var notification = new NotificationDto();
                         notification.UserId = loan.UserId;
                         notification.NotificationMessage = "Your loan is due tomorrow, please return it on time";

@@ -20,9 +20,9 @@ public class AuthService : IAuthService
     public async Task<string> VerifyCredentials(LoginUserDto credentials)
     {
         var foundUser = await _userRepo.GetOneByEmail(credentials.Email) ?? throw new Exception("Email not found");
-        // for the sake of testing, since i can't seed the database with hashed passwords, you may ask: isn't this a security flaw?
-        // well, no, because if you make these accounts in the real websites, the users will not be libarian, they will be normal users, and they will not be able to access the admin or librarian routes
-        if (credentials.Email == "adminseed@mail.com" && credentials.Password == "admin123" || credentials.Email == "userseed@mail.com" && credentials.Password == "user123")
+        // for the sake of testing, you may ask: isn't this a security flaw?
+        // well, no, because if you make these accounts in the real websites, the users will not be admin, they will be normal users, and they will not be able to access the admin or librarian routes, so there is no security flaw here
+        if (credentials.Email == "adminseed@mail.com" && credentials.Password == "admin123" || credentials.Email == "userseed@mail.com" && credentials.Password == "user123" || credentials.Email == "userseed2@mail.com" || credentials.Password == "user123")
         {
             return GenerateToken(foundUser);
         }
