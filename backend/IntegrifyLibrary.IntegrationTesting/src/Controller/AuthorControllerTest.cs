@@ -1,24 +1,30 @@
-// namespace IntegrifyLibrary.IntegrationTesting;
-// [Collection("Integration Tests")]
+namespace IntegrifyLibrary.IntegrationTesting;
+[Collection("Integration Tests")]
 
-// public class AuthorControllerTest
-// {
-//     private readonly CustomWebApplicationFactory<Program> _factory;
-//     public AuthorControllerTest(CustomWebApplicationFactory<Program> factory)
-//     {
-//         _factory = factory;
-//     }
-//     [Fact]
-//     public async Task GetAuthor_GetWithoutLogin_Successfully()
-//     {
-//         var client = _factory.CreateClient(new WebApplicationFactoryClientOptions
-//         {
-//             AllowAutoRedirect = false
-//         });
-//         // Author get endpoint should be accessible without login
-//         var response = await client.GetAsync("/api/v1/authors");
-//         var responseString = await response.Content.ReadAsStringAsync();
+public class AuthorControllerTest : IAsyncLifetime
+{
+    private readonly HttpClient _client;
+    private readonly Func<Task> _resetDatabase;
 
-//         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-//     }
-// }
+    public AuthorControllerTest(CustomWebApplicationFactory factory)
+    {
+        _client = factory.HttpClient;
+        _resetDatabase = factory.ResetDatabaseAsync;
+    }
+
+    [Fact]
+    public async Task GetAuthor_GetWithoutLogin_Successfully()
+    {
+        // Author get endpoint should be accessible without login
+        var response = await _client.GetAsync("/api/v1/authors");
+        var responseString = await response.Content.ReadAsStringAsync();
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        // J.K Rowling is seeded in the database
+        Assert.Contains("J.K Rowling", responseString);
+    }
+
+    public Task InitializeAsync() => Task.CompletedTask;
+
+    public Task DisposeAsync() => _resetDatabase();
+}

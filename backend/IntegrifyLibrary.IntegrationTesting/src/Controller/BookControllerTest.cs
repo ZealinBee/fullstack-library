@@ -3,7 +3,6 @@ namespace IntegrifyLibrary.IntegrationTesting;
 
 public class BookControllerTest : IAsyncLifetime
 {
-    // Testing to see if routes work
     private readonly HttpClient _client;
     private readonly Func<Task> _resetDatabase;
 
@@ -43,7 +42,11 @@ public class BookControllerTest : IAsyncLifetime
         var responseString = await response.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        // Harry Potter and the Philosopher's Stone is seeded in the database
+        Assert.Contains("Harry Potter and the Philosopher's Stone", responseString);
     }
+
+
 
     public Task InitializeAsync() => Task.CompletedTask;
 

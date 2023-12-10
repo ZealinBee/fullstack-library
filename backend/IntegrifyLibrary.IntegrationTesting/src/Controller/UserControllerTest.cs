@@ -15,8 +15,7 @@ public class UserControllerTest : IAsyncLifetime
     [Fact]
     public async Task SignUpUser_Always_Successfully()
     {
-        // Sign up user should be accessible without anything
-
+        // Sign up user should be accessible to everyone
         var signUpUser = new User()
         {
             FirstName = "Zhiyuan",
@@ -34,17 +33,18 @@ public class UserControllerTest : IAsyncLifetime
     [Fact]
     public async Task SignUpUser_WithExistingEmail_Fail()
     {
-        // The admin@mail.com is already seeded in db, so creating it again should fail
-
+        // this user is already seeded in the database, so it should fail
         var signUpUser = new User()
         {
             FirstName = "Zhiyuan",
             LastName = "Liu",
-            Email = "admin@mail.com",
+            Email = "adminseed@mail.com",
             Password = "12345678"
         };
+
         var response = await _client.PostAsync("/api/v1/users", JsonContent.Create(signUpUser));
         var responseString = await response.Content.ReadAsStringAsync();
+
         Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
     }
 
@@ -55,7 +55,7 @@ public class UserControllerTest : IAsyncLifetime
         var response = await _client.GetAsync("/api/v1/users");
         var responseString = await response.Content.ReadAsStringAsync();
 
-        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }
 
 

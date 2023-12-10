@@ -21,6 +21,5 @@ namespace IntegrifyLibrary.Controller
         {
             return Ok(await _authService.VerifyCredentials(credentials));
         }
-
     }
 }
