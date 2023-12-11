@@ -55,7 +55,7 @@ public class ReservationControllerTest : IAsyncLifetime
         var response = await _client.PostAsJsonAsync("/api/v1/reservations", reservationRequest);
         var responseString = await response.Content.ReadAsStringAsync();
 
-        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         Assert.Contains("Book is available, no need to reserve", responseString);
         // After login, clear the authorization header
         _client.DefaultRequestHeaders.Authorization = null;

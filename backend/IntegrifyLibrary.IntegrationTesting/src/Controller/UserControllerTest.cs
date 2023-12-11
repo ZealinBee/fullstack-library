@@ -22,7 +22,7 @@ public class UserControllerTest : IAsyncLifetime
         {
             FirstName = "Zhiyuan",
             LastName = "Liu",
-            Email = "test@mail.com",
+            Email = "testhellohello@mail.com",
             Password = "12345678"
         };
 
@@ -47,7 +47,7 @@ public class UserControllerTest : IAsyncLifetime
         var response = await _client.PostAsync("/api/v1/users", JsonContent.Create(signUpUser));
         var responseString = await response.Content.ReadAsStringAsync();
 
-        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
 

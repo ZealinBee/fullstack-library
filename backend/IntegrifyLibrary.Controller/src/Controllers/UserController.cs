@@ -59,8 +59,16 @@ public class UserController : BaseController<User, CreateUserDto, GetUserDto, Up
     [ProducesResponseType(statusCode: 400)]
     public override async Task<ActionResult<GetUserDto>> CreateOne([FromBody] CreateUserDto dto)
     {
-        var createdObject = await _userService.CreateOne(dto);
-        return CreatedAtAction(nameof(CreateOne), createdObject);
+        try
+        {
+            var createdObject = await _userService.CreateOne(dto);
+            return CreatedAtAction(nameof(CreateOne), createdObject);
+        }
+        catch (CustomException e)
+        {
+            return StatusCode(e.StatusCode, e.ErrorMessage);
+        }
+
     }
 
     [HttpPatch("{id:Guid}")]

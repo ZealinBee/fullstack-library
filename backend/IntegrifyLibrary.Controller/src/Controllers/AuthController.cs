@@ -17,9 +17,19 @@ namespace IntegrifyLibrary.Controller
         }
 
         [HttpPost]
+        [ProducesResponseType(statusCode: 200)]
+        [ProducesResponseType(statusCode: 400)]
+        [ProducesResponseType(statusCode: 401)]
         public async Task<ActionResult<string>> VerifyCredentials([FromBody] LoginUserDto credentials)
         {
-            return Ok(await _authService.VerifyCredentials(credentials));
+            try
+            {
+                return Ok(await _authService.VerifyCredentials(credentials));
+            }
+            catch (CustomException e)
+            {
+                return StatusCode(e.StatusCode, e.ErrorMessage);
+            }
         }
     }
 }

@@ -35,12 +35,19 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [ProducesResponseType(statusCode: 404)]
     public virtual async Task<ActionResult<TGetDto>> GetOne([FromRoute] Guid id)
     {
-        var item = await _service.GetOne(id);
-        if (item == null)
+        try
         {
-            return NotFound();
+            var item = await _service.GetOne(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return Ok(item);
         }
-        return Ok(item);
+        catch (CustomException e)
+        {
+            return StatusCode(e.StatusCode, e.ErrorMessage);
+        }
     }
 
     [HttpPost]
@@ -48,8 +55,15 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [ProducesResponseType(statusCode: 400)]
     public virtual async Task<ActionResult<TGetDto>> CreateOne([FromBody] TCreateDto dto)
     {
-        var createdObject = await _service.CreateOne(dto);
-        return CreatedAtAction(nameof(CreateOne), createdObject);
+        try
+        {
+            var createdObject = await _service.CreateOne(dto);
+            return CreatedAtAction(nameof(CreateOne), createdObject);
+        }
+        catch (CustomException e)
+        {
+            return StatusCode(e.StatusCode, e.ErrorMessage);
+        }
     }
 
     [Authorize(Roles = "Librarian")]
@@ -59,13 +73,22 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [ProducesResponseType(statusCode: 404)]
     public virtual async Task<ActionResult<TGetDto>> UpdateOne([FromRoute] Guid id, [FromBody] TUpdateDto dto)
     {
-        await _service.UpdateOne(id, dto);
-        var item = await _service.GetOne(id);
-        if (item == null)
+        try
         {
-            return NotFound();
+            await _service.UpdateOne(id, dto);
+            var item = await _service.GetOne(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return Ok(item);
         }
-        return Ok(item);
+        catch (CustomException e)
+        {
+            return StatusCode(e.StatusCode, e.ErrorMessage);
+        }
+
+
     }
 
     [Authorize(Roles = "Librarian")]
@@ -74,11 +97,20 @@ public class BaseController<T, TCreateDto, TGetDto, TUpdateDto> : ControllerBase
     [ProducesResponseType(statusCode: 404)]
     public virtual async Task<ActionResult<bool>> DeleteOne([FromRoute] Guid id)
     {
-        var item = await _service.DeleteOne(id);
-        if (item == false)
+        try
         {
-            return NotFound();
+            var item = await _service.DeleteOne(id);
+            if (item == false)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
-        return NoContent();
+        catch (CustomException e)
+        {
+            return StatusCode(e.StatusCode, e.ErrorMessage);
+        }
+
+
     }
 }

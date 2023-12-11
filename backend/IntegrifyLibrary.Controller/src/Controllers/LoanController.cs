@@ -28,9 +28,18 @@ public class LoanController : BaseController<Loan, CreateLoanDto, GetLoanDto, Up
     [ProducesResponseType(statusCode: 400)]
     public override async Task<ActionResult<GetLoanDto>> CreateOne([FromBody] CreateLoanDto dto)
     {
-        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        var createdObject = await _loanService.CreateLoan(dto, userId);
-        return CreatedAtAction(nameof(CreateOne), createdObject);
+        try
+        {
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var createdObject = await _loanService.CreateLoan(dto, userId);
+            return CreatedAtAction(nameof(CreateOne), createdObject);
+        }
+        catch (CustomException e)
+        {
+            return StatusCode(e.StatusCode, e.ErrorMessage);
+        }
+
+
     }
 
     [Authorize(Roles = "User")]

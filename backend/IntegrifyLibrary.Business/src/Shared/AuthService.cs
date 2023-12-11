@@ -19,7 +19,7 @@ public class AuthService : IAuthService
 
     public async Task<string> VerifyCredentials(LoginUserDto credentials)
     {
-        var foundUser = await _userRepo.GetOneByEmail(credentials.Email) ?? throw new Exception("Email not found");
+        var foundUser = await _userRepo.GetOneByEmail(credentials.Email) ?? throw new CustomException().BadRequestException("Email not found");
         // for the sake of testing, you may ask: isn't this a security flaw?
         // well, no, because if you make these accounts in the real websites, the users will not be admin, they will be normal users, and they will not be able to access the admin or librarian routes, so there is no security flaw here
         if (credentials.Email == "adminseed@mail.com" && credentials.Password == "admin123" || credentials.Email == "userseed@mail.com" && credentials.Password == "user123" || credentials.Email == "userseed2@mail.com" || credentials.Password == "user123")
@@ -27,7 +27,7 @@ public class AuthService : IAuthService
             return GenerateToken(foundUser);
         }
         var isAuthenticated = PasswordService.VerifyPassword(credentials.Password, foundUser.Password, foundUser.Salt);
-        if (!isAuthenticated) throw new Exception("Password is incorrect");
+        if (!isAuthenticated) throw new CustomException().UnauthorizedException("Password is incorrect");
         return GenerateToken(foundUser);
     }
 

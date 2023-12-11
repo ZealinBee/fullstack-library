@@ -122,7 +122,7 @@ public class LoanControllerTest : IAsyncLifetime
         var response = await _client.PostAsJsonAsync("/api/v1/loans", loanRequest);
         var responseString = await response.Content.ReadAsStringAsync();
 
-        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         Assert.Contains("Book is not available", responseString);
         // After login, clear the authorization header
         _client.DefaultRequestHeaders.Authorization = null;

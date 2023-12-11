@@ -34,7 +34,7 @@ public class LoanService : BaseService<Loan, CreateLoanDto, GetLoanDto, UpdateLo
             var existingBook = await _bookRepo.GetOne(bookId);
             if (existingBook.Quantity == 0)
             {
-                throw new Exception("Book is not available");
+                throw new CustomException().BadRequestException("Book is not available");
             }
             existingBook.Quantity--;
             existingBook.LoanedTimes++;

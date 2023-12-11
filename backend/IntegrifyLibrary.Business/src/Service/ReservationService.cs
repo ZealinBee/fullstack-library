@@ -21,7 +21,7 @@ public class ReservationService : BaseService<Reservation, CreateReservationDto,
         if (dto == null) throw new ArgumentNullException(nameof(dto));
         var reservation = _mapper.Map<Reservation>(dto);
         var book = await _bookRepo.GetOne(dto.BookId);
-        if (book.Quantity > 0) throw new Exception("Book is available, no need to reserve");
+        if (book.Quantity > 0) throw new CustomException().BadRequestException("Book is available, no need to reserve");
         reservation.Book = book;
         reservation.UserId = userId;
         var createdReservation = await _reservationRepo.CreateOne(reservation);

@@ -42,7 +42,7 @@ public class AuthControllerTest : IAsyncLifetime
         var response = await _client.PostAsync("/api/v1/auth", JsonContent.Create(loginCredentials));
         var responseString = await response.Content.ReadAsStringAsync();
 
-        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         var expectedErrorMessage = "Password is incorrect";
         Assert.Contains(expectedErrorMessage, responseString, StringComparison.OrdinalIgnoreCase);
     }
@@ -59,7 +59,7 @@ public class AuthControllerTest : IAsyncLifetime
         var response = await _client.PostAsync("/api/v1/auth", JsonContent.Create(loginCredentials));
         var responseString = await response.Content.ReadAsStringAsync();
 
-        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         var expectedErrorMessage = "Email not found";
         Assert.Contains(expectedErrorMessage, responseString, StringComparison.OrdinalIgnoreCase);
     }

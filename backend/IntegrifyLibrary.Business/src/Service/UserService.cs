@@ -27,7 +27,7 @@ namespace IntegrifyLibrary.Business
         public override async Task<GetUserDto> CreateOne(CreateUserDto dto)
         {
             var user = _mapper.Map<User>(dto);
-            if (await _userRepo.GetOneByEmail(dto.Email) != null) throw new Exception($"User with email {dto.Email} already exists");
+            if (await _userRepo.GetOneByEmail(dto.Email) != null) throw new CustomException().BadRequestException($"User with email {dto.Email} already exists");
             PasswordService.HashPassword(dto.Password, out var hashedPassword, out var salt);
             user.Password = hashedPassword;
             user.Salt = salt;

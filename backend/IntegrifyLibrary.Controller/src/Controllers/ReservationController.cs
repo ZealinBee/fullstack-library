@@ -22,9 +22,17 @@ public class ReservationController : BaseController<Reservation, CreateReservati
     [ProducesResponseType(statusCode: 400)]
     public override async Task<ActionResult<ReservationDto>> CreateOne([FromBody] CreateReservationDto dto)
     {
-        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        var createdObject = await _reservationService.CreateReservation(dto, userId);
-        return CreatedAtAction(nameof(CreateOne), createdObject);
+        try
+        {
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var createdObject = await _reservationService.CreateReservation(dto, userId);
+            return CreatedAtAction(nameof(CreateOne), createdObject);
+        }
+        catch (CustomException e)
+        {
+            return StatusCode(e.StatusCode, e.ErrorMessage);
+        }
+
     }
 
     [Authorize(Roles = "User")]
