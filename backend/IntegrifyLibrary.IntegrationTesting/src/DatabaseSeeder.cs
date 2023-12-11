@@ -130,18 +130,19 @@ public class DatabaseSeeder
         {
             LoanId = loan1Id,
             UserId = user1Id,
-            LoanDate = new DateOnly(2021, 10, 10),
-            DueDate = new DateOnly(2021, 10, 17),
+            LoanDate = new DateOnly(2023, 10, 10),
+            DueDate = new DateOnly(2023, 10, 17),
             ReturnedDate = new DateOnly(2021, 10, 11),
             IsReturned = true,
             IsOverdue = false
         });
+        // this loan is overdue
         await _context.AddAsync(new Loan
         {
             LoanId = loan2Id,
             UserId = user2Id,
-            LoanDate = new DateOnly(2021, 10, 10),
-            DueDate = new DateOnly(2021, 10, 17),
+            LoanDate = new DateOnly(2023, 10, 10),
+            DueDate = new DateOnly(2023, 10, 17),
             ReturnedDate = new DateOnly(2021, 10, 11),
             IsReturned = false,
             IsOverdue = false

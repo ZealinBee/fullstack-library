@@ -38,7 +38,7 @@ public class NotificationControllerTest : IAsyncLifetime
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         // now we can check if userseed got notified
-        var response = await _client.GetAsync("/api/v1/notifications");
+        var response = await _client.GetAsync("/api/v1/notifications/own-notifications");
         var responseString = await response.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -46,6 +46,29 @@ public class NotificationControllerTest : IAsyncLifetime
         // After login, clear the authorization header
         _client.DefaultRequestHeaders.Authorization = null;
     }
+    // TODO: fix this test
+    // [Fact]
+    // public async Task ScheduledService_NotifyOverdueLoan_Successfully()
+    // {
+    //     // user 2 has a loan that is overdue, let's check if the scheduled service can notify him, we'll login to check
+    //     var loginCredentials = new LoginUserDto
+    //     {
+    //         Email = "userseed@mail.com",
+    //         Password = "user123"
+    //     };
+    //     var loginResponse = await _client.PostAsJsonAsync("/api/v1/auth", loginCredentials);
+    //     var token = await loginResponse.Content.ReadAsStringAsync();
+    //     _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+    //     // now we can check if userseed2 got notified
+    //     var response = await _client.GetAsync("/api/v1/notifications/own-notifications");
+    //     var responseString = await response.Content.ReadAsStringAsync();
+
+    //     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    //     Assert.Contains("Your loan is overdue", responseString);
+    //     // After login, clear the authorization header
+    //     _client.DefaultRequestHeaders.Authorization = null;
+    // }
 
     public Task InitializeAsync() => Task.CompletedTask;
 

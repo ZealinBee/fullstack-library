@@ -22,7 +22,8 @@ public class ScheduledService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        while (await _timer.WaitForNextTickAsync(stoppingToken) && !stoppingToken.IsCancellationRequested)
+        // checks once immediately after the service starts
+        do
         {
             using (var scope = _scopeFactory.CreateScope())
             {
@@ -56,5 +57,6 @@ public class ScheduledService : BackgroundService
                 }
             }
         }
+        while (await _timer.WaitForNextTickAsync(stoppingToken) && !stoppingToken.IsCancellationRequested);
     }
 }

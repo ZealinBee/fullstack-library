@@ -215,8 +215,6 @@ public class LoanControllerTest : IAsyncLifetime
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
 
-
-
     public Task InitializeAsync() => Task.CompletedTask;
 
     public Task DisposeAsync() => _resetDatabase();

@@ -11,8 +11,9 @@ public class CustomException : Exception
         ErrorMessage = message;
     }
 
-    public static CustomException NotFoundException(string message = "Item cannot be found")
+    public CustomException NotFoundException(string message = "Item cannot be found")
     {
         return new CustomException(404, message);
     }
+
 }
