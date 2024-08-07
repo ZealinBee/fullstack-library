@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrifyLibrary.Controller
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrifyLibrary.Testing", "IntegrifyLibrary.Testing\IntegrifyLibrary.Testing.csproj", "{E45D2187-62B5-4370-9A6C-778523D9496C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrifyLibrary.IntegrationTesting", "IntegrationTesting\IntegrifyLibrary.IntegrationTesting.csproj", "{7DDEA4FC-D1F1-4FDA-8747-49E565C0A822}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrifyLibrary.IntegrationTesting", "IntegrifyLibrary.IntegrationTesting\IntegrifyLibrary.IntegrationTesting.csproj", "{7DDEA4FC-D1F1-4FDA-8747-49E565C0A822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
